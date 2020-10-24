@@ -19,6 +19,7 @@ const Login = () => {
         style={styles.loginButton}
       />
       <TextButton title={'Have U an account? CREAT ONE'} onPress={() => {}} />
+      <TextButton title={'Forget password'} onPress={() => {}} />
     </View>
   );
 };

@@ -7,13 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const ImageButton = (props) => {
+const ImageButton = ({style, uri, ...props}) => {
   return (
     <ImageBackground
-      style={styles.button}
+      style={[styles.button, style]}
       source={{
-        uri:
-          'https://wallpapertag.com/wallpaper/full/2/c/7/463317-cool-techno-backgrounds-1920x1200-for-lockscreen.jpg',
+        uri: uri,
       }}>
       <TouchableOpacity style={styles.touch} onPress={props.onPress}>
         <Text style={styles.text}>{props.title}</Text>

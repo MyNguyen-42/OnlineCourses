@@ -1,29 +1,24 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-/* import StackNavigation from './src/components/StackNavigation';
-import {NavigationContainer} from '@react-navigation/native'; */
 /* import Home from './src/components/Main/Home/Home'; */
 /* import ListCourses from './src/components/Courses/ListCourses/ListCourses'; */
-import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/components/Authentication/Login/Login';
 import Register from './src/components/Authentication/Register/Register';
-import {createStackNavigator} from '@react-navigation/stack';
-const RootStack = createStackNavigator();
+import VerifyPassword from './src/components/Authentication/VerifyPassword/VerifyPassword';
+import Browes from './src/components/Main/Browse/Browse';
+import ForgetPassword from './src/components/Authentication/ForgetPassword/ForgetPassword';
+import ChangePassword from './src/components/Authentication/ChangePassword/ChangePassword';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <NavigationContainer>
-        <RootStack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <RootStack.Screen name="Login" component={Login} />
-        </RootStack.Navigator>
-      </NavigationContainer> */}
       {/* <Home /> */}
       {/* <ListCourses /> */}
-      <Register />
+      {/* <Login /> */}
+      {/* <Browes /> */}
+      {/* <VerifyPassword /> */}
+      {/* <ForgetPassword /> */}
+      <ChangePassword />
     </View>
   );
 }
