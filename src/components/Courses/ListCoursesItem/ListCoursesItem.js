@@ -8,6 +8,7 @@ import {
   Alert,
   Share,
 } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ListCoursesItem = (props) => {
   return (
@@ -26,7 +27,7 @@ const ListCoursesItem = (props) => {
       }>
       <Image
         style={styles.image}
-        source={require('../../../../assets/amicat.png')}
+        source={require('../../../../assets/React-Native.png')}
       />
       <View style={{margin: 5}}>
         <Text>{props.item.title}</Text>
@@ -36,6 +37,7 @@ const ListCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
       </View>
+      <MaterialCommunityIcons name="dots-horizontal" style={styles.icon} />
     </TouchableOpacity>
   );
 };
@@ -46,9 +48,8 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     margin: 5,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 1,
     padding: 5,
+    justifyContent: 'space-around',
   },
   image: {
     height: 100,
@@ -56,5 +57,8 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: 'darkgray',
+  },
+  icon: {
+    fontSize: 20,
   },
 });

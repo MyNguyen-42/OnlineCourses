@@ -1,122 +1,77 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  SectionList,
-} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import ListCoursesItem from '../ListCoursesItem/ListCoursesItem';
 
 const ListCourses = () => {
   const courses = [
     {
-      title: 'mobile',
-      data: [
-        {
-          id: 1,
-          title: 'React Native',
-          author: 'Hai Pham',
-          level: 'Advance',
-          released: 'May 6, 2020',
-          duration: '30 hours',
-        },
-        {
-          id: 2,
-          title: 'ios',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-        {
-          id: 3,
-          title: 'ios',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-      ],
+      id: 1,
+      title: 'React Native',
+      author: 'Hai Pham',
+      level: 'Advance',
+      released: 'May 6, 2020',
+      duration: '30 hours',
     },
     {
-      title: 'web',
-      data: [
-        {
-          id: 1,
-          title: 'Reactjs',
-          author: 'Hai Pham',
-          level: 'Advance',
-          released: 'May 6, 2020',
-          duration: '30 hours',
-        },
-        {
-          id: 2,
-          title: 'ASP.NET',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-        {
-          id: 3,
-          title: 'ios',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-        {
-          id: 4,
-          title: 'ios',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-        {
-          id: 5,
-          title: 'ios',
-          author: 'Huy Nguyen',
-          level: 'Beginner',
-          released: 'May 6, 2020',
-          duration: '25 hours',
-        },
-      ],
+      id: 2,
+      title: 'ios',
+      author: 'Huy Nguyen',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
+    },
+    {
+      id: 3,
+      title: 'Reactjs',
+      author: 'Huy Nguyen',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
+    },
+    {
+      id: 4,
+      title: 'Angular',
+      author: 'Hai Pham',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
+    },
+    {
+      id: 5,
+      title: 'Vuejs',
+      author: 'Huy Nguyen',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
+    },
+    {
+      id: 6,
+      title: 'ios',
+      author: 'Huy Nguyen',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
+    },
+    {
+      id: 7,
+      title: 'Android',
+      author: 'Truong Phuoc Loc',
+      level: 'Beginner',
+      released: 'May 6, 2020',
+      duration: '25 hours',
     },
   ];
 
-  const searchView = () => {
-    return (
-      <View style={{flexDirection: 'row'}}>
-        <TextInput style={{flex: 1}} placeholder="ahihi" />
-        <Button
-          onPress={() => {
-            console.log('Search');
-          }}
-          title="Search"
-          style={{width: 60, heigh: 40}}
-        />
-      </View>
-    );
+  const FlatListItemSeparator = () => {
+    return <View style={styles.highlight} />;
   };
 
   return (
     <View>
-      {/* <FlatList
+      <FlatList
+        ItemSeparatorComponent={FlatListItemSeparator}
         data={courses}
         renderItem={({item}) => <ListCoursesItem item={item} />}
-        ListHeaderComponent={() => searchView()}
-      /> */}
-      <SectionList
-        sections={courses}
-        renderItem={({item}) => <ListCoursesItem item={item} />}
-        renderSectionHeader={({section: {title}}) => (
-          <View style={{backgroundColor: 'white'}}>
-            <Text>{title}</Text>
-          </View>
-        )}
       />
     </View>
   );
@@ -124,4 +79,10 @@ const ListCourses = () => {
 
 export default ListCourses;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  highlight: {
+    height: 1,
+    margin: 10,
+    backgroundColor: 'grey',
+  },
+});
