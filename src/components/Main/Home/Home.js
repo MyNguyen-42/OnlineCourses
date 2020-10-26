@@ -10,7 +10,12 @@ const Home = () => {
 
   return (
     <ScrollView>
-      <ImageButton title="NEW RELEASE" onPress={onPressNewRelease()} />
+      <ImageButton
+        uri="http://wonderfulengineering.com/wp-content/uploads/2014/03/Engineering-backgrounds-14.jpg"
+        style={styles.imageButton}
+        title="NEW RELEASE"
+        onPress={onPressNewRelease()}
+      />
       <SectionCourses title="Continue learning" />
       <SectionCourses title="Path" />
       <SectionCourses title="Chanel" />

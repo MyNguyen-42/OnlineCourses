@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {FilledButton} from '../../../global/FilledButton';
 import Heading from '../../../global/Heading';
 import Input from '../../../global/Input';

@@ -1,6 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
 
 const SectionCourses = (props) => {
@@ -36,9 +42,15 @@ const SectionCourses = (props) => {
   };
 
   return (
-    <View>
-      <View>
-        <Text>{props.title}</Text>
+    <View style={styles.container}>
+      <View style={styles.title}>
+        <Text style={styles.text}>{props.title}</Text>
+        <TouchableOpacity>
+          <View style={styles.button}>
+            <Text>See all</Text>
+            <MaterialIcons name="navigate-next" style={styles.icon} />
+          </View>
+        </TouchableOpacity>
       </View>
       <ScrollView horizontal={true}>{renderListItem(courses)}</ScrollView>
     </View>
@@ -46,3 +58,25 @@ const SectionCourses = (props) => {
 };
 
 export default SectionCourses;
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 5,
+  },
+  text: {
+    fontSize: 20,
+  },
+  title: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 5,
+  },
+  button: {
+    flexDirection: 'row',
+  },
+  icon: {
+    fontSize: 15,
+    marginTop: 2,
+  },
+});

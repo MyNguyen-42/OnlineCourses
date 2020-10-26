@@ -5,7 +5,7 @@ const SectionCoursesItem = (props) => {
   return (
     <View style={styles.item}>
       <Image
-        source={require('../../../../../assets/amicat.png')}
+        source={require('../../../../../assets/reactnative.png')}
         style={styles.image}
       />
       <View style={{margin: 5}}>
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 100,
+    width: 200,
   },
   darkText: {
     color: 'darkgray',
