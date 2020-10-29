@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
+import SmallRightButton from '../../../common/SmallRightButton';
 
 const SectionCourses = (props) => {
-  const courses = [
+  const Courses = [
     {
       id: 1,
       title: 'React Native',
@@ -45,14 +39,9 @@ const SectionCourses = (props) => {
     <View style={styles.container}>
       <View style={styles.title}>
         <Text style={styles.text}>{props.title}</Text>
-        <TouchableOpacity>
-          <View style={styles.button}>
-            <Text>See all</Text>
-            <MaterialIcons name="navigate-next" style={styles.icon} />
-          </View>
-        </TouchableOpacity>
+        <SmallRightButton text="See all" name="navigate-next" />
       </View>
-      <ScrollView horizontal={true}>{renderListItem(courses)}</ScrollView>
+      <ScrollView horizontal={true}>{renderListItem(Courses)}</ScrollView>
     </View>
   );
 };
@@ -71,12 +60,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 5,
-  },
-  button: {
-    flexDirection: 'row',
-  },
-  icon: {
-    fontSize: 15,
-    marginTop: 2,
   },
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Input from '../../../global/Input';
-import FIlledButton, {FilledButton} from '../../../global/FilledButton';
+import Input from '../../common/Input';
+import FIlledButton, {FilledButton} from '../../common/FilledButton';
 
 const EditProfile = () => {
   return (

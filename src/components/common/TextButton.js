@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {useTheme} from '@react-navigation/native';
 
 export function TextButton({title, style, onPress}) {
   return (

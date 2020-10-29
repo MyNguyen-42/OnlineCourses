@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {FilledButton} from '../../../global/FilledButton';
-import Heading from '../../../global/Heading';
-import Input from '../../../global/Input';
-import {TextButton} from '../../../global/TextButton';
+import {FilledButton} from '../../common/FilledButton';
+import Heading from '../../common/Heading';
+import Input from '../../common/Input';
+import {TextButton} from '../../common/TextButton';
 
 const Register = () => {
   return (

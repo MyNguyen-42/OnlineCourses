@@ -51,9 +51,12 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
-
+s
 # Bundle artifact
 *.jsbundle
 
 # CocoaPods
 /ios/Pods/
+
+#pickcolor
+colorpick.css

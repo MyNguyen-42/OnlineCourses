@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
-import Input from '../../../global/Input';
-import {FilledButton} from '../../../global/FilledButton';
-import Error from '../../../global/Error';
+import {StyleSheet, Text, View} from 'react-native';
+import Input from '../../common/Input';
+import {FilledButton} from '../../common/FilledButton';
+import Error from '../../common/Error';
 
 const ForgetPassword = () => {
   return (
