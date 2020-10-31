@@ -14,7 +14,7 @@ const Login = () => {
       <Input style={styles.input} placeholder={'email'} />
       <Input style={styles.input} placeholder={'password'} secureTextEntry />
       <FilledButton
-        title={'Login'}
+        title={'LOGIN'}
         onPress={() => {}}
         style={styles.loginButton}
       />

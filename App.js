@@ -12,6 +12,8 @@ import Profile from './src/components/AccountManagement/Profile/Profile';
 import EditProfile from './src/components/AccountManagement/EditProfile/EditProfile';
 import Download from './src/components/Main/Download/Download';
 import Search from './src/components/Main/Search/Search';
+import CourseDetail from './src/components/CourseDetail/CourseDetail';
+import SplashScreen from './src/components/SplashScreen/SplashScreen';
 export default function App() {
   return (
     <View style={styles.container}>
@@ -24,7 +26,9 @@ export default function App() {
       {/* <EditProfile /> */}
       {/* <ListCourses /> */}
       {/* <Download /> */}
-      <Search />
+      {/* <Search /> */}
+      <CourseDetail />
+      {/* <SplashScreen /> */}
     </View>
   );
 }
