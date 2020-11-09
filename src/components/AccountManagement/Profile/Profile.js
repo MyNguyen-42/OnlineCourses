@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
-const Profile = () => {
+const Profile = (props) => {
+  const {authentication} = useContext(AuthenticationContext);
+  console.log(authentication);
   return (
     <View style={styles.container}>
       <Image
@@ -11,8 +14,8 @@ const Profile = () => {
         }}
         style={styles.circle}
       />
-      <Text style={styles.textName}>My Nguyễn</Text>
-      <Text style={styles.textEmail}>mymy42us@gmail.com</Text>
+      <Text style={styles.textName}>{authentication.user.username}</Text>
+      <Text style={styles.textEmail}>{authentication.user.fullname}</Text>
       <Text style={styles.textPhone}>0968517651</Text>
     </View>
   );

@@ -1,0 +1,15 @@
+export const ScreenKey = {
+  SplashScreen: 'splashScreen',
+  MainTab: 'mainTab',
+  ListCourses: 'listCourses',
+  CourseDetail: 'courseDetail',
+  Home: 'Home',
+  Downloads: 'Downloads',
+  Browse: 'Browse',
+  Search: 'Search',
+  Profile: 'Profile',
+  AuthenticationStackScreen: 'authenticationStackScreen',
+  LoginScreen: 'loginScreen',
+  RegisterScreen: 'registerScreen',
+  ForgetPasswordScreen: 'forgetPasswordScreen',
+};

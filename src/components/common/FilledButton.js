@@ -3,12 +3,14 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {View} from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export function FilledButton({title, style, onPress, name}) {
+export function FilledButton(props) {
   return (
-    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.container, props.style]}
+      onPress={props.onPress}>
       {/* <Text style={styles.text}>{title.toUpperCase()}</Text> */}
-      <MaterialCommunityIcons name={name} style={styles.icon} />
-      <Text style={styles.text}>{title}</Text>
+      <MaterialCommunityIcons name={props.name} style={styles.icon} />
+      <Text style={styles.text}>{props.title}</Text>
     </TouchableOpacity>
   );
 }

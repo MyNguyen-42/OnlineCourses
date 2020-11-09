@@ -1,30 +1,16 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Alert,
-  Share,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {ScreenKey} from '../../../global/Constants';
 
 const ListCoursesItem = (props) => {
+  /* const {navigation} = props; */
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() =>
-        Alert.alert('Alert', 'nay la alert', [
-          {text: 'ok'},
-          {
-            text: 'share',
-            onPress: () => {
-              Share.share({message: 'share ne'});
-            },
-          },
-        ])
-      }>
+      onPress={() => {
+        props.onPressListItem(props.item);
+      }}>
       <Image
         style={styles.image}
         source={require('../../../../assets/React-Native.png')}

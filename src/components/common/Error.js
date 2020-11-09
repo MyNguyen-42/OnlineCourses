@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Error = ({error}) => {
+const Error = (props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{error} </Text>
+      <Text style={styles.text}>{props.error} </Text>
     </View>
   );
 };

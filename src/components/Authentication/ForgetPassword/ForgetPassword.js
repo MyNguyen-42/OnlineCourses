@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Input from '../../common/Input';
+import Input from '../../common/Inputs';
 import {FilledButton} from '../../common/FilledButton';
 import Error from '../../common/Error';
+import {ScreenKey} from '../../../global/Constants';
 
-const ForgetPassword = () => {
+const ForgetPassword = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -12,7 +13,13 @@ const ForgetPassword = () => {
       </Text>
       <Input placeholder="Email address " style={styles.input} />
       <Error error="" />
-      <FilledButton title="Send verification code" style={styles.button} />
+      <FilledButton
+        title="Send verification code"
+        style={styles.button}
+        onPress={() => {
+          props.navigation.navigate(ScreenKey.LoginScreen);
+        }}
+      />
     </View>
   );
 };

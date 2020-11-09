@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Input from '../../common/Input';
+import Input from '../../common/Inputs';
 import {FilledButton} from '../../common/FilledButton';
 
 const ChangePassword = () => {

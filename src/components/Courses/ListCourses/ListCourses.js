@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
+import {ScreenKey} from '../../../global/Constants';
 import ListCoursesItem from '../ListCoursesItem/ListCoursesItem';
 
-const ListCourses = () => {
+const ListCourses = (props) => {
   const courses = [
     {
       id: 1,
@@ -62,6 +63,10 @@ const ListCourses = () => {
     },
   ];
 
+  const onPressListItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
+  };
+
   const FlatListItemSeparator = () => {
     return <View style={styles.highlight} />;
   };
@@ -71,7 +76,13 @@ const ListCourses = () => {
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
         data={courses}
-        renderItem={({item}) => <ListCoursesItem item={item} />}
+        renderItem={({item}) => (
+          <ListCoursesItem
+            item={item}
+            navigation={props.navigation}
+            onPressListItem={onPressListItem}
+          />
+        )}
       />
     </View>
   );

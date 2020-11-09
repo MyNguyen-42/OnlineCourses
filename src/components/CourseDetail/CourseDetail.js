@@ -4,7 +4,11 @@ import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
 import Tag from '../common/Tag';
 import ListCourses from '../Courses/ListCourses/ListCourses';
-const CourseDetail = () => {
+const CourseDetail = (props) => {
+  /* const {route} = props;
+  const {item} = route.params; */
+  /* console.log(props.route.params.item.author); */
+  let item = props.route.params.item;
   return (
     <ScrollView>
       <View style={styles.video}>
@@ -14,10 +18,10 @@ const CourseDetail = () => {
         />
       </View>
       <Text style={styles.title}>React: The Big Picture</Text>
-      <Tag title="Cory House" style={styles.author} />
+      <Tag title={item.author} style={styles.author} />
       <View style={styles.containerLevelRelease}>
-        <Text>Beginner .</Text>
-        <Text> May 6, 2020</Text>
+        <Text>{item.level}</Text>
+        <Text> {item.released}</Text>
       </View>
       <View style={styles.containerButton}>
         <CircleButton title="Bookmarked" name="bookmark-multiple" />
