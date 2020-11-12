@@ -1,8 +1,10 @@
 import React, {useContext} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
+  const {colors} = useTheme();
   const {authentication} = useContext(AuthenticationContext);
   console.log(authentication);
   return (
@@ -14,9 +16,13 @@ const Profile = (props) => {
         }}
         style={styles.circle}
       />
-      <Text style={styles.textName}>{authentication.user.username}</Text>
-      <Text style={styles.textEmail}>{authentication.user.fullname}</Text>
-      <Text style={styles.textPhone}>0968517651</Text>
+      <Text style={[styles.textName, {color: colors.text}]}>
+        {authentication.user.username}
+      </Text>
+      <Text style={[styles.textEmail, {color: colors.text}]}>
+        {authentication.user.fullname}
+      </Text>
+      <Text style={[styles.textPhone, {color: colors.text}]}>0968517651</Text>
     </View>
   );
 };

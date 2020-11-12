@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {NavigationContainer, DarkTheme} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DefaultTheme,
+} from '@react-navigation/native';
 import {ScreenKey} from './src/global/Constants';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -33,9 +37,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
   },
 }; */
 
-const MainNavigationStack = createStackNavigator();
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+
+const MainNavigationStack = createStackNavigator();
 
 const MainNavigation = () => {
   return (
@@ -58,6 +62,8 @@ const MainNavigation = () => {
     </MainNavigationStack.Navigator>
   );
 };
+
+const Tab = createBottomTabNavigator();
 
 const MainTabNavigation = () => {
   return (
@@ -103,7 +109,7 @@ const MainTabNavigation = () => {
       />
       <Tab.Screen
         name={ScreenKey.Search}
-        component={ListCoursesStack}
+        component={Search}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (
@@ -118,6 +124,7 @@ const MainTabNavigation = () => {
     </Tab.Navigator>
   );
 };
+
 const ListCoursesStack = () => {
   return (
     <Stack.Navigator initialRouteName={ScreenKey.ListCourses}>
@@ -162,6 +169,11 @@ const HomeStackScreen = (props) => {
         name={ScreenKey.SettingStackScreens}
         component={SettingStackScreen}
         options={{headerShown: false}}
+      />
+      <HomeStack.Screen
+        name={ScreenKey.ListCoursesStack}
+        component={ListCoursesStack}
+        options={{title: 'List Courses'}}
       />
     </HomeStack.Navigator>
   );
@@ -243,7 +255,7 @@ const ManagementAccountStackScreens = (props) => {
     </ManagementAccountStack.Navigator>
   );
 };
-/* const ListCoursesScreen = () => {
+const ListCoursesScreen = () => {
   return (
     <Stack.Screen
       name={ScreenKey.ListCourses}
@@ -252,7 +264,7 @@ const ManagementAccountStackScreens = (props) => {
     />
   );
 };
- */
+
 /* const homeStack = () => {
   return (
     <HomeStack.Navigator>
@@ -275,12 +287,13 @@ export const themes = {
 export const ThemeContext = React.createContext();
 
 export default function App() {
-  const [theme, setTheme] = useState(themes.light);
+  /* const [theme, setTheme] = useState(themes.light); */
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   return (
     <AuthenticationProvider>
-      <ThemeContext.Provider /* value={{theme, setTheme}} */>
+      <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
         <View style={styles.container}>
-          <NavigationContainer /* theme={DarkTheme} */>
+          <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
             <MainNavigation />
           </NavigationContainer>
         </View>

@@ -16,4 +16,5 @@ export const ScreenKey = {
   EditProfile: 'editProfile',
   ManagementAccountStackScreens: 'managementAccountStackScreens',
   Profile: 'Profile',
+  ListCoursesStack: 'listCoursesStack',
 };

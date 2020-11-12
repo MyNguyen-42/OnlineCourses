@@ -6,8 +6,8 @@ const SmallRightButton = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <View style={styles.button}>
-        <Text>{props.text}</Text>
-        <MaterialIcons name={props.name} style={styles.icon} />
+        <Text style={props.style}>{props.text}</Text>
+        <MaterialIcons name={props.name} style={[styles.icon, props.style]} />
       </View>
     </TouchableOpacity>
   );

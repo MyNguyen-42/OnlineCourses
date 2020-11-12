@@ -4,7 +4,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {ScreenKey} from '../../../global/Constants';
 
 const ListCoursesItem = (props) => {
-  /* const {navigation} = props; */
   return (
     <TouchableOpacity
       style={styles.item}

@@ -63,12 +63,12 @@ const ListCourses = (props) => {
     },
   ];
 
-  const onPressListItem = (item) => {
-    props.navigation.navigate(ScreenKey.CourseDetail, {item});
-  };
-
   const FlatListItemSeparator = () => {
     return <View style={styles.highlight} />;
+  };
+
+  const onPressListItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
   };
 
   return (

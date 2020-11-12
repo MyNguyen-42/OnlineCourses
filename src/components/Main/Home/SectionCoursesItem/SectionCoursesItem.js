@@ -1,9 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {ScreenKey} from '../../../../global/Constants';
 
 const SectionCoursesItem = (props) => {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        /* props.onPressSectionItem; */
+        props.navigation.navigate(ScreenKey.ListCoursesStack);
+        console.log(props.item.title);
+      }}>
       <Image
         source={require('../../../../../assets/reactnative.png')}
         style={styles.image}
@@ -16,7 +23,7 @@ const SectionCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

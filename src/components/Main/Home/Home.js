@@ -3,7 +3,7 @@ import {StyleSheet, ScrollView} from 'react-native';
 import ImageButton from '../../common/ImageButton';
 import SectionCourses from './SectionCourses/SectionCourses';
 
-const Home = () => {
+const Home = (props) => {
   const onPressNewRelease = () => {
     console.log('object1');
   };
@@ -16,10 +16,10 @@ const Home = () => {
         title="NEW RELEASE"
         onPress={onPressNewRelease()}
       />
-      <SectionCourses title="Continue learning" />
-      <SectionCourses title="Path" />
-      <SectionCourses title="Chanel" />
-      <SectionCourses title="Bookmarks" />
+      <SectionCourses title="Continue learning" navigation={props.navigation} />
+      <SectionCourses title="Path" navigation={props.navigation} />
+      <SectionCourses title="Chanel" navigation={props.navigation} />
+      <SectionCourses title="Bookmarks" navigation={props.navigation} />
     </ScrollView>
   );
 };

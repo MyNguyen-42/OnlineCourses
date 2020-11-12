@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,46 +8,58 @@ import {
   Alert,
   Switch,
 } from 'react-native';
-import {ListItem, Icon} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ScreenKey} from '../../../global/Constants';
+import {useTheme} from '@react-navigation/native';
+import {ThemeContext} from '../../../../App';
 
 const Setting = (props) => {
-  const [isSwitchEnable, setIsSwitchEnable] = useState(false);
-
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+  const {isDarkTheme, setIsDarkTheme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   return (
     <ScrollView>
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate(ScreenKey.ManagementAccountStackScreens);
-        }}>
+        }}
+        style={{backgroundColor: colors.card}}>
         <View style={styles.itemContainer}>
           <FontAwesome style={styles.menuItemIcon} name="user-o" />
-          <Text style={styles.menuItemText}>Account</Text>
+          <Text style={[styles.menuItemText, {color: colors.text}]}>
+            Account
+          </Text>
         </View>
       </TouchableOpacity>
-      <View style={styles.itemContainer}>
+      <View style={[styles.itemContainer, {backgroundColor: colors.card}]}>
         <FontAwesome style={styles.menuItemIcon} name="exchange" />
-        <Text style={styles.menuItemText}>Theme</Text>
+        <Text style={[styles.menuItemText, {color: colors.text}]}>Theme</Text>
         <Switch
           style={styles.menuItemSwitch}
-          value={isSwitchEnable}
-          onValueChange={(value) => setIsSwitchEnable(value)}
+          value={isDarkTheme}
+          onValueChange={(value) => setIsDarkTheme(value)}
         />
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity style={{backgroundColor: colors.card}}>
         <View style={styles.itemContainer}>
           <FontAwesome style={styles.menuItemIcon} name="flag-o" />
-          <Text style={styles.menuItemText}>App version</Text>
+          <Text style={[styles.menuItemText, {color: colors.text}]}>
+            App version
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate(ScreenKey.LoginScreen);
-        }}>
+        }}
+        style={{backgroundColor: colors.card}}>
         <View style={styles.itemContainer}>
           <FontAwesome style={styles.menuItemIcon} name="sign-out" />
-          <Text style={styles.menuItemText}>Sign out</Text>
+          <Text style={[styles.menuItemText, {color: colors.text}]}>
+            Sign out
+          </Text>
         </View>
       </TouchableOpacity>
     </ScrollView>
