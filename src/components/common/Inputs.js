@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Input} from 'react-native-elements';
+import {useTheme} from '@react-navigation/native';
 
 const Inputs = (props) => {
   /*   const [IsFocus, setIsFocus] = useState(false);
@@ -10,8 +11,11 @@ const Inputs = (props) => {
     setIsFocus(true);
   };
  */
+
+  const {colors} = useTheme();
   return (
-    <View style={[styles.container, props.style]}>
+    <View
+      style={[styles.container, props.style, {backgroundColor: colors.card}]}>
       <Input
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry}

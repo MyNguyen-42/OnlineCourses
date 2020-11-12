@@ -3,8 +3,9 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Input from '../../common/Inputs';
 import FIlledButton, {FilledButton} from '../../common/FilledButton';
+import {ScreenKey} from '../../../global/Constants';
 
-const EditProfile = () => {
+const EditProfile = (props) => {
   return (
     <View>
       <View style={styles.avatar}>
@@ -19,7 +20,13 @@ const EditProfile = () => {
       <View style={styles.edit}>
         <Input placeholder={'user name'} />
         <Input placeholder={'phone'} style={{marginTop: 10}} />
-        <FilledButton title="SUBMIT" style={{marginTop: 10}} />
+        <FilledButton
+          title="SUBMIT"
+          style={{marginTop: 10}}
+          onPress={() => {
+            props.navigation.navigate(ScreenKey.Profile);
+          }}
+        />
       </View>
     </View>
   );

@@ -20,22 +20,22 @@ const SplashScreen = (props) => {
   }); */
 
   useEffect(() => {
-    console.log('loading UseEffect count loading');
+    /* console.log('loading UseEffect count loading'); */
     const clockInterval = setInterval(() => {
       const load = loading + 1;
       /*       console.log('create interval'); */
       setLoading(load);
     }, 100);
     return () => {
-      console.log('clear interval');
+      /* console.log('clear interval'); */
       clearInterval(clockInterval);
     };
   });
 
   useEffect(() => {
-    console.log('loading UseEffect');
+    /* console.log('loading UseEffect'); */
     if (loading === 1) {
-      props.navigation.navigate(ScreenKey.AuthenticationStackScreen);
+      props.navigation.navigate(ScreenKey.AuthenticationStackScreens);
     }
   }, [loading, props.navigation]);
 

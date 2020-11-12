@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import {ScreenKey} from './src/global/Constants';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -20,13 +20,44 @@ import Search from './src/components/Main/Search/Search';
 import CourseDetail from './src/components/CourseDetail/CourseDetail';
 import Home from './src/components/Main/Home/Home';
 import ListCourses from './src/components/Courses/ListCourses/ListCourses';
+import Setting from './src/components/AccountManagement/Setting/Setting';
 import {FilledButton} from './src/components/common/FilledButton';
 import {TextButton} from './src/components/common/TextButton';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+/* const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+  },
+}; */
 
 const MainNavigationStack = createStackNavigator();
 const Stack = createStackNavigator();
-const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const MainNavigation = () => {
+  return (
+    <MainNavigationStack.Navigator>
+      <MainNavigationStack.Screen
+        name={ScreenKey.SplashScreen}
+        component={SplashScreen}
+        options={{headerShown: false}}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.AuthenticationStackScreens}
+        component={AuthenticationStackScreens}
+        options={{headerShown: false}}
+      />
+      <MainNavigationStack.Screen
+        name={ScreenKey.MainTab}
+        component={MainTabNavigation}
+        options={{headerShown: false}}
+      />
+    </MainNavigationStack.Navigator>
+  );
+};
 
 const MainTabNavigation = () => {
   return (
@@ -43,6 +74,7 @@ const MainTabNavigation = () => {
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -83,42 +115,9 @@ const MainTabNavigation = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name={ScreenKey.Profile}
-        component={Profile}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
     </Tab.Navigator>
   );
 };
-
-const MainNavigation = () => {
-  return (
-    <MainNavigationStack.Navigator>
-      <MainNavigationStack.Screen
-        name={ScreenKey.SplashScreen}
-        component={SplashScreen}
-        options={{headerShown: false}}
-      />
-      <MainNavigationStack.Screen
-        name={ScreenKey.AuthenticationStackScreen}
-        component={AuthenticationStackScreen}
-        options={{headerShown: false}}
-      />
-      <MainNavigationStack.Screen
-        name={ScreenKey.MainTab}
-        component={MainTabNavigation}
-        options={{headerShown: false}}
-      />
-    </MainNavigationStack.Navigator>
-  );
-};
-
 const ListCoursesStack = () => {
   return (
     <Stack.Navigator initialRouteName={ScreenKey.ListCourses}>
@@ -136,28 +135,33 @@ const ListCoursesStack = () => {
   );
 };
 
-const HomeStackScreen = () => {
+const HomeStack = createStackNavigator();
+
+const HomeStackScreen = (props) => {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator initialRouteName={ScreenKey.Home}>
       <HomeStack.Screen
         name={ScreenKey.Home}
         component={Home}
         options={{
+          title: 'Home',
           headerRight: () => (
-            <TextButton
-              onPress={() => alert('This is a button!')}
-              title="Setting"
-              color="#fff"
-            />
-          ),
-          headerLeft: () => (
-            <FilledButton
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
+            <Ionicons
+              onPress={() =>
+                props.navigation.navigate(ScreenKey.SettingStackScreens)
+              }
+              name="home"
+              color="#f50"
+              size={26}
+              style={{marginRight: 15}}
             />
           ),
         }}
+      />
+      <HomeStack.Screen
+        name={ScreenKey.SettingStackScreens}
+        component={SettingStackScreen}
+        options={{headerShown: false}}
       />
     </HomeStack.Navigator>
   );
@@ -165,7 +169,7 @@ const HomeStackScreen = () => {
 
 const AuthenticationStack = createStackNavigator();
 
-const AuthenticationStackScreen = () => {
+const AuthenticationStackScreens = () => {
   return (
     <AuthenticationStack.Navigator initialRouteName={ScreenKey.LoginScreen}>
       <AuthenticationStack.Screen
@@ -187,6 +191,58 @@ const AuthenticationStackScreen = () => {
   );
 };
 
+const SettingStack = createStackNavigator();
+
+const SettingStackScreen = () => {
+  return (
+    <SettingStack.Navigator>
+      <SettingStack.Screen
+        name={ScreenKey.SettingScreen}
+        component={Setting}
+        options={{title: 'Setting'}}
+      />
+      <SettingStack.Screen
+        name={ScreenKey.ManagementAccountStackScreens}
+        component={ManagementAccountStackScreens}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </SettingStack.Navigator>
+  );
+};
+
+const ManagementAccountStack = createStackNavigator();
+
+const ManagementAccountStackScreens = (props) => {
+  return (
+    <ManagementAccountStack.Navigator>
+      <ManagementAccountStack.Screen
+        name={ScreenKey.Profile}
+        component={Profile}
+        options={{
+          title: 'Profile',
+          headerRight: () => (
+            <MaterialCommunityIcons
+              onPress={() => props.navigation.navigate(ScreenKey.EditProfile)}
+              name="account-edit"
+              color="#f50"
+              size={26}
+              style={{marginRight: 15}}
+            />
+          ),
+        }}
+      />
+      <ManagementAccountStack.Screen
+        name={ScreenKey.EditProfile}
+        component={EditProfile}
+        options={{
+          title: 'Edit Profile',
+        }}
+      />
+    </ManagementAccountStack.Navigator>
+  );
+};
 /* const ListCoursesScreen = () => {
   return (
     <Stack.Screen
@@ -222,9 +278,9 @@ export default function App() {
   const [theme, setTheme] = useState(themes.light);
   return (
     <AuthenticationProvider>
-      <ThemeContext.Provider value={{theme, setTheme}}>
+      <ThemeContext.Provider /* value={{theme, setTheme}} */>
         <View style={styles.container}>
-          <NavigationContainer>
+          <NavigationContainer /* theme={DarkTheme} */>
             <MainNavigation />
           </NavigationContainer>
         </View>

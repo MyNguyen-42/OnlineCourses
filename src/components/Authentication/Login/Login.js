@@ -19,7 +19,7 @@ const Login = (props) => {
   const [status, setStatus] = useState('');
 
   const {setAuthentication} = useContext(AuthenticationContext);
-  const {theme, setTheme} = useContext(ThemeContext);
+  /*   const {theme, setTheme} = useContext(ThemeContext); */
 
   useEffect(() => {
     console.log('useEffect Login');
