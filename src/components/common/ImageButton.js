@@ -2,22 +2,24 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {View} from 'react-native-animatable';
 
-const ImageButton = ({style, uri, ...props}) => {
+const ImageButton = (props) => {
   return (
-    <ImageBackground
-      style={[styles.button, style]}
-      source={{
-        uri: uri,
-      }}>
-      <TouchableOpacity style={styles.touch} onPress={props.onPress}>
-        <Text style={styles.text}>{props.title}</Text>
-      </TouchableOpacity>
-    </ImageBackground>
+    <TouchableOpacity onPress={props.onPress}>
+      <ImageBackground
+        style={[styles.button, props.style]}
+        source={{
+          uri: props.uri,
+        }}>
+        <View style={styles.touch}>
+          <Text style={styles.text}>{props.title}</Text>
+        </View>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 

@@ -34,9 +34,8 @@ const SectionCourses = (props) => {
     },
   ];
 
-  const onPressSectionItem = () => {
-    /* props.navigation.navigate(ScreenKey.ListCourses); */
-    /* console.log('test'); */
+  const onPressSectionItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
   };
 
   const renderListItem = (courses) => {
@@ -44,7 +43,7 @@ const SectionCourses = (props) => {
       <SectionCoursesItem
         item={id}
         navigation={props.navigation}
-        /* onPressSectionItem={onPressSectionItem()} */
+        onPressSectionItem={onPressSectionItem}
       />
     ));
   };

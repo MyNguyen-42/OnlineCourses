@@ -1,34 +1,41 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
 import Tag from '../common/Tag';
 import ListCourses from '../Courses/ListCourses/ListCourses';
+import {useTheme} from '@react-navigation/native';
+import VideoPlayer from './VideoPlayer/VideoPlayer';
+import {ButtonGroup} from 'react-native-elements';
 const CourseDetail = (props) => {
-  /* const {route} = props;
-  const {item} = route.params; */
-  /* console.log(props.route.params.item.author); */
+  const {colors} = useTheme();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const buttons = ['Contents', 'Transcript'];
+
+  const updateIndex = (SelectedIndex) => {
+    setSelectedIndex(SelectedIndex);
+  };
+
   let item = props.route.params.item;
   return (
     <ScrollView>
-      <View style={styles.video}>
-        <Image
-          source={require('../../../assets/reactnative.png')}
-          style={styles.image}
-        />
-      </View>
-      <Text style={styles.title}>React: The Big Picture</Text>
+      <VideoPlayer />
+      <Text style={[styles.title, {color: colors.text}]}>
+        React: The Big Picture
+      </Text>
       <Tag title={item.author} style={styles.author} />
       <View style={styles.containerLevelRelease}>
-        <Text>{item.level}</Text>
-        <Text> {item.released}</Text>
+        <Text style={{color: colors.text}}>{item.level}</Text>
+        <Text style={{color: colors.text}}> {item.released}</Text>
       </View>
       <View style={styles.containerButton}>
         <CircleButton title="Bookmarked" name="bookmark-multiple" />
         <CircleButton title="Add to channel" name="text-box-plus-outline" />
         <CircleButton title="Downloaded" name="download-circle" />
       </View>
-      <Text style={styles.description}>Description</Text>
+      <Text style={[styles.description, {color: colors.text}]}>
+        Description
+      </Text>
       <View style={styles.containerButtonSmall}>
         <FilledButton
           name="file-multiple-outline"
@@ -43,15 +50,17 @@ const CourseDetail = (props) => {
           onPress={() => {}}
         />
       </View>
-      <View style={styles.buttonGroup}>
-        <View style={styles.line}>
-          <Text> Contents</Text>
-        </View>
-        <View>
-          <Text> Transcript</Text>
-        </View>
-      </View>
-      <ListCourses />
+      <ButtonGroup
+        onPress={updateIndex}
+        selectedIndex={selectedIndex}
+        buttons={buttons}
+        containerStyle={{height: 30}}
+        buttonStyle={{color: colors.text}}
+        buttonContainerStyle={{backgroundColor: colors.background}}
+        selectedButtonStyle={styles.selectedButtonStyle}
+      />
+      {selectedIndex ? <Text>Transcript</Text> : <Text>Contents</Text>}
+      <ListCourses navigation={props.navigation} />
     </ScrollView>
   );
 };
@@ -59,14 +68,6 @@ const CourseDetail = (props) => {
 export default CourseDetail;
 
 const styles = StyleSheet.create({
-  video: {
-    height: 200,
-    width: '100%',
-    backgroundColor: 'gray',
-  },
-  image: {
-    height: 200,
-  },
   title: {
     margin: 10,
     fontSize: 20,

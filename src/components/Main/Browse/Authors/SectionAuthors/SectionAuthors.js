@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import {ScreenKey} from '../../../../../global/Constants';
 import SectionAuthorsItem from '../SectionAuthorsItem/SectionAuthorsItem';
 
 const SectionPaths = (props) => {
@@ -26,8 +27,18 @@ const SectionPaths = (props) => {
     },
   ];
 
+  const onPressSectionItem = (item) => {
+    props.navigation.navigate(ScreenKey.AuthorDetail, {item});
+  };
+
   const renderListItem = (authors) => {
-    return authors.map((id) => <SectionAuthorsItem item={id} />);
+    return authors.map((id) => (
+      <SectionAuthorsItem
+        item={id}
+        navigation={props.navigation}
+        onPressSectionItem={onPressSectionItem}
+      />
+    ));
   };
 
   return (

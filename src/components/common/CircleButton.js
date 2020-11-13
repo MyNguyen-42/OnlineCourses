@@ -1,13 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useTheme} from '@react-navigation/native';
 const CircleButton = (props) => {
+  const {colors} = useTheme();
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.circle}>
         <MaterialCommunityIcons name={props.name} style={styles.icon} />
       </View>
-      <Text>{props.title}</Text>
+      <Text style={{color: colors.text}}>{props.title}</Text>
     </TouchableOpacity>
   );
 };

@@ -17,4 +17,6 @@ export const ScreenKey = {
   ManagementAccountStackScreens: 'managementAccountStackScreens',
   Profile: 'Profile',
   ListCoursesStack: 'listCoursesStack',
+  BrowseStackScreen: 'browseStackScreen',
+  AuthorDetail: 'authorDetail',
 };

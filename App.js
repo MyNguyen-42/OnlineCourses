@@ -28,14 +28,7 @@ import Setting from './src/components/AccountManagement/Setting/Setting';
 import {FilledButton} from './src/components/common/FilledButton';
 import {TextButton} from './src/components/common/TextButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-/* const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
-  },
-}; */
+import AuthorDetail from './src/components/Main/Browse/AuthorDetail/AuthorDetail';
 
 const Stack = createStackNavigator();
 
@@ -94,8 +87,8 @@ const MainTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={ScreenKey.Browse}
-        component={Browse}
+        name={ScreenKey.BrowseStackScreen}
+        component={BrowseStackScreen}
         options={{
           tabBarLabel: 'Browse',
           tabBarIcon: ({color, size}) => (
@@ -173,9 +166,30 @@ const HomeStackScreen = (props) => {
       <HomeStack.Screen
         name={ScreenKey.ListCoursesStack}
         component={ListCoursesStack}
-        options={{title: 'List Courses'}}
+      />
+      <HomeStack.Screen
+        name={ScreenKey.CourseDetail}
+        component={CourseDetail}
       />
     </HomeStack.Navigator>
+  );
+};
+
+const BrowseStack = createStackNavigator();
+
+const BrowseStackScreen = () => {
+  return (
+    <BrowseStack.Navigator initialRouteName={ScreenKey.Browse}>
+      <BrowseStack.Screen name={ScreenKey.Browse} component={Browse} />
+      <BrowseStack.Screen
+        name={ScreenKey.ListCoursesStack}
+        component={ListCoursesStack}
+      />
+      <BrowseStack.Screen
+        name={ScreenKey.AuthorDetail}
+        component={AuthorDetail}
+      />
+    </BrowseStack.Navigator>
   );
 };
 
@@ -304,6 +318,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
 });

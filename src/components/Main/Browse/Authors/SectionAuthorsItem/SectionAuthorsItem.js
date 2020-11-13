@@ -1,9 +1,15 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 const SectionAuthorsItem = (props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => {
+        props.onPressSectionItem(props.item);
+        /* props.navigation.navigate(ScreenKey.ListCoursesStack);
+      console.log(props.item.title); */
+      }}>
       <Image
         source={{
           uri:
@@ -12,7 +18,7 @@ const SectionAuthorsItem = (props) => {
         style={styles.circle}
       />
       <Text>{props.item.name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

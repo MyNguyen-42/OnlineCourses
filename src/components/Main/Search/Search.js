@@ -8,7 +8,7 @@ import {useTheme} from '@react-navigation/native';
 const Search = () => {
   const {colors} = useTheme();
   const [search, setSearch] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const updateSearch = (Search) => {
     setSearch(Search);
   };
