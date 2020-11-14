@@ -84,6 +84,7 @@ const MainTabNavigation = () => {
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="download" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -98,6 +99,7 @@ const MainTabNavigation = () => {
               size={size}
             />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -143,7 +145,8 @@ const HomeStackScreen = (props) => {
       <HomeStack.Screen
         name={ScreenKey.Home}
         component={Home}
-        options={{
+        options={{headerShown: false}}
+        /* options={{
           title: 'Home',
           headerRight: () => (
             <Ionicons
@@ -156,7 +159,7 @@ const HomeStackScreen = (props) => {
               style={{marginRight: 15}}
             />
           ),
-        }}
+        }} */
       />
       <HomeStack.Screen
         name={ScreenKey.SettingStackScreens}
@@ -180,7 +183,11 @@ const BrowseStack = createStackNavigator();
 const BrowseStackScreen = () => {
   return (
     <BrowseStack.Navigator initialRouteName={ScreenKey.Browse}>
-      <BrowseStack.Screen name={ScreenKey.Browse} component={Browse} />
+      <BrowseStack.Screen
+        name={ScreenKey.Browse}
+        component={Browse}
+        options={{headerShown: false}}
+      />
       <BrowseStack.Screen
         name={ScreenKey.ListCoursesStack}
         component={ListCoursesStack}

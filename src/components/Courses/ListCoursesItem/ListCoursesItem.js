@@ -2,8 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScreenKey} from '../../../global/Constants';
+import {useTheme} from '@react-navigation/native';
 
 const ListCoursesItem = (props) => {
+  const {colors} = useTheme();
   return (
     <TouchableOpacity
       style={styles.item}
@@ -22,7 +24,10 @@ const ListCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
       </View>
-      <MaterialCommunityIcons name="dots-horizontal" style={styles.icon} />
+      <MaterialCommunityIcons
+        name="dots-horizontal"
+        style={[styles.icon, {color: colors.text}]}
+      />
     </TouchableOpacity>
   );
 };

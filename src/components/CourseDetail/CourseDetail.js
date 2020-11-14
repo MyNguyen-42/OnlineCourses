@@ -3,10 +3,13 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
 import Tag from '../common/Tag';
-import ListCourses from '../Courses/ListCourses/ListCourses';
 import {useTheme} from '@react-navigation/native';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import {ButtonGroup} from 'react-native-elements';
+import ListLesson from './ListLessons/ListLesson';
+import {ScreenKey} from '../../global/Constants';
+const Description =
+  'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
 const CourseDetail = (props) => {
   const {colors} = useTheme();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -23,7 +26,14 @@ const CourseDetail = (props) => {
       <Text style={[styles.title, {color: colors.text}]}>
         React: The Big Picture
       </Text>
-      <Tag title={item.author} style={styles.author} />
+      <Tag
+        title={item.author}
+        style={styles.author}
+        onPres={() => {
+          /* props.navigation.navigate(ScreenKey.AuthorDetail); */
+          console.log('object');
+        }}
+      />
       <View style={styles.containerLevelRelease}>
         <Text style={{color: colors.text}}>{item.level}</Text>
         <Text style={{color: colors.text}}> {item.released}</Text>
@@ -34,7 +44,7 @@ const CourseDetail = (props) => {
         <CircleButton title="Downloaded" name="download-circle" />
       </View>
       <Text style={[styles.description, {color: colors.text}]}>
-        Description
+        {Description}
       </Text>
       <View style={styles.containerButtonSmall}>
         <FilledButton
@@ -59,8 +69,19 @@ const CourseDetail = (props) => {
         buttonContainerStyle={{backgroundColor: colors.background}}
         selectedButtonStyle={styles.selectedButtonStyle}
       />
-      {selectedIndex ? <Text>Transcript</Text> : <Text>Contents</Text>}
-      <ListCourses navigation={props.navigation} />
+      {selectedIndex ? (
+        <Text style={{color: colors.text}}>
+          Adipisicing ad ad qui incididunt reprehenderit mollit sint do
+          consectetur anim consequat labore. Amet adipisicing ullamco enim aute.
+          Ad id quis est dolor. Ex excepteur dolor labore fugiat culpa officia
+          veniam labore labore ad. Ex non enim incididunt veniam. Reprehenderit
+          exercitation sunt ipsum voluptate non cillum ipsum fugiat incididunt
+          dolor velit enim. Labore Lorem exercitation minim irure ea officia
+          duis ipsum.
+        </Text>
+      ) : (
+        <ListLesson />
+      )}
     </ScrollView>
   );
 };

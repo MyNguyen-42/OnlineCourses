@@ -15,6 +15,8 @@ const SectionCourses = (props) => {
       level: 'Advance',
       released: 'May 6, 2020',
       duration: '30 hours',
+      rating: 4,
+      ratingNumber: 10,
     },
     {
       id: 2,
@@ -23,6 +25,8 @@ const SectionCourses = (props) => {
       level: 'Beginner',
       released: 'May 6, 2020',
       duration: '25 hours',
+      rating: 5,
+      ratingNumber: 10,
     },
     {
       id: 3,
@@ -31,6 +35,8 @@ const SectionCourses = (props) => {
       level: 'Beginner',
       released: 'May 6, 2020',
       duration: '25 hours',
+      rating: 3,
+      ratingNumber: 10,
     },
   ];
 

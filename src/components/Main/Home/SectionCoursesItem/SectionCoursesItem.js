@@ -4,6 +4,7 @@ import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../../global/Constants';
 import {Rating, AirbnbRating} from 'react-native-elements';
 import {color} from 'react-native-reanimated';
+import MyRating from '../../../common/MyRating';
 
 const SectionCoursesItem = (props) => {
   const {colors} = useTheme();
@@ -30,12 +31,17 @@ const SectionCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
 
-        <Rating
-          type="star"
+        {/* <Rating
+          tintColor={colors.card}
           ratingCount={5}
           imageSize={20}
-          ratingBackgroundColor={colors.card}
+          startingValue={props.item.rating}
+          style={styles.rating}
           onFinishRating={ratingCompleted}
+        /> */}
+        <MyRating
+          ratingNumber={props.item.ratingNumber}
+          rating={props.item.rating}
         />
       </View>
     </TouchableOpacity>
@@ -56,5 +62,8 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: 'darkgray',
+  },
+  rating: {
+    alignSelf: 'center',
   },
 });

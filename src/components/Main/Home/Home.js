@@ -1,7 +1,10 @@
 import React from 'react';
 import {StyleSheet, ScrollView, ImageBackground, Text} from 'react-native';
-import ImageButton from '../../common/ImageButton';
 import SectionCourses from './SectionCourses/SectionCourses';
+import {Header} from 'react-native-elements';
+import {View} from 'react-native-animatable';
+import {useTheme} from '@react-navigation/native';
+import {ScreenKey} from '../../../global/Constants';
 
 const image = {
   uri:
@@ -11,17 +14,40 @@ const image = {
 const introduce =
   'With Pluralsight, you can build and apply skills in top technologies.You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.';
 const Home = (props) => {
+  const {colors} = useTheme();
+  const onPress = () => {
+    props.navigation.navigate(ScreenKey.SettingStackScreens);
+  };
   return (
-    <ScrollView>
-      <ImageBackground source={image} style={styles.image}>
-        <Text style={styles.text}>Welcome to Pluralsight!</Text>
-        <Text style={styles.textIntroduce}>{introduce}</Text>
-      </ImageBackground>
-      <SectionCourses title="Continue learning" navigation={props.navigation} />
-      <SectionCourses title="Path" navigation={props.navigation} />
-      <SectionCourses title="Chanel" navigation={props.navigation} />
-      <SectionCourses title="Bookmarks" navigation={props.navigation} />
-    </ScrollView>
+    <>
+      <Header
+        placement="left"
+        centerComponent={{
+          text: 'Home',
+          style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
+        }}
+        rightComponent={{
+          icon: 'home',
+          color: colors.text,
+          onPress: onPress,
+        }}
+        backgroundColor={colors.card}
+        containerStyle={styles.containerStyle}
+      />
+      <ScrollView>
+        <ImageBackground source={image} style={styles.image}>
+          <Text style={styles.text}>Welcome to Pluralsight!</Text>
+          <Text style={styles.textIntroduce}>{introduce}</Text>
+        </ImageBackground>
+        <SectionCourses
+          title="Continue learning"
+          navigation={props.navigation}
+        />
+        <SectionCourses title="Path" navigation={props.navigation} />
+        <SectionCourses title="Chanel" navigation={props.navigation} />
+        <SectionCourses title="Bookmarks" navigation={props.navigation} />
+      </ScrollView>
+    </>
   );
 };
 
@@ -43,5 +69,11 @@ const styles = StyleSheet.create({
     marginTop: 0,
     fontSize: 20,
     color: 'white',
+  },
+  containerStyle: {
+    shadowColor: 'black',
+    shadowOffset: {width: 1, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 3,
   },
 });

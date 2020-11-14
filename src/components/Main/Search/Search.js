@@ -4,8 +4,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ListCourse from '../../Courses/ListCourses/ListCourses';
 import {ButtonGroup, SearchBar} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
+import {ScreenKey} from '../../../global/Constants';
+import {Header} from 'react-native-elements';
 
-const Search = () => {
+const Search = (props) => {
   const {colors} = useTheme();
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -56,9 +58,25 @@ const Search = () => {
       break;
   }
   const buttons = ['All', 'Courses', 'Path', 'Author'];
-
+  const onPress = () => {
+    props.navigation.navigate(ScreenKey.SettingStackScreens);
+  };
   return (
-    <View>
+    <>
+      <Header
+        placement="left"
+        centerComponent={{
+          text: 'Search',
+          style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
+        }}
+        rightComponent={{
+          icon: 'home',
+          color: colors.text,
+          onPress: onPress,
+        }}
+        backgroundColor={colors.card}
+        containerStyle={styles.containerStyle}
+      />
       <View
         style={[
           styles.search,
@@ -101,7 +119,7 @@ const Search = () => {
         selectedButtonStyle={styles.selectedButtonStyle}
       />
       {ViewResult}
-    </View>
+    </>
   );
 };
 
