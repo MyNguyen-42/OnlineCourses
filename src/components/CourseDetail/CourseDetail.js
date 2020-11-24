@@ -23,9 +23,7 @@ const CourseDetail = (props) => {
   return (
     <ScrollView>
       <VideoPlayer />
-      <Text style={[styles.title, {color: colors.text}]}>
-        React: The Big Picture
-      </Text>
+      <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
       <Tag
         title={item.author}
         style={styles.author}

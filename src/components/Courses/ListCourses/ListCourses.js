@@ -2,9 +2,10 @@ import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {ScreenKey} from '../../../global/Constants';
 import ListCoursesItem from '../ListCoursesItem/ListCoursesItem';
+import {recommendedCourses} from '../../../models/CourseModel';
 
 const ListCourses = (props) => {
-  const courses = [
+  /* const courses = [
     {
       id: 1,
       title: 'React Native',
@@ -61,7 +62,9 @@ const ListCourses = (props) => {
       released: 'May 6, 2020',
       duration: '25 hours',
     },
-  ];
+  ]; */
+  let Courses = props.route.params.courses;
+  console.log(Courses);
 
   const FlatListItemSeparator = () => {
     return <View style={styles.highlight} />;
@@ -75,7 +78,7 @@ const ListCourses = (props) => {
     <View>
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
-        data={courses}
+        data={Courses}
         renderItem={({item}) => (
           <ListCoursesItem
             item={item}
