@@ -11041,7 +11041,7 @@ const trendingPaths = paths.slice(7, 15);
 const authors = [
   {
     id: 1,
-    name: 'Hieu Duong',
+    name: 'My Nguyen',
     title: 'Elearning.io Author',
     description:
       'Hieu Duong is a sofware developer, consultant, conference speaker, and Elearning.io Author. Him Courses include: Angular, OOP Fundamentals in C#. For him work in support of sofware developers, she has been recognized with the Microsoft Most valuable Professional (MVP) award, and is a Google Developer Expert (GDE).',

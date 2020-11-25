@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, ScrollView, ImageBackground, Text} from 'react-native';
 import SectionCourses from './SectionCourses/SectionCourses';
 import {Header} from 'react-native-elements';
-import {View} from 'react-native-animatable';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
+import {recommendedCourses} from '../../../models/CourseModel';
 
 const image = {
   uri:
@@ -42,10 +42,23 @@ const Home = (props) => {
         <SectionCourses
           title="Continue learning"
           navigation={props.navigation}
+          data={recommendedCourses}
         />
-        <SectionCourses title="Path" navigation={props.navigation} />
-        <SectionCourses title="Chanel" navigation={props.navigation} />
-        <SectionCourses title="Bookmarks" navigation={props.navigation} />
+        <SectionCourses
+          title="IT Operations"
+          navigation={props.navigation}
+          data={recommendedCourses}
+        />
+        <SectionCourses
+          title="Data Professional"
+          navigation={props.navigation}
+          data={recommendedCourses}
+        />
+        <SectionCourses
+          title="Bookmarks"
+          navigation={props.navigation}
+          data={recommendedCourses}
+        />
       </ScrollView>
     </>
   );

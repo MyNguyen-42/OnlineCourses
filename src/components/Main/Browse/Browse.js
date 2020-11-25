@@ -8,7 +8,12 @@ import SectionAuthors from './Authors/SectionAuthors/SectionAuthors';
 import {ScreenKey} from '../../../global/Constants';
 import {useTheme} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
-import {recommendedCourses, newCourses} from '../../../models/CourseModel';
+import {
+  recommendedCourses,
+  newCourses,
+  paths,
+  authors,
+} from '../../../models/CourseModel';
 
 const Browse = (props) => {
   const {colors} = useTheme();
@@ -37,24 +42,24 @@ const Browse = (props) => {
       />
       <ScrollView>
         <ImageButton
-          uri="https://cdn.guidingtech.com/imager/assets/2020/04/787146/Cool-Backgrounds-for-Zoom-Meetings-1_4d470f76dc99e18ad75087b1b8410ea9.jpg?1585326792"
-          title="RECOMMENDED FOR YOU"
+          uri="https://wallpapertag.com/wallpaper/full/2/c/7/463317-cool-techno-backgrounds-1920x1200-for-lockscreen.jpg"
+          title="NEW RELEASE"
           onPress={() => {
-            const courses = recommendedCourses;
+            const Courses = newCourses;
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
-              params: {courses},
+              params: {Courses},
             });
           }}
         />
         <ImageButton
-          uri="https://wallpapertag.com/wallpaper/full/2/c/7/463317-cool-techno-backgrounds-1920x1200-for-lockscreen.jpg"
-          title="NEW RELEASE"
+          uri="https://cdn.guidingtech.com/imager/assets/2020/04/787146/Cool-Backgrounds-for-Zoom-Meetings-1_4d470f76dc99e18ad75087b1b8410ea9.jpg?1585326792"
+          title="RECOMMENDED FOR YOU"
           onPress={() => {
-            const courses = newCourses;
+            const Courses = recommendedCourses;
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
-              params: {courses},
+              params: {Courses},
             });
           }}
         />
@@ -65,7 +70,11 @@ const Browse = (props) => {
               style={styles.imageButton}
               title="NEW RELEASE"
               onPress={() => {
-                props.navigation.navigate(ScreenKey.ListCoursesStack);
+                const Courses = newCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
               }}
             />
             <ImageButton
@@ -73,7 +82,11 @@ const Browse = (props) => {
               style={styles.imageButton}
               title="RECOMMENDED FOR YOU"
               onPress={() => {
-                props.navigation.navigate(ScreenKey.ListCoursesStack);
+                const Courses = recommendedCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
               }}
             />
           </View>
@@ -83,7 +96,11 @@ const Browse = (props) => {
               style={styles.imageButton}
               title="NEW RELEASE"
               onPress={() => {
-                props.navigation.navigate(ScreenKey.ListCoursesStack);
+                const Courses = newCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
               }}
             />
             <ImageButton
@@ -91,7 +108,11 @@ const Browse = (props) => {
               style={styles.imageButton}
               title="RECOMMENDED FOR YOU"
               onPress={() => {
-                props.navigation.navigate(ScreenKey.ListCoursesStack);
+                const Courses = recommendedCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
               }}
             />
           </View>
@@ -101,14 +122,24 @@ const Browse = (props) => {
               style={styles.imageButton}
               title="NEW RELEASE"
               onPress={() => {
-                props.navigation.navigate(ScreenKey.ListCoursesStack);
+                const Courses = newCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
               }}
             />
             <ImageButton
               uri="http://www.hdwallpaperspulse.com/wp-content/uploads/2018/03/13/colorful-hd-backgrounds.jpg"
               style={styles.imageButton}
               title="RECOMMENDED FOR YOU"
-              onPress={() => {}}
+              onPress={() => {
+                const Courses = recommendedCourses;
+                props.navigation.navigate(ScreenKey.ListCoursesStack, {
+                  screen: ScreenKey.ListCourses,
+                  params: {Courses},
+                });
+              }}
             />
           </View>
         </ScrollView>
@@ -120,8 +151,12 @@ const Browse = (props) => {
           <Tag title="Java" onPress={() => {}} />
           <Tag title="Data Analysis" onPress={() => {}} />
         </ScrollView>
-        <SectionPaths title="Paths" />
-        <SectionAuthors title="Top authors" navigation={props.navigation} />
+        <SectionPaths title="Paths" data={paths} />
+        <SectionAuthors
+          title="Top authors"
+          navigation={props.navigation}
+          data={authors}
+        />
       </ScrollView>
     </>
   );

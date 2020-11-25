@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {Avatar} from 'react-native-elements';
 import {FilledButton} from '../../../common/FilledButton';
-import ListCourses from '../../../Courses/ListCourses/ListCourses';
+import ListCoursesItem from '../../../Courses/ListCoursesItem/ListCoursesItem';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const AuthorDetail = (props) => {
-  console.log(props);
   let item = props.route.params.item;
   const {colors} = useTheme();
   return (
@@ -25,8 +25,30 @@ const AuthorDetail = (props) => {
       <Text style={{color: colors.text}}>
         Follow to be notified when new courses are published
       </Text>
-      <Text style={{color: colors.text}}>Description</Text>
-      <ListCourses />
+      <Text style={{color: colors.text}}>{item.description}</Text>
+      <View style={styles.icon}>
+        <TouchableOpacity>
+          <View style={styles.iconItem}>
+            <Icon name="facebook-official" size={30} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.iconItem}>
+            <Icon name="twitter" size={30} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.iconItem}>
+            <Icon name="linkedin-square" size={30} />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={item.course}
+        renderItem={({item}) => (
+          <ListCoursesItem navigation={props.navigation} item={item} />
+        )}
+      />
     </View>
   );
 };
@@ -41,5 +63,14 @@ const styles = StyleSheet.create({
   textName: {
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  icon: {
+    margin: 6,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  iconItem: {
+    alignItems: 'center',
+    margin: 6,
   },
 });

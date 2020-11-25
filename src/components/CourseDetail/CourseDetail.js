@@ -7,7 +7,6 @@ import {useTheme} from '@react-navigation/native';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import {ButtonGroup} from 'react-native-elements';
 import ListLesson from './ListLessons/ListLesson';
-import {ScreenKey} from '../../global/Constants';
 const Description =
   'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
 const CourseDetail = (props) => {
@@ -20,6 +19,7 @@ const CourseDetail = (props) => {
   };
 
   let item = props.route.params.item;
+  /* console.log(item.content); */
   return (
     <ScrollView>
       <VideoPlayer />
@@ -78,7 +78,7 @@ const CourseDetail = (props) => {
           duis ipsum.
         </Text>
       ) : (
-        <ListLesson />
+        <ListLesson data={item.content} />
       )}
     </ScrollView>
   );

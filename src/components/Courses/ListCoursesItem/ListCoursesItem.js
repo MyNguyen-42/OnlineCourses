@@ -27,6 +27,9 @@ const ListCoursesItem = (props) => {
       <MaterialCommunityIcons
         name="dots-horizontal"
         style={[styles.icon, {color: colors.text}]}
+        onPress={() => {
+          console.log('clicked item');
+        }}
       />
     </TouchableOpacity>
   );

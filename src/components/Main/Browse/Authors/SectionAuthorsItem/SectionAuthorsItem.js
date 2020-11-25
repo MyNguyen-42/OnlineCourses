@@ -1,14 +1,13 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const SectionAuthorsItem = (props) => {
+  console.log(props.item);
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
         props.onPressSectionItem(props.item);
-        /* props.navigation.navigate(ScreenKey.ListCoursesStack);
-      console.log(props.item.title); */
       }}>
       <Image
         source={{

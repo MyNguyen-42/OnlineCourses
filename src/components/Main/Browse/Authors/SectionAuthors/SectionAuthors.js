@@ -4,35 +4,14 @@ import {ScreenKey} from '../../../../../global/Constants';
 import SectionAuthorsItem from '../SectionAuthorsItem/SectionAuthorsItem';
 
 const SectionPaths = (props) => {
-  const authors = [
-    {
-      id: 1,
-      name: 'Dzoi',
-    },
-    {
-      id: 2,
-      name: 'Jhon',
-    },
-    {
-      id: 3,
-      name: 'Adele',
-    },
-    {
-      id: 4,
-      name: 'Lisa',
-    },
-    {
-      id: 5,
-      name: 'Mark',
-    },
-  ];
+  const authors = props.data;
 
   const onPressSectionItem = (item) => {
     props.navigation.navigate(ScreenKey.AuthorDetail, {item});
   };
 
-  const renderListItem = (authors) => {
-    return authors.map((id) => (
+  const renderListItem = (Authors) => {
+    return Authors.map((id) => (
       <SectionAuthorsItem
         item={id}
         navigation={props.navigation}

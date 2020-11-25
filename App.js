@@ -146,20 +146,6 @@ const HomeStackScreen = (props) => {
         name={ScreenKey.Home}
         component={Home}
         options={{headerShown: false}}
-        /* options={{
-          title: 'Home',
-          headerRight: () => (
-            <Ionicons
-              onPress={() =>
-                props.navigation.navigate(ScreenKey.SettingStackScreens)
-              }
-              name="home"
-              color="#f50"
-              size={26}
-              style={{marginRight: 15}}
-            />
-          ),
-        }} */
       />
       <HomeStack.Screen
         name={ScreenKey.SettingStackScreens}

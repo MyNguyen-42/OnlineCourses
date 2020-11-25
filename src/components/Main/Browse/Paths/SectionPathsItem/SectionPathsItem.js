@@ -10,7 +10,7 @@ const SectionPathsItem = (props) => {
       />
       <View style={styles.containerText}>
         <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.totalCourses}</Text>
+        <Text style={styles.darkText}>{props.item.countCourses}</Text>
       </View>
     </View>
   );

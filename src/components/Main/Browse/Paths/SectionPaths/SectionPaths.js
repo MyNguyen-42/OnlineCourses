@@ -3,7 +3,7 @@ import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import SectionPathsItem from '../SectionPathsItem/SectionPathsItem';
 
 const SectionPaths = (props) => {
-  const courses = [
+  /* const courses = [
     {
       id: 1,
       title: 'Configuration Management Using Puppet',
@@ -19,16 +19,18 @@ const SectionPaths = (props) => {
       title: 'Windows SerVer Administation Concepts',
       totalCourses: 6,
     },
-  ];
+  ]; */
+  const paths = props.data;
+  /* console.log(props.data); */
 
-  const renderListItem = (courses) => {
-    return courses.map((id) => <SectionPathsItem item={id} />);
+  const renderListItem = (Paths) => {
+    return Paths.map((id) => <SectionPathsItem item={id} />);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{props.title}</Text>
-      <ScrollView horizontal={true}>{renderListItem(courses)}</ScrollView>
+      <ScrollView horizontal={true}>{renderListItem(paths)}</ScrollView>
     </View>
   );
 };

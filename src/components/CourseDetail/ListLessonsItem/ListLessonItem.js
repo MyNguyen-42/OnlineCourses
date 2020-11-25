@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ScreenKey} from '../../../global/Constants';
 import {useTheme} from '@react-navigation/native';
 
 const ListCoursesItem = (props) => {
@@ -13,9 +12,9 @@ const ListCoursesItem = (props) => {
           name="checkbox-blank-circle"
           style={[styles.icon, {color: colors.text}]}
         />
-        <Text style={{color: colors.text}}>Introduction</Text>
+        <Text style={{color: colors.text}}>{props.item.title}</Text>
       </View>
-      <Text style={{color: colors.text}}>0:42</Text>
+      <Text style={{color: colors.text}}>{props.item.time}</Text>
     </TouchableOpacity>
   );
 };
