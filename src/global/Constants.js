@@ -19,4 +19,5 @@ export const ScreenKey = {
   ListCoursesStack: 'listCoursesStack',
   BrowseStackScreen: 'browseStackScreen',
   AuthorDetail: 'authorDetail',
+  ListSectionPaths: 'listSectionPaths',
 };

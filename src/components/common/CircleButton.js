@@ -5,7 +5,7 @@ import {useTheme} from '@react-navigation/native';
 const CircleButton = (props) => {
   const {colors} = useTheme();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <View style={styles.circle}>
         <MaterialCommunityIcons name={props.name} style={styles.icon} />
       </View>

@@ -17,3 +17,36 @@ const AuthenticationProvider = (props) => {
 };
 
 export {AuthenticationProvider, AuthenticationContext};
+
+const FavoritesContext = React.createContext();
+
+const FavoritesProvider = (props) => {
+  const [favoriteCourses, setFavoriteCourses] = useState(new Set());
+
+  const addFavoriteCourse = (courseId) => {
+    console.log('addFavoriteCourse', courseId);
+    var newSet = new Set(favoriteCourses.add(courseId));
+    setFavoriteCourses(newSet);
+  };
+
+  const removeFavoriteCourse = (courseId) => {
+    console.log('removeFavoriteCourse', courseId);
+    favoriteCourses.delete(courseId);
+    var newSet = new Set(favoriteCourses);
+    setFavoriteCourses(newSet);
+  };
+
+  return (
+    <FavoritesContext.Provider
+      value={{
+        favoriteCourses,
+        setFavoriteCourses,
+        addFavoriteCourse,
+        removeFavoriteCourse,
+      }}>
+      {props.children}
+    </FavoritesContext.Provider>
+  );
+};
+
+export {FavoritesProvider, FavoritesContext};

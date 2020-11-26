@@ -10,6 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AuthenticationProvider} from './src/Provider/AuthenticationProvider';
+import {FavoriteProvider} from './src/Provider/FavoriteProvider';
 import Login from './src/components/Authentication/Login/Login';
 import SplashScreen from './src/components/SplashScreen/SplashScreen';
 import Register from './src/components/Authentication/Register/Register';
@@ -29,6 +30,7 @@ import {FilledButton} from './src/components/common/FilledButton';
 import {TextButton} from './src/components/common/TextButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AuthorDetail from './src/components/Main/Browse/AuthorDetail/AuthorDetail';
+import ListSectionPaths from './src/components/Main/Browse/Paths/ListSectionPaths/ListSectionPaths';
 
 const Stack = createStackNavigator();
 
@@ -182,6 +184,10 @@ const BrowseStackScreen = () => {
         name={ScreenKey.AuthorDetail}
         component={AuthorDetail}
       />
+      <BrowseStack.Screen
+        name={ScreenKey.ListSectionPaths}
+        component={ListSectionPaths}
+      />
     </BrowseStack.Navigator>
   );
 };
@@ -298,13 +304,15 @@ export default function App() {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
   return (
     <AuthenticationProvider>
-      <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
-        <View style={styles.container}>
-          <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-            <MainNavigation />
-          </NavigationContainer>
-        </View>
-      </ThemeContext.Provider>
+      <FavoriteProvider>
+        <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
+          <View style={styles.container}>
+            <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+              <MainNavigation />
+            </NavigationContainer>
+          </View>
+        </ThemeContext.Provider>
+      </FavoriteProvider>
     </AuthenticationProvider>
   );
 }

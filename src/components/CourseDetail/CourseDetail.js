@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
@@ -7,11 +7,14 @@ import {useTheme} from '@react-navigation/native';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import {ButtonGroup} from 'react-native-elements';
 import ListLesson from './ListLessons/ListLesson';
+import {FavoriteContext} from '../../Provider/FavoriteProvider';
 const Description =
   'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
 const CourseDetail = (props) => {
   const {colors} = useTheme();
+  const favoriteContext = useContext(FavoriteContext);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [favorite, setFavorite] = useState('Download');
   const buttons = ['Contents', 'Transcript'];
 
   const updateIndex = (SelectedIndex) => {
@@ -39,7 +42,23 @@ const CourseDetail = (props) => {
       <View style={styles.containerButton}>
         <CircleButton title="Bookmarked" name="bookmark-multiple" />
         <CircleButton title="Add to channel" name="text-box-plus-outline" />
-        <CircleButton title="Downloaded" name="download-circle" />
+        <CircleButton
+          title={
+            favoriteContext.favoriteCourses.has(item)
+              ? 'Downloaded'
+              : 'Download'
+          }
+          name="download-circle"
+          onPress={() => {
+            if (favoriteContext.favoriteCourses.has(item)) {
+              setFavorite('Download');
+              favoriteContext.removeFavoriteCourse(item);
+            } else {
+              setFavorite('Downloaded');
+              favoriteContext.addFavoriteCourse(item);
+            }
+          }}
+        />
       </View>
       <Text style={[styles.description, {color: colors.text}]}>
         {Description}

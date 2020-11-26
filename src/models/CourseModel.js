@@ -5,7 +5,7 @@ const coursesData = [
     author: 'Hai Pham',
     level: 'Advance',
     released: 'May 12, 2020',
-    duration: '38 hours',
+    duration: '38 h',
     image: '../../assets/reactNative.png',
     content: [
       {
@@ -56,7 +56,7 @@ const coursesData = [
       },
       {
         detail: 'Component, Styling and Layout',
-        time: '4 hours 13m',
+        time: '4 h 13m',
         data: [
           {
             title: 'Component, Styling and Layout',
@@ -71,7 +71,7 @@ const coursesData = [
       },
       {
         detail: 'Navigation with React Navigation',
-        time: '2 hours 11m',
+        time: '2 h 11m',
         data: [
           {
             title: 'Navigation with React Navigation',
@@ -81,7 +81,7 @@ const coursesData = [
       },
       {
         detail: 'State management and Redux',
-        time: '3 hours 43m',
+        time: '3 h 43m',
         data: [
           {
             title: 'React Lifecycle, React Hook and React Context',
@@ -106,16 +106,16 @@ const coursesData = [
     author: 'Huy Nguyen',
     level: 'Beginner',
     released: 'May 12, 2020',
-    duration: '30 hours',
+    duration: '30 h',
     image: '../../assets/Android.jpg',
     content: [
       {
         detail: 'Android developer',
-        time: '3 hours 50m',
+        time: '3 h 50m',
         data: [
           {
             title: 'Android developer',
-            time: '3 hours 50m',
+            time: '3 h 50m',
           },
         ],
       },
@@ -132,15 +132,15 @@ const coursesData = [
     author: 'Huy Nguyen',
     level: 'Beginner',
     released: 'May 12, 2020',
-    duration: '30 hours',
+    duration: '30 h',
     content: [
       {
         detail: 'Ios developer',
-        time: '3 hours 50m',
+        time: '3 h 50m',
         data: [
           {
             title: 'Ios developer',
-            time: '3 hours 50m',
+            time: '3 h 50m',
           },
         ],
       },
@@ -159,15 +159,15 @@ const coursesData = [
     level: 'Advance',
     released: 'May 12, 2020',
     image: '../../assets/react.png',
-    duration: '38 hours',
+    duration: '38 h',
     content: [
       {
         detail: 'ReactJs developer',
-        time: '4 hours 50m',
+        time: '4 h 50m',
         data: [
           {
             title: 'ReactJs developer',
-            time: '4 hours 50m',
+            time: '4 h 50m',
           },
         ],
       },
@@ -185,15 +185,15 @@ const coursesData = [
     level: 'Beginner',
     released: 'May 12, 2020',
     image: '../../assets/vuejs-logo.jpg',
-    duration: '30 hours',
+    duration: '30 h',
     content: [
       {
         detail: 'VueJs developer',
-        time: '5 hours 50m',
+        time: '5 h 50m',
         data: [
           {
             title: 'VueJs developer',
-            time: '5 hours 50m',
+            time: '5 h 50m',
           },
         ],
       },
@@ -211,16 +211,16 @@ const coursesData = [
     author: 'Huy Nguyen',
     level: 'Beginner',
     released: 'May 12, 2020',
-    duration: '30 hours',
+    duration: '30 h',
     image: '../../assets/Nuxtjs.png',
     content: [
       {
         detail: 'NuxtJs developer',
-        time: '3 hours 20m',
+        time: '3 h 20m',
         data: [
           {
             title: 'NuxtJs developer',
-            time: '3 hours 20m',
+            time: '3 h 20m',
           },
         ],
       },
@@ -237,16 +237,16 @@ const coursesData = [
     author: 'Hai Pham',
     level: 'Advance',
     released: 'May 12, 2020',
-    duration: '38 hours',
+    duration: '38 h',
     image: '../../assets/Javadev.jpg',
     content: [
       {
         detail: 'Java developer: The Big Picture',
-        time: '6 hours 50m',
+        time: '6 h 50m',
         data: [
           {
             title: 'Java developer: The Big Picture',
-            time: '6 hours 50m',
+            time: '6 h 50m',
           },
         ],
       },
@@ -263,16 +263,16 @@ const coursesData = [
     author: 'Huy Nguyen',
     level: 'Beginner',
     released: 'May 12, 2020',
-    duration: '30 hours',
+    duration: '30 h',
     image: '../../assets/Python.jpg',
     content: [
       {
         detail: 'Python developer',
-        time: '4 hours 30m',
+        time: '4 h 30m',
         data: [
           {
             title: 'Python developer',
-            time: '4 hours 30m',
+            time: '4 h 30m',
           },
         ],
       },
@@ -289,16 +289,16 @@ const coursesData = [
     author: 'Huy Nguyen',
     level: 'Intermediate',
     released: 'May 12, 2020',
-    duration: '30 hours',
+    duration: '30 h',
     image: '../../assets/Angular.png',
     content: [
       {
         detail: 'Angular developer',
-        time: '3 hours 50m',
+        time: '3 h 50m',
         data: [
           {
             title: 'Angular developer',
-            time: '3 hours 50m',
+            time: '3 h 50m',
           },
         ],
       },
@@ -315,16 +315,16 @@ const coursesData = [
     author: 'Bryan',
     level: 'Beginner',
     released: 'May 15, 2019',
-    duration: '23 hours',
+    duration: '23 h',
     image: '../../assets/SpringMVC.png',
     content: [
       {
         detail: 'Spring Framework: Spring MVC',
-        time: '3 hours 50m',
+        time: '3 h 50m',
         data: [
           {
             title: 'Spring Framework: Spring MVC',
-            time: '3 hours 50m',
+            time: '3 h 50m',
           },
         ],
       },
@@ -341,16 +341,16 @@ const coursesData = [
     author: 'Shawn',
     level: 'Beginner',
     released: 'Feb 27, 2019',
-    duration: '12 hours',
+    duration: '12 h',
     image: '../../assets/restfulAPI.jpg',
     content: [
       {
         detail: 'Restful API webservice',
-        time: '5 hours 50m',
+        time: '5 h 50m',
         data: [
           {
             title: 'Restful API webservice',
-            time: '5 hours 50m',
+            time: '5 h 50m',
           },
         ],
       },
@@ -367,16 +367,16 @@ const coursesData = [
     author: 'Fallon',
     level: 'Beginner',
     released: 'Jun 3, 2019',
-    duration: '5 hours',
+    duration: '5 h',
     image: '../../assets/Nodejs.svg',
     content: [
       {
         detail: 'NodeJs: The Big Picture',
-        time: '5 hours 50m',
+        time: '5 h 50m',
         data: [
           {
             title: 'NodeJs: The Big Picture',
-            time: '5 hours 50m',
+            time: '5 h 50m',
           },
         ],
       },
@@ -393,16 +393,16 @@ const coursesData = [
     author: 'Barry',
     level: 'Beginner',
     released: 'Jan 16, 2019',
-    duration: '4 hours',
+    duration: '4 h',
     image: '../../assets/javascript.png',
     content: [
       {
         detail: 'Javascript: Getting Started',
-        time: '4 hours 50m',
+        time: '4 h 50m',
         data: [
           {
             title: 'Javascript: Getting Started',
-            time: '4 hours 50m',
+            time: '4 h 50m',
           },
         ],
       },
@@ -419,17 +419,17 @@ const coursesData = [
     author: 'Hieu Duong',
     Level: 'Beginner',
     released: 'Jan 20, 2019',
-    duration: '1 hours',
+    duration: '1 h',
     image: '../../assets/html-css-js.jpg',
     star: 5,
     content: [
       {
         detail: 'HTML, CSS, Javascript: Getting Started',
-        time: '4 hours 50m',
+        time: '4 h 50m',
         data: [
           {
             title: 'HTML, CSS, Javascript: Getting Started',
-            time: '4 hours 50m',
+            time: '4 h 50m',
           },
         ],
       },
@@ -445,16 +445,16 @@ const coursesData = [
     author: 'Mike',
     level: 'Beginner',
     released: 'Feb 2, 2020',
-    duration: '10 hours',
+    duration: '10 h',
     image: '../../assets/Cplus.jpg',
     content: [
       {
         detail: 'C++: The Big Picture',
-        time: '4 hours 50m',
+        time: '4 h 50m',
         data: [
           {
             title: 'C++: The Big Picture',
-            time: '4 hours 50m',
+            time: '4 h 50m',
           },
         ],
       },
@@ -7643,7 +7643,7 @@ const paths = [
     id: 1,
     title: 'Angular Denver 2019',
     countCourses: '44 Courses',
-    duration: '15 hours',
+    duration: '15 h',
     description:
       'Angular Denver is the coolest Angular conference east of the Continental Dide! Angular developers come from all over to spend two days learning, connecting, and having fun.',
     image: '../../assets/angular-pwa-course.png',
@@ -7866,7 +7866,7 @@ const paths = [
     id: 2,
     title: 'Big Data LDN 2019',
     countCourses: '101 Courses',
-    duration: '42 hours',
+    duration: '42 h',
     description:
       'Big Data LDN (London) is a free to attend conference and exhibition, hosting leading data and analytics experts who are ready to equip you with the tools you need to deliver your most effective data-driven strategy.',
     image: '../../assets/Big-Data.jpg',
@@ -8086,7 +8086,7 @@ const paths = [
     id: 3,
     title: 'BSides Huntsville 2020',
     countCourses: '8 Courses',
-    duration: '6 hours',
+    duration: '6 h',
     description:
       'BSides Huntsville is the conference for those that work in the trenches of cybersecurity for you to engage in fierce discussions about the next big ideas or the worst product you have ever seen in a friendly and informal setting.',
     image: '../../assets/bsides-huntsville.png',
@@ -8275,7 +8275,7 @@ const paths = [
     id: 4,
     title: 'CodeMash Conference 2020',
     countCourses: '94 Courses',
-    duration: '76 hours',
+    duration: '76 h',
     description:
       'CodeMash is a unique event that educates developers on current practices, methodologies and technology trends in variety of platforms and development languages such as Java, .Net, Ruby and PHP.',
     image: '../../assets/CodeMash.jpg',
@@ -8463,7 +8463,7 @@ const paths = [
     id: 5,
     title: 'DEVintersection 2019',
     countCourses: '20 Courses',
-    duration: '18 hours',
+    duration: '18 h',
     description:
       'It is a challenge to stay on top of everything new while mastering the fundamentals. This exciting event, now in its eighth year, brings your favorite Microsoft leaders,, engineers and industry experts together to educate, network and share their expertise with you. ',
     image: '../../assets/devintersection.png',
@@ -8663,7 +8663,7 @@ const paths = [
     id: 6,
     title: 'AWS Application Development',
     countCourses: '12 Courses',
-    duration: '15 hours',
+    duration: '15 h',
     description:
       'In this path, you will learn how to develop application using primarily Amazon Web Service. We will cover the various tools of AWS development, how to continuously deliver and automate deployments.',
     image: '../../assets/aws.png',
@@ -9124,7 +9124,7 @@ const paths = [
     id: 7,
     title: 'C# Development Fundamentals',
     countCourses: '14 Courses',
-    duration: '42 hours',
+    duration: '42 h',
     description:
       'C# is the most commonly used language for leveraging the .NET  Framework. Such as, learning C# is springboard to creating enterprise systems, desktop application, websites and mobile applications.',
     image: '../../assets/C#.jpeg',
@@ -9365,7 +9365,7 @@ const paths = [
     id: 8,
     title: 'Java Development Enviroments and Tooling',
     countCourses: '6 Courses',
-    duration: '15 hours',
+    duration: '15 h',
     description:
       'While you can write Java code using a simple text editor and compile your code using te java command, you will be much more productive if you take advantage of and master the rich tooling available to you.',
     image: '../../assets/Javadev.jpg',
@@ -9583,7 +9583,7 @@ const paths = [
     id: 9,
     title: 'API Development in ASP .NET Core',
     countCourses: '7 Courses',
-    duration: '19 hours',
+    duration: '19 h',
     description:
       'APIs are at the heart of today s connected applications. ASP .NET Core offers a multitude of choices for developing APIs. This path will help you learn about al of the choices, from REST to GraphQL, and how to implement each one.',
     image: '../../assets/asp-net-core.png',
@@ -9971,7 +9971,7 @@ const paths = [
     id: 10,
     title: 'IOS App Development - Fundamentals',
     countCourses: '12 Courses',
-    duration: '31 hours',
+    duration: '31 h',
     description:
       'Learn to build IOS app for iPhone and iPad. You will begin with the Swift programming language, explore Apple s xcode IDE and cover all the essential concepts, architectural patterns and techniques to build IOS apps.',
     image: '../../assets/Ios.jpg',
@@ -10392,7 +10392,7 @@ const paths = [
     id: 11,
     title: 'Fundamentals of IP Operations',
     countCourses: '20 Courses',
-    duration: '40 hours',
+    duration: '40 h',
     description:
       'This is collection of courses provides newcomers with the first step they need to start a career in IT. After completing this path, learners should be prepared to begin a entry-level IT job, such as Help Desk Technician or Desktop Support Technician, that provides additional hands-on experience.',
     image: '../../assets/ITOP.png',
@@ -10553,7 +10553,7 @@ const paths = [
     id: 12,
     title: 'Fundamentals of IP Operations',
     countCourses: '20 Courses',
-    duration: '40 hours',
+    duration: '40 h',
     description:
       'This is collection of courses provides newcomers with the first step they need to start a career in IT. After completing this path, learners should be prepared to begin a entry-level IT job, such as Help Desk Technician or Desktop Support Technician, that provides additional hands-on experience.',
     image: '../../assets/ITOP.png',
@@ -10714,7 +10714,7 @@ const paths = [
     id: 13,
     title: 'Managing Security Operations in Microsoft Azure',
     countCourses: '4 Courses',
-    duration: '5 hours',
+    duration: '5 h',
     description:
       'Moving to the cloud provides countless benefits to you and your organization, but properly securing and maintaining security in the cloud presents a never-ending challenge.',
     image: '../../assets/microsoft-azure-main.png',
@@ -10804,7 +10804,7 @@ const paths = [
     id: 14,
     title: 'Microsoft Azure Stack Planning and Operations',
     countCourses: '4 Courses',
-    duration: '5 hours',
+    duration: '5 h',
     description:
       'Microsoft Azure Stack is a extension of Microsoft Azure Cloud Platform Service to your on-premises implementations. This path will teach you the basics of planing for, setting up, and managing the operations of this hybrid integration.',
     image: '../../assets/microsoft-azure-main.png',
@@ -10915,7 +10915,7 @@ const paths = [
     id: 15,
     title: 'Monitoring Microsoft Resources with System Center 2016 (SCOM)',
     countCourses: '4 Courses',
-    duration: '12 hours',
+    duration: '12 h',
     description:
       'System Center Operations Manager, also known as SCOM or OpsMgr, is an enterprise monitoring tool that deeply instruments servers ad services in the datacenter.',
     image: '../../assets/SCOM_Logo.jpg',

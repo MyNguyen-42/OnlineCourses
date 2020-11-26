@@ -1,12 +1,19 @@
-import React from 'react';
-import {StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet, View, Text, FlatList} from 'react-native';
 import ListCourses from '../../Courses/ListCourses/ListCourses';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
+import SmallRightButton from '../../common/SmallRightButton';
+import {FavoriteContext} from '../../../Provider/FavoriteProvider';
+import ListCoursesItem from '../../Courses/ListCoursesItem/ListCoursesItem';
 
 const Download = (props) => {
   const {colors} = useTheme();
+  const favoriteContext = useContext(FavoriteContext);
+  const course = Array.from(favoriteContext.favoriteCourses);
+
+  /* console.log(course); */
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -26,14 +33,34 @@ const Download = (props) => {
         backgroundColor={colors.card}
         containerStyle={styles.containerStyle}
       />
-      {/* <View style={styles.rightButton}>
-        <Text style={styles.text}>Downloads</Text>
-        <SmallRightButton
-          text="Remove all"
-          onPress={() => console.log('Remove all')}
-        />
-      </View> */}
-      <ListCourses navigation={props.navigation} />
+      {course.length === 0 ? (
+        <View style={styles.viewNotification}>
+          <Text style={[styles.textNotification, {color: colors.text}]}>
+            {' '}
+            Watch your courses on the go!
+          </Text>
+          <Text>
+            Download courses so you can coutinue to skill up-even when you're
+            offline
+          </Text>
+        </View>
+      ) : (
+        <>
+          <View style={styles.rightButton}>
+            <Text style={styles.text}>Downloads</Text>
+            <SmallRightButton
+              text="Remove all"
+              onPress={favoriteContext.removeAllFavoriteCourses}
+            />
+          </View>
+          <FlatList
+            data={course}
+            renderItem={({item}) => (
+              <ListCoursesItem navigation={props.navigation} item={item} />
+            )}
+          />
+        </>
+      )}
     </>
   );
 };
@@ -50,5 +77,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+  },
+  viewNotification: {alignItems: 'center'},
+  textNotification: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });

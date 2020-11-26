@@ -20,17 +20,16 @@ const SplashScreen = (props) => {
   }); */
 
   useEffect(() => {
-    /* console.log('loading UseEffect count loading'); */
+    console.log('loading UseEffect count loading');
     const clockInterval = setInterval(() => {
       const load = loading + 1;
-      /*       console.log('create interval'); */
       setLoading(load);
     }, 100);
     return () => {
       /* console.log('clear interval'); */
       clearInterval(clockInterval);
     };
-  });
+  }, []);
 
   useEffect(() => {
     /* console.log('loading UseEffect'); */

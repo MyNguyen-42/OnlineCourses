@@ -151,7 +151,7 @@ const Browse = (props) => {
           <Tag title="Java" onPress={() => {}} />
           <Tag title="Data Analysis" onPress={() => {}} />
         </ScrollView>
-        <SectionPaths title="Paths" data={paths} />
+        <SectionPaths title="Paths" navigation={props.navigation} />
         <SectionAuthors
           title="Top authors"
           navigation={props.navigation}

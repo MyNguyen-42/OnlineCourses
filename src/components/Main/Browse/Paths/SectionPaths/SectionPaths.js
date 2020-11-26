@@ -1,27 +1,15 @@
 import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import SmallRightButton from '../../../../common/SmallRightButton';
 import SectionPathsItem from '../SectionPathsItem/SectionPathsItem';
+import {useTheme} from '@react-navigation/native';
+import {ScreenKey} from '../../../../../global/Constants';
+import {paths} from '../../../../../models/CourseModel';
 
 const SectionPaths = (props) => {
-  /* const courses = [
-    {
-      id: 1,
-      title: 'Configuration Management Using Puppet',
-      totalCourses: 3,
-    },
-    {
-      id: 2,
-      title: 'Pluralsight LIVE 2020',
-      totalCourses: 94,
-    },
-    {
-      id: 3,
-      title: 'Windows SerVer Administation Concepts',
-      totalCourses: 6,
-    },
-  ]; */
-  const paths = props.data;
-  /* console.log(props.data); */
+  const {colors} = useTheme();
+
+  /* const paths = props.data; */
 
   const renderListItem = (Paths) => {
     return Paths.map((id) => <SectionPathsItem item={id} />);
@@ -29,7 +17,17 @@ const SectionPaths = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{props.title}</Text>
+      <View style={styles.title}>
+        <Text style={styles.text}>{props.title}</Text>
+        <SmallRightButton
+          style={{color: colors.text}}
+          text="See all"
+          name="navigate-next"
+          onPress={() => {
+             props.navigation.navigate(ScreenKey.ListSectionPaths);
+          }}
+        />
+      </View>
       <ScrollView horizontal={true}>{renderListItem(paths)}</ScrollView>
     </View>
   );
@@ -42,7 +40,12 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   text: {
-    margin: 5,
     fontSize: 20,
+  },
+  title: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 5,
   },
 });

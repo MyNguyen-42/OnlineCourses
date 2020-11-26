@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const SectionAuthorsItem = (props) => {
-  console.log(props.item);
+  /* console.log(props.item); */
   return (
     <TouchableOpacity
       style={styles.container}

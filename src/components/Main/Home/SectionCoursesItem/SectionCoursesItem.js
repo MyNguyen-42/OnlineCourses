@@ -31,14 +31,6 @@ const SectionCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
 
-        {/* <Rating
-          tintColor={colors.card}
-          ratingCount={5}
-          imageSize={20}
-          startingValue={props.item.rating}
-          style={styles.rating}
-          onFinishRating={ratingCompleted}
-        /> */}
         <MyRating
           ratingNumber={props.item.ratingNumber}
           rating={props.item.rating}
