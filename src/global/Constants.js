@@ -20,4 +20,5 @@ export const ScreenKey = {
   BrowseStackScreen: 'browseStackScreen',
   AuthorDetail: 'authorDetail',
   ListSectionPaths: 'listSectionPaths',
+  PathDetail: 'pathDetail',
 };

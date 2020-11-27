@@ -5,10 +5,15 @@ import {Avatar} from 'react-native-elements';
 import {FilledButton} from '../../../common/FilledButton';
 import ListCoursesItem from '../../../Courses/ListCoursesItem/ListCoursesItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ScreenKey} from '../../../../global/Constants';
 
 const AuthorDetail = (props) => {
   let item = props.route.params.item;
   const {colors} = useTheme();
+
+  const onPressListItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
+  };
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
       <Avatar
@@ -46,7 +51,11 @@ const AuthorDetail = (props) => {
       <FlatList
         data={item.course}
         renderItem={({item}) => (
-          <ListCoursesItem navigation={props.navigation} item={item} />
+          <ListCoursesItem
+            navigation={props.navigation}
+            item={item}
+            onPressListItem={onPressListItem}
+          />
         )}
       />
     </View>

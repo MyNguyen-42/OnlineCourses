@@ -11,8 +11,14 @@ const SectionPaths = (props) => {
 
   /* const paths = props.data; */
 
+  const onPressSectionItem = (item) => {
+    props.navigation.navigate(ScreenKey.PathDetail, {item});
+  };
+
   const renderListItem = (Paths) => {
-    return Paths.map((id) => <SectionPathsItem item={id} />);
+    return Paths.map((id) => (
+      <SectionPathsItem item={id} onPressSectionItem={onPressSectionItem} />
+    ));
   };
 
   return (
@@ -24,7 +30,7 @@ const SectionPaths = (props) => {
           text="See all"
           name="navigate-next"
           onPress={() => {
-             props.navigation.navigate(ScreenKey.ListSectionPaths);
+            props.navigation.navigate(ScreenKey.ListSectionPaths);
           }}
         />
       </View>

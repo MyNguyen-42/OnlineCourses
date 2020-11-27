@@ -1,7 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTheme} from '@react-navigation/native';
+
+const screenWidth = Dimensions.get('window').width;
+
+const WidthTitle = screenWidth - 100;
 
 const ListCoursesItem = (props) => {
   const {colors} = useTheme();
@@ -12,7 +22,9 @@ const ListCoursesItem = (props) => {
           name="checkbox-blank-circle"
           style={[styles.icon, {color: colors.text}]}
         />
-        <Text style={{color: colors.text}}>{props.item.title}</Text>
+        <Text style={{color: colors.text, width: WidthTitle}}>
+          {props.item.title}
+        </Text>
       </View>
       <Text style={{color: colors.text}}>{props.item.time}</Text>
     </TouchableOpacity>

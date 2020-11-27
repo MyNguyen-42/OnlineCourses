@@ -17,6 +17,11 @@ const Download = (props) => {
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
+
+  const onPressListItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
+  };
+
   return (
     <>
       <Header
@@ -56,7 +61,11 @@ const Download = (props) => {
           <FlatList
             data={course}
             renderItem={({item}) => (
-              <ListCoursesItem navigation={props.navigation} item={item} />
+              <ListCoursesItem
+                navigation={props.navigation}
+                item={item}
+                onPressListItem={onPressListItem}
+              />
             )}
           />
         </>

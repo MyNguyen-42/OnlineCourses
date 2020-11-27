@@ -55,7 +55,7 @@ export default ListCoursesItem;
 const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
-    margin: 5,
+    /* margin: 5, */
     padding: 5,
   },
   image: {

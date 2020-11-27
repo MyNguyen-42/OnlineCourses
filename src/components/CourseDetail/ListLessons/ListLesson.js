@@ -41,11 +41,6 @@ const FlatListItemSeparator = () => {
 };
 
 const ListLesson = (props) => {
-  /* const Lesson = [
-    {name: 'Course Overview', time: '2:04'},
-    {name: 'Getting Started with Angular', time: '38:45'},
-  ]; */
-  /* console.log(props.data); */
   return (
     <View>
       <FlatList

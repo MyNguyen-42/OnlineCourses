@@ -14,6 +14,7 @@ const MyRating = (props) => {
         ratingCount={5}
         startingValue={props.rating}
         style={styles.rating}
+        fractions={1}
       />
       <Text style={{color: 'darkgray', fontSize: 15}}>
         {/* ({props.item.ratingNumber}) */}

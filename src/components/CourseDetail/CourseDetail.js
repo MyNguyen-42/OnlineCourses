@@ -8,11 +8,15 @@ import VideoPlayer from './VideoPlayer/VideoPlayer';
 import {ButtonGroup} from 'react-native-elements';
 import ListLesson from './ListLessons/ListLesson';
 import {FavoriteContext} from '../../Provider/FavoriteProvider';
+import {ScreenKey} from '../../global/Constants';
+/* import {AuthorContext} from '../../Provider/AuthorProvider'; */
+
 const Description =
   'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
 const CourseDetail = (props) => {
   const {colors} = useTheme();
   const favoriteContext = useContext(FavoriteContext);
+  /*   const AuthorContext = useContext(AuthorContext); */
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [favorite, setFavorite] = useState('Download');
   const buttons = ['Contents', 'Transcript'];
@@ -30,9 +34,8 @@ const CourseDetail = (props) => {
       <Tag
         title={item.author}
         style={styles.author}
-        onPres={() => {
-          /* props.navigation.navigate(ScreenKey.AuthorDetail); */
-          console.log('object');
+        onPress={() => {
+          /* props.navigation.navigate(ScreenKey.AuthorDetail, {item: 'ahihi'}); */
         }}
       />
       <View style={styles.containerLevelRelease}>

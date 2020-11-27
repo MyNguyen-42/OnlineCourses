@@ -7,38 +7,6 @@ import {ScreenKey} from '../../../../global/Constants';
 
 const SectionCourses = (props) => {
   const {colors} = useTheme();
-  /* const Courses = [
-    {
-      id: 1,
-      title: 'React Native',
-      author: 'Hai Pham',
-      level: 'Advance',
-      released: 'May 6, 2020',
-      duration: '30 hours',
-      rating: 4,
-      ratingNumber: 10,
-    },
-    {
-      id: 2,
-      title: 'ios',
-      author: 'Huy Nguyen',
-      level: 'Beginner',
-      released: 'May 6, 2020',
-      duration: '25 hours',
-      rating: 5,
-      ratingNumber: 10,
-    },
-    {
-      id: 3,
-      title: 'ios',
-      author: 'Huy Nguyen',
-      level: 'Beginner',
-      released: 'May 6, 2020',
-      duration: '25 hours',
-      rating: 3,
-      ratingNumber: 10,
-    },
-  ]; */
 
   const Courses = props.data;
   /* console.log(Courses); */
