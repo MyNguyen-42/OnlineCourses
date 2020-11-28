@@ -7,19 +7,16 @@ import {TextButton} from '../../common/TextButton';
 import Error from '../../common/Error';
 import {login} from '../../../core/service/AuthenticationService';
 import {ScreenKey} from '../../../global/Constants';
-import {ThemeContext} from '../../../../App';
-import {
-  AuthenticationContext,
-  AuthenticationProvider,
-} from '../../../Provider/AuthenticationProvider';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {AccountContext} from '../../../Provider/AccountProvider';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
 
-  const {setAuthentication} = useContext(AuthenticationContext);
-  /*   const {theme, setTheme} = useContext(ThemeContext); */
+  const {accounts} = useContext(AccountContext);
+  const {setAuthenticated, setUser} = useContext(AuthenticationContext);
 
   useEffect(() => {
     console.log('useEffect Login');
@@ -30,6 +27,19 @@ const Login = (props) => {
       });
     }
   }, [props.navigation, status]);
+
+  const onPressLogin = (username, password, setAuthenticated, setUser) => {
+    if (username !== '' && password !== '') {
+      const loginStatus = login(accounts, username, password);
+      if (loginStatus.status === 200) {
+        setAuthenticated(true);
+        setUser(loginStatus.user);
+      }
+      setStatus(loginStatus);
+    } else {
+      /* setShouldDisplayValidationText(true); */
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -51,8 +61,7 @@ const Login = (props) => {
       <FilledButton
         title={'LOGIN'}
         onPress={() => {
-          setStatus(login(username, password));
-          setAuthentication(login(username, password));
+          onPressLogin(username, password, setAuthenticated, setUser);
         }}
         style={styles.loginButton}
       />

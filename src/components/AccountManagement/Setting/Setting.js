@@ -5,13 +5,13 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Alert,
   Switch,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {ScreenKey} from '../../../global/Constants';
 import {useTheme} from '@react-navigation/native';
 import {ThemeContext} from '../../../../App';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const Setting = (props) => {
   const toggleTheme = () => {
@@ -19,6 +19,13 @@ const Setting = (props) => {
   };
   const {isDarkTheme, setIsDarkTheme} = useContext(ThemeContext);
   const {colors} = useTheme();
+  const {setAuthenticated, setUser} = useContext(AuthenticationContext);
+  const onPressSignOut = () => {
+    setAuthenticated(false);
+    setUser(null);
+    props.navigation.navigate(ScreenKey.LoginScreen);
+  };
+
   return (
     <ScrollView>
       <TouchableOpacity
@@ -51,9 +58,7 @@ const Setting = (props) => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate(ScreenKey.LoginScreen);
-        }}
+        onPress={() => onPressSignOut()}
         style={{backgroundColor: colors.card}}>
         <View style={styles.itemContainer}>
           <FontAwesome style={styles.menuItemIcon} name="sign-out" />

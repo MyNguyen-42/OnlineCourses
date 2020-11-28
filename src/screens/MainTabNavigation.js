@@ -6,6 +6,7 @@ import HomeStackScreen from '../screens/HomeStackScreen';
 import Download from '../components/Main/Download/Download';
 import BrowseStackScreen from './BrowseStackScreen';
 import Search from '../components/Main/Search/Search';
+import SearchStackScreens from './SearchStackScreens';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,8 +55,8 @@ const MainTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name={ScreenKey.Search}
-        component={Search}
+        name={ScreenKey.SearchStackScreens}
+        component={SearchStackScreens}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (

@@ -1,11 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {AccountContext} from '../../../Provider/AccountProvider';
 import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
   const {colors} = useTheme();
   const {authentication} = useContext(AuthenticationContext);
+  const accountContext = useContext(AccountContext);
+  const [user, setCurrentUser] = useState(authentication.user);
+  console.log(accountContext);
   console.log(authentication);
   return (
     <View style={styles.container}>
@@ -20,9 +24,11 @@ const Profile = (props) => {
         {authentication.user.username}
       </Text>
       <Text style={[styles.textEmail, {color: colors.text}]}>
-        {authentication.user.fullname}
+        {authentication.user.fullName}
       </Text>
-      <Text style={[styles.textPhone, {color: colors.text}]}>0968517651</Text>
+      <Text style={[styles.textPhone, {color: colors.text}]}>
+        {authentication.user.email}
+      </Text>
     </View>
   );
 };

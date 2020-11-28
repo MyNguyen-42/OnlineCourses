@@ -21,4 +21,5 @@ export const ScreenKey = {
   AuthorDetail: 'authorDetail',
   ListSectionPaths: 'listSectionPaths',
   PathDetail: 'pathDetail',
+  SearchStackScreens: 'searchStackScreens',
 };

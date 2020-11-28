@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ListCourse from '../../Courses/ListCourses/ListCourses';
@@ -6,13 +6,69 @@ import {ButtonGroup, SearchBar} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
+import {CoursesContext} from '../../../Provider/CoursesProvider';
+import Courses from './Courses/Courses';
+import Authors from './Authors/Authors';
+import Paths from './Paths/Paths';
+import All from './All/All';
+import {authors, paths} from '../../../models/CourseModel';
 
 const Search = (props) => {
   const {colors} = useTheme();
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const coursesContext = useContext(CoursesContext);
+
+  const [courseIds, setCourseIds] = useState([]);
+
+  const [pathIds, setPathIds] = useState([]);
+
+  const [authorIds, setAuthorIds] = useState([]);
+
+  const [searching, setSearching] = useState(false);
+
   const updateSearch = (Search) => {
     setSearch(Search);
+  };
+
+  const Search = (Keyword) => {
+    setCourseIds([]);
+    setPathIds([]);
+    setAuthorIds([]);
+
+    const lKeyword = Keyword.toLowerCase().trim();
+
+    const resultCourseIds = [];
+
+    const resultPathIds = [];
+
+    const resultAuthorIds = [];
+
+    coursesContext.courses.forEach((value, key) => {
+      if (value.title.toLowerCase().trim().search(lKeyword) >= 0) {
+        console.log('key', key);
+
+        resultCourseIds.push(coursesContext.courses[key]);
+      }
+    });
+
+    paths.forEach((value, key) => {
+      if (value.title.toLowerCase().search(lKeyword) >= 0) {
+        console.log('key', key);
+        resultPathIds.push(paths[key]);
+      }
+    });
+
+    authors.forEach((value, key) => {
+      if (value.name.toLowerCase().search(lKeyword) >= 0) {
+        console.log('key', key);
+        resultAuthorIds.push(authors[key]);
+      }
+    });
+
+    setCourseIds(resultCourseIds);
+    setPathIds(resultPathIds);
+    setAuthorIds(resultAuthorIds);
   };
 
   const updateIndex = (SelectedIndex) => {
@@ -24,38 +80,35 @@ const Search = (props) => {
   };
 
   var ViewResult = <View />;
-  switch (selectedIndex) {
-    case 0:
-      ViewResult = (
-        <View>
-          <Text style={{color: colors.text}}> All</Text>
-        </View>
-      );
-      break;
-    case 1:
-      ViewResult = (
-        <View>
-          <Text style={{color: colors.text}}> Courses</Text>
-        </View>
-      );
-      break;
-    case 2:
-      ViewResult = (
-        <View>
-          <Text style={{color: colors.text}}> Path</Text>
-        </View>
-      );
-      break;
-    case 3:
-      ViewResult = (
-        <View>
-          <Text style={{color: colors.text}}> Author</Text>
-        </View>
-      );
-      break;
+  if (searching === true) {
+    switch (selectedIndex) {
+      case 0:
+        ViewResult = (
+          <All
+            courseIds={courseIds}
+            pathIds={pathIds}
+            authorIds={authorIds}
+            navigation={props.navigation}
+          />
+        );
+        break;
+      case 1:
+        ViewResult = (
+          <Courses courseIds={courseIds} navigation={props.navigation} />
+        );
+        break;
+      case 2:
+        ViewResult = <Paths pathIds={pathIds} navigation={props.navigation} />;
+        break;
+      case 3:
+        ViewResult = (
+          <Authors authorIds={authorIds} navigation={props.navigation} />
+        );
+        break;
 
-    default:
-      break;
+      default:
+        break;
+    }
   }
   const buttons = ['All', 'Courses', 'Path', 'Author'];
   const onPress = () => {
@@ -90,7 +143,12 @@ const Search = (props) => {
           style={[styles.textInput, {color: colors.text}]}
           placeholder="Search"
           onChangeText={(text) => {
-            updateSearch(text);
+            if (text === '') {
+              setSearching(false);
+            } else {
+              setSearching(true);
+              Search(text);
+            }
           }}
           value={search}
         />
@@ -105,7 +163,7 @@ const Search = (props) => {
       {/* <SearchBar
         placeholder="Type Here..."
         onChangeText={(text) => {
-          updateSearch(text);
+          Search(text);
         }}
         value={search}
       /> */}

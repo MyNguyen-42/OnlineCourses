@@ -1,11 +1,41 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {StyleSheet, View, Image} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Input from '../../common/Inputs';
-import FIlledButton, {FilledButton} from '../../common/FilledButton';
+import {FilledButton} from '../../common/FilledButton';
 import {ScreenKey} from '../../../global/Constants';
+import {AccountContext} from '../../../Provider/AccountProvider';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const EditProfile = (props) => {
+  const {
+    getAccountById,
+    changeAccountFullname,
+    changeAccountEmail,
+  } = useContext(AccountContext);
+  const {authentication, setAuthenticated, setUser} = useContext(
+    AuthenticationContext,
+  );
+  const [user, setCurrentUser] = useState(authentication.user);
+
+  /* const changeFullName = (newFullName) => {
+    const status = changeAccountFullname(user.id, newFullName);
+    if (status.status === 200) {
+      const account = getAccountById(user.id);
+      setUser(account);
+    }
+    return status;
+  };
+
+  const changeEmail = (newEmail) => {
+    const status = changeAccountEmail(user.id, newEmail);
+    if (status.status === 200) {
+      const account = getAccountById(user.id);
+      setUser(account);
+    }
+    return status;
+  }; */
+
   return (
     <View>
       <View style={styles.avatar}>
@@ -19,7 +49,7 @@ const EditProfile = (props) => {
       </View>
       <View style={styles.edit}>
         <Input placeholder={'user name'} />
-        <Input placeholder={'phone'} style={{marginTop: 10}} />
+        <Input placeholder={'email'} style={{marginTop: 10}} />
         <FilledButton
           title="SUBMIT"
           style={{marginTop: 10}}
