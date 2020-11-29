@@ -5,7 +5,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeStackScreen from '../screens/HomeStackScreen';
 import Download from '../components/Main/Download/Download';
 import BrowseStackScreen from './BrowseStackScreen';
-import Search from '../components/Main/Search/Search';
 import SearchStackScreens from './SearchStackScreens';
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +22,11 @@ const MainTabNavigation = () => {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={size}
+            />
           ),
           headerShown: false,
         }}
@@ -34,7 +37,11 @@ const MainTabNavigation = () => {
         options={{
           tabBarLabel: 'Downloads',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="download" color={color} size={size} />
+            <MaterialCommunityIcons
+              name="download-outline"
+              color={color}
+              size={size}
+            />
           ),
           headerShown: false,
         }}
@@ -46,7 +53,7 @@ const MainTabNavigation = () => {
           tabBarLabel: 'Browse',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
-              name="view-grid"
+              name="view-grid-outline"
               color={color}
               size={size}
             />
@@ -60,12 +67,9 @@ const MainTabNavigation = () => {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="search-web"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="magnify" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

@@ -11,16 +11,11 @@ import {Header} from 'react-native-elements';
 import {
   recommendedCourses,
   newCourses,
-  paths,
   authors,
 } from '../../../models/CourseModel';
 
 const Browse = (props) => {
   const {colors} = useTheme();
-  const onPressNewRelease = () => {
-    /* props.navigation.navigate(ScreenKey.ListCoursesStack); */
-    console.log('recmtfu');
-  };
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -143,7 +138,10 @@ const Browse = (props) => {
             />
           </View>
         </ScrollView>
-        <Text style={styles.label}> Popular Skills</Text>
+        <Text style={[styles.label, {color: colors.text}]}>
+          {' '}
+          Popular Skills
+        </Text>
         <ScrollView horizontal={true}>
           <Tag title="JavaScripts" onPress={() => {}} />
           <Tag title="Angular" onPress={() => {}} />

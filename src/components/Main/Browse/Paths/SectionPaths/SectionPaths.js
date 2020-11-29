@@ -24,7 +24,7 @@ const SectionPaths = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.text}>{props.title}</Text>
+        <Text style={[styles.text, {color: colors.text}]}>{props.title}</Text>
         <SmallRightButton
           style={{color: colors.text}}
           text="See all"

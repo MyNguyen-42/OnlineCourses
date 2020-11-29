@@ -1,8 +1,7 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ListCourse from '../../Courses/ListCourses/ListCourses';
-import {ButtonGroup, SearchBar} from 'react-native-elements';
+import {ButtonGroup} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';

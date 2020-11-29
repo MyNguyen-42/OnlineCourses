@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, ScrollView, ImageBackground, Text} from 'react-native';
 import SectionCourses from './SectionCourses/SectionCourses';
 import {Header} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {recommendedCourses} from '../../../models/CourseModel';
+import {FavoriteContext} from '../../../Provider/FavoriteProvider';
 
 const image = {
   uri:
@@ -13,7 +14,10 @@ const image = {
 
 const introduce =
   'With Pluralsight, you can build and apply skills in top technologies.You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.';
+
 const Home = (props) => {
+  const favoriteContext = useContext(FavoriteContext);
+  const course = Array.from(favoriteContext.favoriteCourses);
   const {colors} = useTheme();
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
@@ -57,7 +61,7 @@ const Home = (props) => {
         <SectionCourses
           title="Bookmarks"
           navigation={props.navigation}
-          data={recommendedCourses}
+          data={course}
         />
       </ScrollView>
     </>

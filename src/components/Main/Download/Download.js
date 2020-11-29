@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
 import {StyleSheet, View, Text, FlatList} from 'react-native';
-import ListCourses from '../../Courses/ListCourses/ListCourses';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
 import SmallRightButton from '../../common/SmallRightButton';
 import {FavoriteContext} from '../../../Provider/FavoriteProvider';
 import ListCoursesItem from '../../Courses/ListCoursesItem/ListCoursesItem';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Download = (props) => {
   const {colors} = useTheme();
   const favoriteContext = useContext(FavoriteContext);
-  const course = Array.from(favoriteContext.favoriteCourses);
+  const course = Array.from(favoriteContext.downloadCourses);
 
   /* console.log(course); */
   const onPress = () => {
@@ -40,11 +40,15 @@ const Download = (props) => {
       />
       {course.length === 0 ? (
         <View style={styles.viewNotification}>
+          <FontAwesome
+            name="download"
+            style={[styles.imageFA, {color: colors.card}]}
+          />
           <Text style={[styles.textNotification, {color: colors.text}]}>
             {' '}
             Watch your courses on the go!
           </Text>
-          <Text>
+          <Text style={[styles.textSmall, {color: colors.text}]}>
             Download courses so you can coutinue to skill up-even when you're
             offline
           </Text>
@@ -52,10 +56,12 @@ const Download = (props) => {
       ) : (
         <>
           <View style={styles.rightButton}>
-            <Text style={styles.text}>Downloads</Text>
+            <Text style={styles.text}>
+              {favoriteContext.countDownloadCourses()} courses
+            </Text>
             <SmallRightButton
               text="Remove all"
-              onPress={favoriteContext.removeAllFavoriteCourses}
+              onPress={favoriteContext.removeAllDownloadCourses}
             />
           </View>
           <FlatList
@@ -87,9 +93,19 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
   },
-  viewNotification: {alignItems: 'center'},
+  viewNotification: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  },
   textNotification: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  textSmall: {
+    margin: 10,
+  },
+  imageFA: {
+    fontSize: 120,
   },
 });

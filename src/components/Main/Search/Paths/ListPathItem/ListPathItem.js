@@ -11,7 +11,7 @@ const ListPathItem = (props) => {
       <Image
         source={{
           uri:
-            'https://i.pinimg.com/736x/03/42/87/034287c49d6041b4b98ac96bdd03c3e1.jpg',
+            'http://www.dotplays.com/wp-content/uploads/2019/02/1C3kxjCrJy-aWSMpe2chfaA.png',
         }}
         style={styles.circle}
       />

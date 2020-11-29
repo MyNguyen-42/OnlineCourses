@@ -2,8 +2,11 @@ import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {ScreenKey} from '../../../../../global/Constants';
 import SectionAuthorsItem from '../SectionAuthorsItem/SectionAuthorsItem';
+import {useTheme} from '@react-navigation/native';
 
 const SectionPaths = (props) => {
+  const {colors} = useTheme();
+
   const authors = props.data;
 
   const onPressSectionItem = (item) => {
@@ -22,7 +25,7 @@ const SectionPaths = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{props.title}</Text>
+      <Text style={[styles.text, {color: colors.text}]}>{props.title}</Text>
       <ScrollView horizontal={true}>{renderListItem(authors)}</ScrollView>
     </View>
   );

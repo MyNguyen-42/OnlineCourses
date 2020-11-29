@@ -20,6 +20,7 @@ const BrowseStackScreen = () => {
       <BrowseStack.Screen
         name={ScreenKey.ListCoursesStack}
         component={ListCoursesStack}
+        options={{headerShown: false}}
       />
       <BrowseStack.Screen
         name={ScreenKey.AuthorDetail}

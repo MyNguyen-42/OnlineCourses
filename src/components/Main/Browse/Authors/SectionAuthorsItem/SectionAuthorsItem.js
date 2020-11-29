@@ -1,8 +1,10 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 const SectionAuthorsItem = (props) => {
   /* console.log(props.item); */
+  const {colors} = useTheme();
   return (
     <TouchableOpacity
       style={styles.container}
@@ -10,13 +12,16 @@ const SectionAuthorsItem = (props) => {
         props.onPressSectionItem(props.item);
       }}>
       <Image
-        source={{
+        source={
+          /* {
           uri:
             'https://i.pinimg.com/736x/03/42/87/034287c49d6041b4b98ac96bdd03c3e1.jpg',
-        }}
+        } */
+          require('../../../../../../assets/unnamed.png')
+        }
         style={styles.circle}
       />
-      <Text>{props.item.name}</Text>
+      <Text style={{color: colors.text}}>{props.item.name}</Text>
     </TouchableOpacity>
   );
 };

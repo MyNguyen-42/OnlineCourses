@@ -24,10 +24,12 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name={ScreenKey.ListCoursesStack}
         component={ListCoursesStack}
+        options={{headerShown: false}}
       />
       <HomeStack.Screen
         name={ScreenKey.CourseDetail}
         component={CourseDetail}
+        options={({route}) => ({title: route.params.item.title})}
       />
     </HomeStack.Navigator>
   );
