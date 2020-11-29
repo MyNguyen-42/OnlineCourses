@@ -1,14 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, Image} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Video from 'react-native-video';
 
 const VideoPlayer = (props) => {
   return (
     <View style={styles.video}>
-      {/*  <Image
-        source={require('../../../../assets/reactnative.png')}
-        style={styles.image}
-      /> */}
       <Video
         /* source={require('../../../../assets/video/BigBuckBunny.mp4')} */
         source={{
@@ -24,11 +20,6 @@ const VideoPlayer = (props) => {
         /* shouldPlay
         isLooping
         useNativeControls */
-        /* onBuffer={this.onBuffer} // Callback when remote video is buffering
-        onError={this.videoError} // Callback when video cannot be loaded */
-        /* ref={(ref) => {
-          this.player = ref;
-        }} */
       />
     </View>
   );

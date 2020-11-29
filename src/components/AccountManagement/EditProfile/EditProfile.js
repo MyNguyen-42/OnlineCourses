@@ -17,8 +17,10 @@ const EditProfile = (props) => {
     AuthenticationContext,
   );
   const [user, setCurrentUser] = useState(authentication.user);
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
 
-  /* const changeFullName = (newFullName) => {
+  const changeFullName = (newFullName) => {
     const status = changeAccountFullname(user.id, newFullName);
     if (status.status === 200) {
       const account = getAccountById(user.id);
@@ -34,7 +36,7 @@ const EditProfile = (props) => {
       setUser(account);
     }
     return status;
-  }; */
+  };
 
   return (
     <View>
@@ -48,13 +50,26 @@ const EditProfile = (props) => {
         />
       </View>
       <View style={styles.edit}>
-        <Input placeholder={'user name'} />
-        <Input placeholder={'email'} style={{marginTop: 10}} />
+        <Input
+          placeholder={'user name'}
+          onChangeText={(text) => {
+            setFullname(text);
+          }}
+        />
+        <Input
+          placeholder={'email'}
+          style={{marginTop: 10}}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+        />
         <FilledButton
           title="SUBMIT"
           style={{marginTop: 10}}
           onPress={() => {
             props.navigation.navigate(ScreenKey.Profile);
+            changeFullName(fullname);
+            changeEmail(email);
           }}
         />
       </View>
