@@ -44,7 +44,7 @@ const Login = (props) => {
   return (
     <View style={styles.container}>
       <Heading style={styles.title}> LOGIN</Heading>
-      <Error error={status.status === 200 ? '' : status.errorString} />
+      <Error error={status.status === 200 ? '' : status.message} />
       <Input
         style={styles.input}
         placeholder={'email'}

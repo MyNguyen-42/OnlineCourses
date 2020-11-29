@@ -62,7 +62,7 @@ const CourseDetail = (props) => {
           }
           name="download-circle"
           onPress={() => {
-            if (favoriteContext.favoriteCourses.has(item)) {
+            if (favoriteContext.downloadCourses.has(item)) {
               setDownload('Download');
               favoriteContext.removeDownloadCourse(item);
             } else {

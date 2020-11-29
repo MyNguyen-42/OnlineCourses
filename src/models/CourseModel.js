@@ -416,7 +416,7 @@ const coursesData = [
   {
     id: 14,
     title: 'HTML, CSS, Javascript: The Big Picture',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     Level: 'Beginner',
     released: 'Jan 20, 2019',
     duration: '1 h',
@@ -3889,7 +3889,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: '40m 42s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/angular-pwa-course.png',
     content: [
       {
@@ -3916,7 +3916,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 24m 28s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/Angular.png',
     content: [
       {
@@ -3943,7 +3943,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 22m 48s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/Angular.png',
     content: [
       {
@@ -3970,7 +3970,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 10m 47s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/angular-pwa-course.png',
     content: [
       {
@@ -3996,7 +3996,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 10m 6s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/angular-pwa-course.png',
     content: [
       {
@@ -4023,7 +4023,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 20m 36s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/angular-pwa-course.png',
     content: [
       {
@@ -4052,7 +4052,7 @@ const coursesData = [
     level: 'Intermediate',
     released: 'Sep 11, 2019',
     duration: ' 22m 4s',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/angular-pwa-course.png',
     content: [
       {
@@ -4078,7 +4078,7 @@ const coursesData = [
     level: 'Beginner',
     released: 'Apr 16, 2019',
     duration: '6h 5m',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/C#.jpeg',
     content: [
       {
@@ -4204,7 +4204,7 @@ const coursesData = [
     level: 'Beginner',
     released: 'Mar 29, 2019',
     duration: '3h 26m',
-    author: 'Hieu Duong',
+    author: 'My Nguyen',
     image: '../../assets/C#.jpeg',
     content: [
       {
@@ -11044,7 +11044,7 @@ const authors = [
     name: 'My Nguyen',
     title: 'Elearning.io Author',
     description:
-      'Hieu Duong is a sofware developer, consultant, conference speaker, and Elearning.io Author. Him Courses include: Angular, OOP Fundamentals in C#. For him work in support of sofware developers, she has been recognized with the Microsoft Most valuable Professional (MVP) award, and is a Google Developer Expert (GDE).',
+      'My Nguyen is a sofware developer, consultant, conference speaker, and Elearning.io Author. Him Courses include: Angular, OOP Fundamentals in C#. For him work in support of sofware developers, she has been recognized with the Microsoft Most valuable Professional (MVP) award, and is a Google Developer Expert (GDE).',
     course: [
       {
         id: 106,
@@ -11052,7 +11052,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: '40m 42s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/angular-pwa-course.png',
         content: [
           {
@@ -11079,7 +11079,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 24m 28s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/Angular.png',
         content: [
           {
@@ -11107,7 +11107,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 22m 48s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/Angular.png',
         content: [
           {
@@ -11135,7 +11135,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 10m 47s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/angular-pwa-course.png',
         content: [
           {
@@ -11161,7 +11161,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 10m 6s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/angular-pwa-course.png',
         content: [
           {
@@ -11188,7 +11188,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 20m 36s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/angular-pwa-course.png',
         content: [
           {
@@ -11217,7 +11217,7 @@ const authors = [
         level: 'Intermediate',
         released: 'Sep 11, 2019',
         duration: ' 22m 4s',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/angular-pwa-course.png',
         content: [
           {
@@ -11243,7 +11243,7 @@ const authors = [
         level: 'Beginner',
         released: 'Apr 16, 2019',
         duration: '6h 5m',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/C#.jpeg',
         content: [
           {
@@ -11369,7 +11369,7 @@ const authors = [
         level: 'Beginner',
         released: 'Mar 29, 2019',
         duration: '3h 26m',
-        author: 'Hieu Duong',
+        author: 'My Nguyen',
         image: '../../assets/C#.jpeg',
         content: [
           {

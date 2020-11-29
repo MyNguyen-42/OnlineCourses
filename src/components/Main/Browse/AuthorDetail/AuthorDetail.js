@@ -19,8 +19,7 @@ const AuthorDetail = (props) => {
       <Avatar
         rounded
         source={{
-          uri:
-            'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+          uri: 'https://cdn.onlinewebfonts.com/svg/img_568656.png',
         }}
         size={'large'}
       />
