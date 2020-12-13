@@ -17,12 +17,7 @@ const Login = (props) => {
     console.log('Auth/Login: ', authContext);
     if (authContext.state.isAuthenticated) {
       console.log('login successed!');
-      props.navigation.navigate(
-        ScreenKey.MainTab /* , {
-        screen: ScreenKey.Profile,
-        params: authContext.state.userInfo,
-      } */,
-      );
+      props.navigation.navigate(ScreenKey.MainTab);
     } else {
     }
   }, [authContext, authContext.state.isAuthenticated, props.navigation]);

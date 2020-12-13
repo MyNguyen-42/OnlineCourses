@@ -2,6 +2,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESSED,
   LOGOUT,
+  REGISTER_FAIL,
+  REGISTER_SUCCESSED,
   SEND_EMAIL_FORGET_PASSWORD_FAIL,
   SEND_EMAIL_FORGET_PASSWORD_SUCCESSED,
 } from '../action/AuthenticationAction';
@@ -47,7 +49,20 @@ export const reducer = (prevState, action) => {
         status: action.status,
         message: action.message,
       };
-
+    case REGISTER_SUCCESSED:
+      console.log('authentication reducer: ', action);
+      return {
+        ...prevState,
+        status: action.status,
+        registerMessage: action.message,
+      };
+    case REGISTER_FAIL:
+      console.log('authentication reducer: ', action);
+      return {
+        ...prevState,
+        status: action.status,
+        registerMessage: action.message,
+      };
     default:
       throw new Error();
   }

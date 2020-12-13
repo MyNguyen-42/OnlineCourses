@@ -23,11 +23,18 @@ const MainNavigation = () => {
   return (
     <MainNavigationStack.Navigator>
       {authContext.state.isAuthenticated ? (
-        <MainNavigationStack.Screen
-          name={ScreenKey.MainTab}
-          component={MainTabNavigation}
-          options={{headerShown: false}}
-        />
+        <>
+          <MainNavigationStack.Screen
+            name={ScreenKey.MainTab}
+            component={MainTabNavigation}
+            options={{headerShown: false}}
+          />
+          <MainNavigationStack.Screen
+            name={ScreenKey.AuthenticationStackScreens}
+            component={AuthenticationStackScreens}
+            options={{headerShown: false}}
+          />
+        </>
       ) : (
         <>
           <MainNavigationStack.Screen

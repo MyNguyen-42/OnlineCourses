@@ -5,45 +5,33 @@ import Heading from '../../common/Heading';
 import Input from '../../common/Inputs';
 import {TextButton} from '../../common/TextButton';
 import {ScreenKey} from '../../../global/Constants';
-/* import {AccountContext} from '../../../Provider/AccountProvider'; */
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import Error from '../../common/Error';
 
 const Register = (props) => {
-  const [username, setUsername] = useState('');
-  const [fullname, setFullname] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
 
-  /*   const accountContext = useContext(AccountContext); */
+  const authContext = useContext(AuthenticationContext);
 
   useEffect(() => {
-    if (status && status.status === 200) {
+    if (authContext.state.status === 200) {
       // eslint-disable-next-line no-alert
-      alert('You have registered a new account. You can now sign in.');
-      props.navigation.navigate(ScreenKey.LoginScreen, {status});
+      /* alert('You have registered a new account. You can now sign in.'); */
+      props.navigation.navigate(ScreenKey.LoginScreen);
     }
-  }, [props.navigation, status]);
+  }, [authContext.state.status, props.navigation]);
 
-  const onPressRegister = (
-    username,
-    email,
-    fullname,
-    password,
-    verifyPassword,
-  ) => {
-    if (
-      username === '' ||
-      email === '' ||
-      fullname === '' ||
-      password === '' ||
-      verifyPassword === ''
-      /* ||
-      password !== verifyPassword */
-    ) {
-      /* setShouldDisplayValidationText(true); */
+  const onPressRegister = (name, email, phone, password, confirmPassword) => {
+    if (password === confirmPassword) {
+      authContext.register(name, email, phone, password);
+      setErrorConfirmPassword('');
     } else {
-      setStatus();
-      /* accountContext.registerNewAccount(username, email, fullname, password), */
+      setErrorConfirmPassword('Password does not match');
     }
   };
 
@@ -52,15 +40,9 @@ const Register = (props) => {
       <Heading style={styles.title}>CREATE YOUR ACCOUNT</Heading>
       <Input
         style={styles.input}
-        placeholder={'Full name'}
-        leftIcon="user"
-        onChangeText={(text) => setFullname(text)}
-      />
-      <Input
-        style={styles.input}
         placeholder={'User name'}
         leftIcon="user"
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={(text) => setName(text)}
       />
       <Input
         style={styles.input}
@@ -68,7 +50,12 @@ const Register = (props) => {
         leftIcon="envelope"
         onChangeText={(text) => setEmail(text)}
       />
-      <Input style={styles.input} placeholder={'Phone'} leftIcon="phone" />
+      <Input
+        style={styles.input}
+        placeholder={'Phone'}
+        leftIcon="phone"
+        onChangeText={(text) => setPhone(text)}
+      />
       <Input
         style={styles.input}
         placeholder={'Password'}
@@ -81,12 +68,17 @@ const Register = (props) => {
         placeholder={'Confirm password'}
         leftIcon="lock"
         secureTextEntry
+        onChangeText={(text) => setConfirmPassword(text)}
       />
+      <Error error={errorConfirmPassword} />
       <FilledButton
         title={'Register'}
-        onPress={() => onPressRegister(username, email, fullname, password)}
+        onPress={() =>
+          onPressRegister(name, email, phone, password, confirmPassword)
+        }
         style={styles.loginButton}
       />
+      <Error error={authContext.state.registerMessage} />
       <TextButton
         title={'Already have an account? Sign in'}
         onPress={() => {

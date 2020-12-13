@@ -3,6 +3,7 @@ import {reducer} from '../reducer/AuthenticationReducer';
 import {
   login,
   logout,
+  register,
   sendEmailForgetPassword,
 } from '../action/AuthenticationAction';
 
@@ -15,6 +16,7 @@ const initialState = {
   token: null,
   message: null,
   status: null,
+  registerMessage: null,
 };
 
 const AuthenticationProvider = (props) => {
@@ -24,6 +26,7 @@ const AuthenticationProvider = (props) => {
       value={{
         state,
         login: login(dispatch),
+        register: register(dispatch),
         logout: logout(dispatch),
         sendEmailForgetPassword: sendEmailForgetPassword(dispatch),
       }}>
