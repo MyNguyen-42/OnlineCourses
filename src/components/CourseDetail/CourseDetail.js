@@ -7,14 +7,14 @@ import {useTheme} from '@react-navigation/native';
 import VideoPlayer from './VideoPlayer/VideoPlayer';
 import {ButtonGroup} from 'react-native-elements';
 import ListLesson from './ListLessons/ListLesson';
-import {FavoriteContext} from '../../Provider/FavoriteProvider';
+/* import {FavoriteContext} from '../../Provider/FavoriteProvider'; */
 
 const Description =
   'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
 
 const CourseDetail = (props) => {
   const {colors} = useTheme();
-  const favoriteContext = useContext(FavoriteContext);
+  /* const favoriteContext = useContext(FavoriteContext); */
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [favorite, setFavorite] = useState('Bookmark');
   const [download, setDownload] = useState('Download');
@@ -37,38 +37,36 @@ const CourseDetail = (props) => {
       </View>
       <View style={styles.containerButton}>
         <CircleButton
-          title={
-            favoriteContext.favoriteCourses.has(item)
+          title="bookmarked" /* {favoriteContext.favoriteCourses.has(item)
               ? 'Bookmarked'
-              : 'Bookmark'
-          }
+              : 'Bookmark'} */
           name="bookmark-multiple"
           onPress={() => {
-            if (favoriteContext.favoriteCourses.has(item)) {
+            /* if (favoriteContext.favoriteCourses.has(item)) {
               setFavorite('Bookmark');
               favoriteContext.removeFavoriteCourse(item);
             } else {
               setFavorite('Bookmarked');
               favoriteContext.addFavoriteCourse(item);
-            }
+            } */
           }}
         />
         <CircleButton title="Add to channel" name="text-box-plus-outline" />
         <CircleButton
-          title={
+          title="DL" /* {
             favoriteContext.downloadCourses.has(item)
               ? 'Downloaded'
               : 'Download'
-          }
+          } */
           name="download-circle"
           onPress={() => {
-            if (favoriteContext.downloadCourses.has(item)) {
+            /* if (favoriteContext.downloadCourses.has(item)) {
               setDownload('Download');
               favoriteContext.removeDownloadCourse(item);
             } else {
               setDownload('Downloaded');
               favoriteContext.addDownloadCourse(item);
-            }
+            } */
           }}
         />
       </View>

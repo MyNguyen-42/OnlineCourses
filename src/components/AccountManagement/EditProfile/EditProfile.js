@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, View, Image} from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Input from '../../common/Inputs';
 import {FilledButton} from '../../common/FilledButton';
 import {ScreenKey} from '../../../global/Constants';
@@ -8,35 +7,14 @@ import {AccountContext} from '../../../Provider/AccountProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const EditProfile = (props) => {
-  const {
-    getAccountById,
-    changeAccountFullname,
-    changeAccountEmail,
-  } = useContext(AccountContext);
-  const {authentication, setAuthenticated, setUser} = useContext(
-    AuthenticationContext,
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [avatar, setAvatar] = useState(
+    'https://c7.uihere.com/files/592/884/975/programmer-computer-programming-computer-software-computer-icons-programming-language-avatar.jpg',
   );
-  const [user, setCurrentUser] = useState(authentication.user);
-  const [fullname, setFullname] = useState('');
-  const [email, setEmail] = useState('');
 
-  const changeFullName = (newFullName) => {
-    const status = changeAccountFullname(user.id, newFullName);
-    if (status.status === 200) {
-      const account = getAccountById(user.id);
-      setUser(account);
-    }
-    return status;
-  };
-
-  const changeEmail = (newEmail) => {
-    const status = changeAccountEmail(user.id, newEmail);
-    if (status.status === 200) {
-      const account = getAccountById(user.id);
-      setUser(account);
-    }
-    return status;
-  };
+  const authContext = useContext(AuthenticationContext);
+  const accountContext = useContext(AccountContext);
 
   return (
     <View>
@@ -51,16 +29,16 @@ const EditProfile = (props) => {
       </View>
       <View style={styles.edit}>
         <Input
-          placeholder={'user name'}
+          defaultValue={accountContext.state.userInfo.name}
           onChangeText={(text) => {
-            setFullname(text);
+            setName(text);
           }}
         />
         <Input
-          placeholder={'email'}
+          defaultValue={accountContext.state.userInfo.phone}
           style={{marginTop: 10}}
           onChangeText={(text) => {
-            setEmail(text);
+            setPhone(text);
           }}
         />
         <FilledButton
@@ -68,8 +46,12 @@ const EditProfile = (props) => {
           style={{marginTop: 10}}
           onPress={() => {
             props.navigation.navigate(ScreenKey.Profile);
-            changeFullName(fullname);
-            changeEmail(email);
+            accountContext.updateProfile(
+              name,
+              avatar,
+              phone,
+              authContext.state.token,
+            );
           }}
         />
       </View>

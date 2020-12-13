@@ -1,31 +1,40 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {AccountContext} from '../../../Provider/AccountProvider';
 import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
   const {colors} = useTheme();
-  const {state} = useContext(AuthenticationContext);
-  console.log('Profile Screen: '.state);
+  const authContext = useContext(AuthenticationContext);
+  const accountContext = useContext(AccountContext);
+  console.log('Profile Screen: ');
+
+  useEffect(() => {
+    accountContext.loadProfile(authContext.state.token);
+    /* console.log('Account/Profile: ', accountContext.state); */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: state.userInfo.avatar,
+          uri: accountContext.state.userInfo.avatar,
         }}
         style={styles.circle}
       />
       <Text style={[styles.textName, {color: colors.text}]}>
-        {state.userInfo.name}
+        {accountContext.state.userInfo.name}
       </Text>
       <Text style={[styles.textEmail, {color: colors.text}]}>
-        {state.userInfo.phone}
+        {accountContext.state.userInfo.phone}
       </Text>
       <Text style={[styles.textPhone, {color: colors.text}]}>
-        {state.userInfo.email}
+        {accountContext.state.userInfo.email}
       </Text>
       <Text style={[styles.textPhone, {color: colors.text}]}>
-        {state.userInfo.type}
+        {accountContext.state.userInfo.type}
       </Text>
     </View>
   );

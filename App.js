@@ -8,8 +8,6 @@ import {
 import {ScreenKey} from './src/global/Constants';
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthenticationProvider} from './src/Provider/AuthenticationProvider';
-import {CoursesProvider} from './src/Provider/CoursesProvider';
-import {FavoriteProvider} from './src/Provider/FavoriteProvider';
 import {AccountProvider} from './src/Provider/AccountProvider';
 import SplashScreen from './src/components/SplashScreen/SplashScreen';
 import MainTabNavigation from './src/screens/MainTabNavigation';
@@ -88,18 +86,17 @@ export default function App() {
   return (
     <AuthenticationProvider>
       <AccountProvider>
-        <CoursesProvider>
-          <FavoriteProvider>
-            <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
-              <View style={styles.container}>
-                <NavigationContainer
-                  theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-                  <MainNavigation />
-                </NavigationContainer>
-              </View>
-            </ThemeContext.Provider>
-          </FavoriteProvider>
-        </CoursesProvider>
+        {/* <CoursesProvider>
+          <FavoriteProvider> */}
+        <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
+          <View style={styles.container}>
+            <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+              <MainNavigation />
+            </NavigationContainer>
+          </View>
+        </ThemeContext.Provider>
+        {/* </FavoriteProvider>
+        </CoursesProvider> */}
       </AccountProvider>
     </AuthenticationProvider>
   );

@@ -5,7 +5,7 @@ import {ButtonGroup} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
-import {CoursesContext} from '../../../Provider/CoursesProvider';
+/* import {CoursesContext} from '../../../Provider/CoursesProvider'; */
 import Courses from './Courses/Courses';
 import Authors from './Authors/Authors';
 import Paths from './Paths/Paths';
@@ -16,7 +16,7 @@ const Search = (props) => {
   const {colors} = useTheme();
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const coursesContext = useContext(CoursesContext);
+  /* const coursesContext = useContext(CoursesContext); */
 
   const [courseIds, setCourseIds] = useState([]);
 
@@ -43,13 +43,13 @@ const Search = (props) => {
 
     const resultAuthorIds = [];
 
-    coursesContext.courses.forEach((value, key) => {
+    /* coursesContext.courses.forEach((value, key) => {
       if (value.title.toLowerCase().trim().search(lKeyword) >= 0) {
         console.log('key', key);
 
         resultCourseIds.push(coursesContext.courses[key]);
       }
-    });
+    }); */
 
     paths.forEach((value, key) => {
       if (value.title.toLowerCase().search(lKeyword) >= 0) {

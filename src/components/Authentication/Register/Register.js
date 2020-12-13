@@ -5,7 +5,7 @@ import Heading from '../../common/Heading';
 import Input from '../../common/Inputs';
 import {TextButton} from '../../common/TextButton';
 import {ScreenKey} from '../../../global/Constants';
-import {AccountContext} from '../../../Provider/AccountProvider';
+/* import {AccountContext} from '../../../Provider/AccountProvider'; */
 
 const Register = (props) => {
   const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ const Register = (props) => {
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
 
-  const accountContext = useContext(AccountContext);
+  /*   const accountContext = useContext(AccountContext); */
 
   useEffect(() => {
     if (status && status.status === 200) {
@@ -42,9 +42,8 @@ const Register = (props) => {
     ) {
       /* setShouldDisplayValidationText(true); */
     } else {
-      setStatus(
-        accountContext.registerNewAccount(username, email, fullname, password),
-      );
+      setStatus();
+      /* accountContext.registerNewAccount(username, email, fullname, password), */
     }
   };
 

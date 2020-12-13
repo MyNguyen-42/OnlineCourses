@@ -5,7 +5,7 @@ import {Header} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {recommendedCourses} from '../../../models/CourseModel';
-import {FavoriteContext} from '../../../Provider/FavoriteProvider';
+import {newCourses} from '../../../models/CourseModel';
 
 const image = {
   uri:
@@ -16,8 +16,8 @@ const introduce =
   'With Pluralsight, you can build and apply skills in top technologies.You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.';
 
 const Home = (props) => {
-  const favoriteContext = useContext(FavoriteContext);
-  const course = Array.from(favoriteContext.favoriteCourses);
+  /* const favoriteContext = useContext(FavoriteContext);*/
+  const course = Array.from(newCourses);
   const {colors} = useTheme();
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);

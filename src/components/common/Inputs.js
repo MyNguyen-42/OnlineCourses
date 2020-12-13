@@ -17,6 +17,7 @@ const Inputs = (props) => {
     <View
       style={[styles.container, props.style, {backgroundColor: colors.card}]}>
       <Input
+        defaultValue={props.defaultValue}
         placeholder={props.placeholder}
         secureTextEntry={props.secureTextEntry}
         onChangeText={props.onChangeText}
