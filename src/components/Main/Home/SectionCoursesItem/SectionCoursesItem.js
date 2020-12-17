@@ -16,8 +16,6 @@ const SectionCoursesItem = (props) => {
       style={[styles.item, {backgroundColor: colors.card}]}
       onPress={() => {
         props.onPressSectionItem(props.item);
-        /* props.navigation.navigate(ScreenKey.ListCoursesStack);
-        console.log(props.item.title); */
       }}>
       <Image
         source={require('../../../../../assets/reactnative.png')}
@@ -25,11 +23,13 @@ const SectionCoursesItem = (props) => {
       />
       <View style={{margin: 5}}>
         <Text style={{color: colors.text}}>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
+        <Text style={styles.darkText}>
+          {props.item['instructor.user.name']}
+        </Text>
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
+          }>{`${props.item.level} . ${props.item.createdAt}. ${props.item.totalHours}`}</Text>
 
         <MyRating
           ratingNumber={props.item.ratingNumber}

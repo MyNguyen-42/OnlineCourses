@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, ScrollView, ImageBackground, Text} from 'react-native';
 import SectionCourses from './SectionCourses/SectionCourses';
 import {Header} from 'react-native-elements';
@@ -6,6 +6,7 @@ import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {recommendedCourses} from '../../../models/CourseModel';
 import {newCourses} from '../../../models/CourseModel';
+import {CourseContext} from '../../../Provider/CourseProvider';
 
 const image = {
   uri:
@@ -19,6 +20,14 @@ const Home = (props) => {
   /* const favoriteContext = useContext(FavoriteContext);*/
   const course = Array.from(newCourses);
   const {colors} = useTheme();
+
+  const CoursesContext = useContext(CourseContext);
+  useEffect(() => {
+    CoursesContext.loadListCourseSell();
+    CoursesContext.loadListCourseNew();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -49,14 +58,14 @@ const Home = (props) => {
           data={recommendedCourses}
         />
         <SectionCourses
-          title="IT Operations"
+          title="Top sell"
           navigation={props.navigation}
-          data={recommendedCourses}
+          data={CoursesContext.state.data}
         />
         <SectionCourses
-          title="Data Professional"
+          title="Top new"
           navigation={props.navigation}
-          data={recommendedCourses}
+          data={CoursesContext.state.dataCoursesNew}
         />
         <SectionCourses
           title="Bookmarks"

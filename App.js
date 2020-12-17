@@ -12,6 +12,7 @@ import {
   AuthenticationContext,
 } from './src/Provider/AuthenticationProvider';
 import {AccountProvider} from './src/Provider/AccountProvider';
+import {CourseProvider} from './src/Provider/CourseProvider';
 import SplashScreen from './src/components/SplashScreen/SplashScreen';
 import MainTabNavigation from './src/screens/MainTabNavigation';
 import AuthenticationStackScreens from './src/screens/AuthenticationStackScreens';
@@ -77,17 +78,18 @@ export default function App() {
   return (
     <AuthenticationProvider>
       <AccountProvider>
-        {/* <CoursesProvider>
-          <FavoriteProvider> */}
-        <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
-          <View style={styles.container}>
-            <NavigationContainer theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-              <MainNavigation />
-            </NavigationContainer>
-          </View>
-        </ThemeContext.Provider>
-        {/* </FavoriteProvider>
-        </CoursesProvider> */}
+        <CourseProvider>
+          {/* <FavoriteProvider> */}
+          <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
+            <View style={styles.container}>
+              <NavigationContainer
+                theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+                <MainNavigation />
+              </NavigationContainer>
+            </View>
+          </ThemeContext.Provider>
+          {/* </FavoriteProvider> */}
+        </CourseProvider>
       </AccountProvider>
     </AuthenticationProvider>
   );

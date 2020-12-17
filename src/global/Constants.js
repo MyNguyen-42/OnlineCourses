@@ -24,4 +24,4 @@ export const ScreenKey = {
   SearchStackScreens: 'searchStackScreens',
 };
 
-export const Server = 'https://api.letstudy.org';
+export const Server = 'http://api.dev.letstudy.org';
