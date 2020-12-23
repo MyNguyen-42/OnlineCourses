@@ -1,7 +1,7 @@
 import React, {useState, useContext, useReducer} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {ButtonGroup} from 'react-native-elements';
+import {ButtonGroup, SearchBar} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
@@ -14,6 +14,7 @@ import {authors, paths} from '../../../models/CourseModel';
 import {SEARCH_COURSE_SUCCESSED} from '../../../action/CourseAction';
 import {CourseContext} from '../../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {ActivityIndicator} from 'react-native';
 
 const Search = (props) => {
   const {colors} = useTheme();
@@ -29,13 +30,23 @@ const Search = (props) => {
   const [authorIds, setAuthorIds] = useState([]);
 
   const [searching, setSearching] = useState(false);
+  const [textSearch, setTextSerch] = useState(null);
 
   const updateSearch = (Search) => {
     setSearch(Search);
   };
 
-  const Search = (Keyword, token) => {
+  const onTextChangeSearch = (Keyword, token) => {
+    console.log('Keyword: ', Keyword);
+    console.log('Token: ', token);
     CoursesContext.search(Keyword, token);
+
+    if (CoursesContext.state.isLoadingSearch) {
+    } else {
+      setCourseIds(CoursesContext.state.searchResult.courses.data);
+      /* setPathIds(CoursesContext.state.searchResult.courses.data); */
+      setAuthorIds(CoursesContext.state.searchResult.instructors.data);
+    }
 
     /* setCourseIds([]);
     setPathIds([]);
@@ -49,7 +60,6 @@ const Search = (props) => {
 
     const resultAuthorIds = [];
 
-    const [state, dispatch] = useReducer(reducer, initialState);
 
     paths.forEach((value, key) => {
       if (value.title.toLowerCase().search(lKeyword) >= 0) {
@@ -66,7 +76,6 @@ const Search = (props) => {
     });
 
     setCourseIds(resultCourseIds);
-    setPathIds(resultPathIds);
     setAuthorIds(resultAuthorIds); */
   };
 
@@ -129,7 +138,7 @@ const Search = (props) => {
         backgroundColor={colors.card}
         containerStyle={styles.containerStyle}
       />
-      <View
+      {/* <View
         style={[
           styles.search,
           {borderColor: colors.border, backgroundColor: colors.card},
@@ -142,30 +151,35 @@ const Search = (props) => {
           style={[styles.textInput, {color: colors.text}]}
           placeholder="Search"
           onChangeText={(text) => {
-            if (text === '') {
+            if (text === '' || text === null) {
               setSearching(false);
             } else {
               setSearching(true);
-              Search(text);
+              onTextChangeSearch(text, authContext.state.token);
             }
           }}
-          value={search}
+          value={textSearch}
         />
-        {search ? (
+        {textSearch ? (
           <Ionicons
             name="close-circle-outline"
             style={[styles.icon, {color: colors.text}]}
             onPress={clearTextSearch}
           />
         ) : null}
-      </View>
-      {/* <SearchBar
+      </View> */}
+      <SearchBar
         placeholder="Type Here..."
         onChangeText={(text) => {
-          Search(text);
+          if (text === '' || text === null) {
+            setSearching(false);
+          } else {
+            setSearching(true);
+            onTextChangeSearch(text, authContext.state.token);
+          }
         }}
-        value={search}
-      /> */}
+        value={textSearch}
+      />
       <ButtonGroup
         onPress={updateIndex}
         selectedIndex={selectedIndex}
@@ -175,7 +189,11 @@ const Search = (props) => {
         buttonContainerStyle={{backgroundColor: colors.background}}
         selectedButtonStyle={styles.selectedButtonStyle}
       />
-      {ViewResult}
+      {CoursesContext.state.isLoadingSearch ? (
+        <ActivityIndicator size="large" color="#8e44ad" />
+      ) : (
+        ViewResult
+      )}
     </>
   );
 };

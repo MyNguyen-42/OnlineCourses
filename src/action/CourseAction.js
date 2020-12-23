@@ -158,7 +158,7 @@ export const loadFavoriteCourse = (dispatch) => (token) => {
 
 export const search = (dispatch) => (keyword, token) => {
   return axios
-    .post(`${Server}/searchV2`, {keyword: keyword, token: token})
+    .post(`${Server}/course/searchV2`, {keyword: keyword, token: token})
     .then((Response) => {
       if (Response.status === 200) {
         console.log('Action: ', Response.data.message);
