@@ -7,9 +7,7 @@ import {ScreenKey} from '../../../../global/Constants';
 
 const SectionCourses = (props) => {
   const {colors} = useTheme();
-
   const Courses = props.data;
-  /* console.log(Courses); */
 
   const onPressSectionItem = (item) => {
     props.navigation.navigate(ScreenKey.CourseDetail, {item});
@@ -34,9 +32,13 @@ const SectionCourses = (props) => {
           text="See all"
           name="navigate-next"
           onPress={() => {
+            /* props.navigation.navigate(ScreenKey.ListCoursesStack, {
+              screen: ScreenKey.ListCourses,
+              params: {temp},
+            }); */
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
-              params: {Courses},
+              params: {key: props.title, data: props.data},
             });
           }}
         />

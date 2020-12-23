@@ -12,16 +12,12 @@ const SectionAuthorsItem = (props) => {
         props.onPressSectionItem(props.item);
       }}>
       <Image
-        source={
-          /* {
-          uri:
-            'https://i.pinimg.com/736x/03/42/87/034287c49d6041b4b98ac96bdd03c3e1.jpg',
-        } */
-          require('../../../../../../assets/unnamed.png')
-        }
+        source={{
+          uri: props.item['user.avatar'],
+        }}
         style={styles.circle}
       />
-      <Text style={{color: colors.text}}>{props.item.name}</Text>
+      <Text style={{color: colors.text}}>{props.item['user.name']}</Text>
     </TouchableOpacity>
   );
 };

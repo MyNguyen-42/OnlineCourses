@@ -18,7 +18,9 @@ const SectionCoursesItem = (props) => {
         props.onPressSectionItem(props.item);
       }}>
       <Image
-        source={require('../../../../../assets/reactnative.png')}
+        source={{
+          uri: props.item.imageUrl,
+        }}
         style={styles.image}
       />
       <View style={{margin: 5}}>

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import {AccountContext} from '../../../Provider/AccountProvider';
 import {useTheme} from '@react-navigation/native';
@@ -18,24 +18,30 @@ const Profile = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri: accountContext.state.userInfo.avatar,
-        }}
-        style={styles.circle}
-      />
-      <Text style={[styles.textName, {color: colors.text}]}>
-        {accountContext.state.userInfo.name}
-      </Text>
-      <Text style={[styles.textEmail, {color: colors.text}]}>
-        {accountContext.state.userInfo.phone}
-      </Text>
-      <Text style={[styles.textPhone, {color: colors.text}]}>
-        {accountContext.state.userInfo.email}
-      </Text>
-      <Text style={[styles.textPhone, {color: colors.text}]}>
-        {accountContext.state.userInfo.type}
-      </Text>
+      {accountContext.state.isLoadingUserInfo ? (
+        <ActivityIndicator size="large" color="#8e44ad" />
+      ) : (
+        <>
+          <Image
+            source={{
+              uri: accountContext.state.userInfo.avatar,
+            }}
+            style={styles.circle}
+          />
+          <Text style={[styles.textName, {color: colors.text}]}>
+            {accountContext.state.userInfo.name}
+          </Text>
+          <Text style={[styles.textEmail, {color: colors.text}]}>
+            {accountContext.state.userInfo.phone}
+          </Text>
+          <Text style={[styles.textPhone, {color: colors.text}]}>
+            {accountContext.state.userInfo.email}
+          </Text>
+          <Text style={[styles.textPhone, {color: colors.text}]}>
+            {accountContext.state.userInfo.type}
+          </Text>
+        </>
+      )}
     </View>
   );
 };

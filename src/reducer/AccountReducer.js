@@ -14,6 +14,7 @@ export const reducer = (prevState, action) => {
         isAuthenticated: true,
         userInfo: action.data.payload,
         message: action.message,
+        isLoadingUserInfo: false,
       };
     case LOAD_PROFILE_FAIL:
       console.log('Account reducer: ', action);

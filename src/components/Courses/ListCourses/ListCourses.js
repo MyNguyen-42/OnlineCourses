@@ -1,18 +1,28 @@
-import React, {useEffect, useReducer, useContext} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
-import {ScreenKey, Server} from '../../../global/Constants';
+import {ScreenKey} from '../../../global/Constants';
 import ListCoursesItem from '../ListCoursesItem/ListCoursesItem';
-import axios from 'axios';
 import {CourseContext} from '../../../Provider/CourseProvider';
 
 const ListCourses = (props) => {
   /* let Courses = props.route.params.Courses; */
   const CoursesContext = useContext(CourseContext);
-  console.log(CourseContext);
+  console.log('props List course: ', props.route.params.key);
+  const typeCourse = props.route.params.key;
+  const data = props.route.params.data;
+
+  const [dataListCourse, setDataListCourse] = useState(null);
 
   useEffect(() => {
-    console.log(props);
-    CoursesContext.loadListCourseSell();
+    if (typeCourse === 'Top sell') {
+      console.log('Top sell');
+      CoursesContext.loadListCourseSell();
+      /*  setDataListCourse(CourseContext.state.data); */
+    } else if (typeCourse === 'Top new') {
+      console.log('top new');
+      CoursesContext.loadListCourseNew();
+      /* setDataListCourse(CourseContext.state.dataCoursesNew); */
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,7 +42,9 @@ const ListCourses = (props) => {
         <FlatList
           horizontal={false}
           ItemSeparatorComponent={FlatListItemSeparator}
-          data={CoursesContext.state.data}
+          /* data={CoursesContext.state.data} */
+          /* data={dataListCourse} */
+          data={data}
           renderItem={({item}) => (
             <ListCoursesItem
               item={item}

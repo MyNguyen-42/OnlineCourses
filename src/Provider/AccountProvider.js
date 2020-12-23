@@ -8,6 +8,7 @@ const initialState = {
   isAuthenticated: false,
   userInfo: null,
   message: null,
+  isLoadingUserInfo: true,
 };
 
 const AccountProvider = (props) => {

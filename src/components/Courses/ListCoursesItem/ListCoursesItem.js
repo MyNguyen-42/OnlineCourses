@@ -28,7 +28,9 @@ const ListCoursesItem = (props) => {
       <View style={styles.imageTitle}>
         <Image
           style={styles.image}
-          source={require('../../../../assets/React-Native.png')}
+          source={{
+            uri: props.item.imageUrl,
+          }}
         />
         <View style={styles.title}>
           <Text>{props.item.title}</Text>

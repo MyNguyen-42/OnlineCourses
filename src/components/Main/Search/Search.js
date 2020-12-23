@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useReducer} from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ButtonGroup} from 'react-native-elements';
@@ -11,12 +11,16 @@ import Authors from './Authors/Authors';
 import Paths from './Paths/Paths';
 import All from './All/All';
 import {authors, paths} from '../../../models/CourseModel';
+import {SEARCH_COURSE_SUCCESSED} from '../../../action/CourseAction';
+import {CourseContext} from '../../../Provider/CourseProvider';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const Search = (props) => {
   const {colors} = useTheme();
   const [search, setSearch] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  /* const coursesContext = useContext(CoursesContext); */
+  const CoursesContext = useContext(CourseContext);
+  const authContext = useContext(AuthenticationContext);
 
   const [courseIds, setCourseIds] = useState([]);
 
@@ -30,8 +34,10 @@ const Search = (props) => {
     setSearch(Search);
   };
 
-  const Search = (Keyword) => {
-    setCourseIds([]);
+  const Search = (Keyword, token) => {
+    CoursesContext.search(Keyword, token);
+
+    /* setCourseIds([]);
     setPathIds([]);
     setAuthorIds([]);
 
@@ -43,13 +49,7 @@ const Search = (props) => {
 
     const resultAuthorIds = [];
 
-    /* coursesContext.courses.forEach((value, key) => {
-      if (value.title.toLowerCase().trim().search(lKeyword) >= 0) {
-        console.log('key', key);
-
-        resultCourseIds.push(coursesContext.courses[key]);
-      }
-    }); */
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     paths.forEach((value, key) => {
       if (value.title.toLowerCase().search(lKeyword) >= 0) {
@@ -67,7 +67,7 @@ const Search = (props) => {
 
     setCourseIds(resultCourseIds);
     setPathIds(resultPathIds);
-    setAuthorIds(resultAuthorIds);
+    setAuthorIds(resultAuthorIds); */
   };
 
   const updateIndex = (SelectedIndex) => {

@@ -82,10 +82,10 @@ export const sendEmailForgetPassword = (dispatch) => (email) => {
       });
     })
     .catch((error) => {
-      /* console.log(
+      console.log(
         'Send mail Forget Password Response: ',
         error.response.status,
-      ); */
+      );
       dispatch({
         type: SEND_EMAIL_FORGET_PASSWORD_FAIL,
         message: 'Email is not on system',
