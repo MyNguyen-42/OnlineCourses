@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,17 +14,20 @@ import {ThemeContext} from '../../../../App';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const Setting = (props) => {
-  const toggleTheme = () => {
+  /* const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
-  };
+  }; */
+
   const {isDarkTheme, setIsDarkTheme} = useContext(ThemeContext);
   const {colors} = useTheme();
-  const {setAuthenticated, setUser} = useContext(AuthenticationContext);
+  const authContext = useContext(AuthenticationContext);
+
   const onPressSignOut = () => {
-    setAuthenticated(false);
-    setUser(null);
+    authContext.logout();
     props.navigation.navigate(ScreenKey.LoginScreen);
   };
+
+  console.log('logout: ', authContext.state);
 
   return (
     <ScrollView>

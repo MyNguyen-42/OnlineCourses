@@ -1,34 +1,47 @@
-import React, {useContext, useState} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React, {useContext, useEffect} from 'react';
+import {StyleSheet, Text, View, Image, ActivityIndicator} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import {AccountContext} from '../../../Provider/AccountProvider';
 import {useTheme} from '@react-navigation/native';
 
 const Profile = (props) => {
   const {colors} = useTheme();
-  const {authentication} = useContext(AuthenticationContext);
+  const authContext = useContext(AuthenticationContext);
   const accountContext = useContext(AccountContext);
-  const [user, setCurrentUser] = useState(authentication.user);
-  console.log(accountContext);
-  console.log(authentication);
+  console.log('Profile Screen: ');
+
+  useEffect(() => {
+    accountContext.loadProfile(authContext.state.token);
+    /* console.log('Account/Profile: ', accountContext.state); */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri:
-            'https://i.pinimg.com/736x/03/42/87/034287c49d6041b4b98ac96bdd03c3e1.jpg',
-        }}
-        style={styles.circle}
-      />
-      <Text style={[styles.textName, {color: colors.text}]}>
-        {authentication.user.username}
-      </Text>
-      <Text style={[styles.textEmail, {color: colors.text}]}>
-        {authentication.user.fullName}
-      </Text>
-      <Text style={[styles.textPhone, {color: colors.text}]}>
-        {authentication.user.email}
-      </Text>
+      {accountContext.state.isLoadingUserInfo ? (
+        <ActivityIndicator size="large" color="#8e44ad" />
+      ) : (
+        <>
+          <Image
+            source={{
+              uri: accountContext.state.userInfo.avatar,
+            }}
+            style={styles.circle}
+          />
+          <Text style={[styles.textName, {color: colors.text}]}>
+            {accountContext.state.userInfo.name}
+          </Text>
+          <Text style={[styles.textEmail, {color: colors.text}]}>
+            {accountContext.state.userInfo.phone}
+          </Text>
+          <Text style={[styles.textPhone, {color: colors.text}]}>
+            {accountContext.state.userInfo.email}
+          </Text>
+          <Text style={[styles.textPhone, {color: colors.text}]}>
+            {accountContext.state.userInfo.type}
+          </Text>
+        </>
+      )}
     </View>
   );
 };

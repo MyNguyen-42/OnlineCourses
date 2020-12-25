@@ -5,6 +5,7 @@ import {ScreenKey} from '../../../../global/Constants';
 import {Rating, AirbnbRating} from 'react-native-elements';
 import {color} from 'react-native-reanimated';
 import MyRating from '../../../common/MyRating';
+import moment from 'moment';
 
 const SectionCoursesItem = (props) => {
   const {colors} = useTheme();
@@ -16,24 +17,30 @@ const SectionCoursesItem = (props) => {
       style={[styles.item, {backgroundColor: colors.card}]}
       onPress={() => {
         props.onPressSectionItem(props.item);
-        /* props.navigation.navigate(ScreenKey.ListCoursesStack);
-        console.log(props.item.title); */
       }}>
       <Image
-        source={require('../../../../../assets/reactnative.png')}
+        source={{
+          uri: props.item.imageUrl || props.item.courseImage,
+        }}
         style={styles.image}
       />
       <View style={{margin: 5}}>
-        <Text style={{color: colors.text}}>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
+        <Text style={{color: colors.text}}>
+          {props.item.title || props.item.courseTitle}
+        </Text>
+        <Text style={styles.darkText}>
+          {props.item['instructor.user.name'] || props.item.instructorName}
+        </Text>
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
+          }>{` ${props.item.createdAt}. ${props.item.totalHours}`}</Text>
 
         <MyRating
-          ratingNumber={props.item.ratingNumber}
-          rating={props.item.rating}
+          ratingNumber={
+            props.item.ratingNumber || props.item.courseContentPoint
+          }
+          rating={props.item.rating || props.item.courseContentPoint}
         />
       </View>
     </TouchableOpacity>

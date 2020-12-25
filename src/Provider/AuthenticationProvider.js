@@ -1,32 +1,34 @@
-import React, {useState} from 'react';
-
-const authentications = {
-  authenticated: false,
-  user: null,
-};
+import React, {useReducer} from 'react';
+import {reducer} from '../reducer/AuthenticationReducer';
+import {
+  login,
+  logout,
+  register,
+  sendEmailForgetPassword,
+} from '../action/AuthenticationAction';
 
 const AuthenticationContext = React.createContext();
 
+const initialState = {
+  isAuthenticating: true,
+  isAuthenticated: false,
+  userInfo: null,
+  token: null,
+  message: null,
+  status: null,
+  registerMessage: null,
+};
+
 const AuthenticationProvider = (props) => {
-  const [authentication, setAuthentication] = useState(authentications);
-
-  const setAuthenticated = (authenticated) => {
-    const newAuthentication = authentication;
-    newAuthentication.authenticated = authenticated;
-    setAuthentication(newAuthentication);
-  };
-
-  const setUser = (user) => {
-    const newAuthentication = authentication;
-    newAuthentication.user = user;
-    setAuthentication(newAuthentication);
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <AuthenticationContext.Provider
       value={{
-        authentication,
-        setAuthenticated,
-        setUser,
+        state,
+        login: login(dispatch),
+        register: register(dispatch),
+        logout: logout(dispatch),
+        sendEmailForgetPassword: sendEmailForgetPassword(dispatch),
       }}>
       {props.children}
     </AuthenticationContext.Provider>

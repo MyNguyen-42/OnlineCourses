@@ -1,11 +1,19 @@
-import React, {useContext} from 'react';
-import {StyleSheet, ScrollView, ImageBackground, Text} from 'react-native';
+import React, {useContext, useEffect} from 'react';
+import {
+  StyleSheet,
+  ScrollView,
+  ImageBackground,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import SectionCourses from './SectionCourses/SectionCourses';
 import {Header} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {recommendedCourses} from '../../../models/CourseModel';
-import {FavoriteContext} from '../../../Provider/FavoriteProvider';
+import {newCourses} from '../../../models/CourseModel';
+import {CourseContext} from '../../../Provider/CourseProvider';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 
 const image = {
   uri:
@@ -16,9 +24,18 @@ const introduce =
   'With Pluralsight, you can build and apply skills in top technologies.You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.';
 
 const Home = (props) => {
-  const favoriteContext = useContext(FavoriteContext);
-  const course = Array.from(favoriteContext.favoriteCourses);
+  const course = Array.from(newCourses);
   const {colors} = useTheme();
+  const authContext = useContext(AuthenticationContext);
+
+  const CoursesContext = useContext(CourseContext);
+  useEffect(() => {
+    CoursesContext.loadListCourseSell();
+    CoursesContext.loadListCourseNew();
+    CoursesContext.loadFavoriteCourse(authContext.state.token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -43,26 +60,40 @@ const Home = (props) => {
           <Text style={styles.text}>Welcome to Pluralsight!</Text>
           <Text style={styles.textIntroduce}>{introduce}</Text>
         </ImageBackground>
-        <SectionCourses
+        {/* <SectionCourses
           title="Continue learning"
           navigation={props.navigation}
           data={recommendedCourses}
-        />
-        <SectionCourses
-          title="IT Operations"
-          navigation={props.navigation}
-          data={recommendedCourses}
-        />
-        <SectionCourses
-          title="Data Professional"
-          navigation={props.navigation}
-          data={recommendedCourses}
-        />
-        <SectionCourses
-          title="Bookmarks"
-          navigation={props.navigation}
-          data={course}
-        />
+        /> */}
+        {CoursesContext.state.isLoading ? (
+          <ActivityIndicator size="large" color="#8e44ad" />
+        ) : (
+          <SectionCourses
+            title="Top sell"
+            navigation={props.navigation}
+            data={CoursesContext.state.data}
+            /* data={recommendedCourses} */
+          />
+        )}
+        {CoursesContext.state.isLoadingCoursesNew ? (
+          <ActivityIndicator size="large" color="#8e44ad" />
+        ) : (
+          <SectionCourses
+            title="Top new"
+            navigation={props.navigation}
+            data={CoursesContext.state.dataCoursesNew}
+            /* data={recommendedCourses} */
+          />
+        )}
+        {CoursesContext.state.isLoadingUserFavoriteCourse ? (
+          <ActivityIndicator size="large" color="#8e44ad" />
+        ) : (
+          <SectionCourses
+            title="Favorites"
+            navigation={props.navigation}
+            data={CoursesContext.state.dataUserFavoriteCourse}
+          />
+        )}
       </ScrollView>
     </>
   );

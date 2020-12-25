@@ -1,24 +1,61 @@
-import React from 'react';
+import React, {useContext, useEffect, useReducer} from 'react';
 import {StyleSheet, ScrollView, Text} from 'react-native';
 import {View} from 'react-native-animatable';
 import ImageButton from '../../common/ImageButton';
 import Tag from '../../common/Tag';
 import SectionPaths from './Paths/SectionPaths/SectionPaths';
 import SectionAuthors from './Authors/SectionAuthors/SectionAuthors';
-import {ScreenKey} from '../../../global/Constants';
+import {ScreenKey, Server} from '../../../global/Constants';
 import {useTheme} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
-import {
-  recommendedCourses,
-  newCourses,
-  authors,
-} from '../../../models/CourseModel';
+import {recommendedCourses, newCourses} from '../../../models/CourseModel';
+import {CourseContext} from '../../../Provider/CourseProvider';
+import axios from 'axios';
+import {ActivityIndicator} from 'react-native';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+export const LOAD_INSTRUCTORS_SUCCESSED = 'LOAD_INSTRUCTORS_SUCCESSED';
+
+const initialState = {
+  instructors: null,
+  isLoadingInstructor: true,
+  isError: false,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case LOAD_INSTRUCTORS_SUCCESSED:
+      return {...state, instructors: action.data, isLoadingInstructor: false};
+    default:
+      throw new Error();
+  }
+};
 
 const Browse = (props) => {
   const {colors} = useTheme();
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    console.log('load Instructors');
+    axios
+      .get(`${Server}/instructor`)
+      .then((Response) => {
+        if (Response.status === 200) {
+          console.log('Action: ', Response.data.message);
+          dispatch({
+            type: LOAD_INSTRUCTORS_SUCCESSED,
+            data: Response.data.payload,
+          });
+        } else {
+          console.log('fail');
+        }
+      })
+      .catch((error) => {})
+      .finally(() => {});
+  }, []);
 
   return (
     <>
@@ -150,11 +187,16 @@ const Browse = (props) => {
           <Tag title="Data Analysis" onPress={() => {}} />
         </ScrollView>
         <SectionPaths title="Paths" navigation={props.navigation} />
-        <SectionAuthors
-          title="Top authors"
-          navigation={props.navigation}
-          data={authors}
-        />
+
+        {state.isLoadingInstructor ? (
+          <ActivityIndicator size="large" color="#8e44ad" />
+        ) : (
+          <SectionAuthors
+            title="Top authors"
+            navigation={props.navigation}
+            data={state.instructors}
+          />
+        )}
       </ScrollView>
     </>
   );

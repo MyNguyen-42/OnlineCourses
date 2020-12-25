@@ -10,7 +10,7 @@ const All = (props) => {
       <Courses
         courseIds={props.courseIds.slice(0, 4)}
         navigation={props.navigation}
-        header="Paths"
+        header="Courses"
       />
       <Paths
         pathIds={props.pathIds.slice(0, 4)}

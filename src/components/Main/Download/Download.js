@@ -4,14 +4,14 @@ import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
 import SmallRightButton from '../../common/SmallRightButton';
-import {FavoriteContext} from '../../../Provider/FavoriteProvider';
+/* import {FavoriteContext} from '../../../Provider/FavoriteProvider'; */
 import ListCoursesItem from '../../Courses/ListCoursesItem/ListCoursesItem';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Download = (props) => {
   const {colors} = useTheme();
-  const favoriteContext = useContext(FavoriteContext);
-  const course = Array.from(favoriteContext.downloadCourses);
+  /* const favoriteContext = useContext(FavoriteContext);
+  const course = Array.from(favoriteContext.downloadCourses); */
 
   /* console.log(course); */
   const onPress = () => {
@@ -38,7 +38,7 @@ const Download = (props) => {
         backgroundColor={colors.card}
         containerStyle={styles.containerStyle}
       />
-      {course.length === 0 ? (
+      {/* {course.length === 0 ? (
         <View style={styles.viewNotification}>
           <FontAwesome
             name="download"
@@ -75,7 +75,7 @@ const Download = (props) => {
             )}
           />
         </>
-      )}
+      )} */}
     </>
   );
 };

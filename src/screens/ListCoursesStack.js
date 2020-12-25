@@ -14,7 +14,7 @@ const ListCoursesStack = () => {
       <Stack.Screen
         name={ScreenKey.ListCourses}
         component={ListCourses}
-        options={{title: 'List Courses'}}
+        options={({route}) => ({title: route.params.key})}
       />
       <Stack.Screen
         name={ScreenKey.CourseDetail}

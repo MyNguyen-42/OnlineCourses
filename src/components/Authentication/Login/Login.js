@@ -4,47 +4,35 @@ import {FilledButton} from '../../common/FilledButton';
 import Heading from '../../common/Heading';
 import Input from '../../common/Inputs';
 import {TextButton} from '../../common/TextButton';
-import Error from '../../common/Error';
-import {login} from '../../../core/service/AuthenticationService';
 import {ScreenKey} from '../../../global/Constants';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
-import {AccountContext} from '../../../Provider/AccountProvider';
+import Error from '../../common/Error';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('');
-
-  const {accounts} = useContext(AccountContext);
-  const {setAuthenticated, setUser} = useContext(AuthenticationContext);
+  const authContext = useContext(AuthenticationContext);
 
   useEffect(() => {
-    console.log('useEffect Login');
-    if (status && status.status === 200) {
-      props.navigation.navigate(ScreenKey.MainTab, {
-        screen: ScreenKey.Profile,
-        params: {status},
-      });
-    }
-  }, [props.navigation, status]);
-
-  const onPressLogin = (username, password, setAuthenticated, setUser) => {
-    if (username !== '' && password !== '') {
-      const loginStatus = login(accounts, username, password);
-      if (loginStatus.status === 200) {
-        setAuthenticated(true);
-        setUser(loginStatus.user);
-      }
-      setStatus(loginStatus);
+    console.log('Auth/Login: ', authContext);
+    if (authContext.state.isAuthenticated) {
+      console.log('login successed!');
+      props.navigation.navigate(ScreenKey.MainTab);
     } else {
-      /* setShouldDisplayValidationText(true); */
     }
+  }, [authContext, authContext.state.isAuthenticated, props.navigation]);
+
+  // eslint-disable-next-line no-shadow
+  const onPressLogin = (username, password) => {
+    authContext.login(username, password);
   };
 
   return (
     <View style={styles.container}>
       <Heading style={styles.title}> LOGIN</Heading>
-      <Error error={status.status === 200 ? '' : status.message} />
+      <Error
+        error={authContext.status === 200 ? '' : authContext.state.message}
+      />
       <Input
         style={styles.input}
         placeholder={'email'}
@@ -61,7 +49,7 @@ const Login = (props) => {
       <FilledButton
         title={'LOGIN'}
         onPress={() => {
-          onPressLogin(username, password, setAuthenticated, setUser);
+          onPressLogin(username, password);
         }}
         style={styles.loginButton}
       />

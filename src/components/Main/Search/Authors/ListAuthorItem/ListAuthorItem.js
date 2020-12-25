@@ -11,8 +11,7 @@ const ListAuthorsItem = (props) => {
       }}>
       <Image
         source={{
-          uri:
-            'https://img.pngio.com/avatar-icon-of-flat-style-available-in-svg-png-eps-ai-icon-png-avatar-256_256.png',
+          uri: props.item.avatar,
         }}
         style={styles.circle}
       />

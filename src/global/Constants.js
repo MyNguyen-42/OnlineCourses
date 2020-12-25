@@ -23,3 +23,5 @@ export const ScreenKey = {
   PathDetail: 'pathDetail',
   SearchStackScreens: 'searchStackScreens',
 };
+
+export const Server = 'http://api.dev.letstudy.org';

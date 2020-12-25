@@ -28,15 +28,19 @@ const ListCoursesItem = (props) => {
       <View style={styles.imageTitle}>
         <Image
           style={styles.image}
-          source={require('../../../../assets/React-Native.png')}
+          source={{
+            uri: props.item.imageUrl,
+          }}
         />
         <View style={styles.title}>
           <Text>{props.item.title}</Text>
-          <Text style={styles.darkText}>{props.item.author}</Text>
+          <Text style={styles.darkText}>
+            {props.item['instructor.user.name']}
+          </Text>
           <Text
             style={
               styles.darkText
-            }>{`${props.item.level} . ${props.item.released}. ${props.item.duration}`}</Text>
+            }>{`${props.item.level} . ${props.item.createdAt}. ${props.item.totalHours}`}</Text>
         </View>
       </View>
       <MaterialCommunityIcons
