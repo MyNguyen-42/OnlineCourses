@@ -15,8 +15,8 @@ const Main = (props) => {
             source={require('../../../../assets/React-Native.png')}
           />
           <View>
-            <Text style={{color: colors.text}}>{props.item.detail}</Text>
-            <Text style={{color: colors.text}}>{props.item.time}</Text>
+            <Text style={{color: colors.text}}>{props.item.name}</Text>
+            <Text style={{color: colors.text}}>{props.item.sumHours}</Text>
           </View>
         </View>
         <MaterialCommunityIcons
@@ -25,7 +25,7 @@ const Main = (props) => {
         />
       </View>
       <FlatList
-        data={props.item.data}
+        data={props.item.lesson}
         renderItem={({item}) => (
           <View>
             <ListLessonItem item={item} navigation={props.navigation} />
@@ -41,6 +41,7 @@ const FlatListItemSeparator = () => {
 };
 
 const ListLesson = (props) => {
+  console.log('List Lesson: ', props.data);
   return (
     <View>
       <FlatList

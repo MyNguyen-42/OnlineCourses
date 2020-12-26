@@ -1,20 +1,18 @@
 import React, {useState, useContext, useReducer} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Text, Button} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ButtonGroup, SearchBar} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
-/* import {CoursesContext} from '../../../Provider/CoursesProvider'; */
 import Courses from './Courses/Courses';
 import Authors from './Authors/Authors';
 import Paths from './Paths/Paths';
 import All from './All/All';
-import {authors, paths} from '../../../models/CourseModel';
-import {SEARCH_COURSE_SUCCESSED} from '../../../action/CourseAction';
 import {CourseContext} from '../../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import {ActivityIndicator} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 const Search = (props) => {
   const {colors} = useTheme();
@@ -24,59 +22,34 @@ const Search = (props) => {
   const authContext = useContext(AuthenticationContext);
 
   const [courseIds, setCourseIds] = useState([]);
-
   const [pathIds, setPathIds] = useState([]);
-
   const [authorIds, setAuthorIds] = useState([]);
 
   const [searching, setSearching] = useState(false);
-  const [textSearch, setTextSerch] = useState(null);
+  const [textSearch, setTextSearch] = useState(null);
 
-  const updateSearch = (Search) => {
+  const [isHistory, setIsHistory] = useState(false);
+
+  /* const updateSearch = (Search) => {
     setSearch(Search);
-  };
+  }; */
 
   const onTextChangeSearch = (Keyword, token) => {
     console.log('Keyword: ', Keyword);
     console.log('Token: ', token);
-    CoursesContext.search(Keyword, token);
-
+    if (searching) {
+      CoursesContext.search(Keyword, token);
+    }
     if (CoursesContext.state.isLoadingSearch) {
     } else {
       setCourseIds(CoursesContext.state.searchResult.courses.data);
       /* setPathIds(CoursesContext.state.searchResult.courses.data); */
       setAuthorIds(CoursesContext.state.searchResult.instructors.data);
     }
-
-    /* setCourseIds([]);
-    setPathIds([]);
-    setAuthorIds([]);
-
-    const lKeyword = Keyword.toLowerCase().trim();
-
-    const resultCourseIds = [];
-
-    const resultPathIds = [];
-
-    const resultAuthorIds = [];
-
-
-    paths.forEach((value, key) => {
-      if (value.title.toLowerCase().search(lKeyword) >= 0) {
-        console.log('key', key);
-        resultPathIds.push(paths[key]);
-      }
-    });
-
-    authors.forEach((value, key) => {
-      if (value.name.toLowerCase().search(lKeyword) >= 0) {
-        console.log('key', key);
-        resultAuthorIds.push(authors[key]);
-      }
-    });
-
-    setCourseIds(resultCourseIds);
-    setAuthorIds(resultAuthorIds); */
+  };
+  const getSearchHistory = (token) => {
+    console.log('Token: ', token);
+    CoursesContext.getSearchHistory(token);
   };
 
   const updateIndex = (SelectedIndex) => {
@@ -88,36 +61,64 @@ const Search = (props) => {
   };
 
   var ViewResult = <View />;
-  if (searching === true) {
-    switch (selectedIndex) {
-      case 0:
-        ViewResult = (
-          <All
-            courseIds={courseIds}
-            pathIds={pathIds}
-            authorIds={authorIds}
-            navigation={props.navigation}
-          />
-        );
-        break;
-      case 1:
-        ViewResult = (
-          <Courses courseIds={courseIds} navigation={props.navigation} />
-        );
-        break;
-      case 2:
-        ViewResult = <Paths pathIds={pathIds} navigation={props.navigation} />;
-        break;
-      case 3:
-        ViewResult = (
-          <Authors authorIds={authorIds} navigation={props.navigation} />
-        );
-        break;
+  if (isHistory && CoursesContext.state.isLoadingSearchHistories === false) {
+    ViewResult = (
+      <ScrollView>
+        {CoursesContext.state.searchHistories.map((item) => (
+          <View style={styles.itemHistory}>
+            <Text style={[styles.description, {color: colors.text}]}>
+              {item.content}
+            </Text>
+            <Ionicons
+              name="close-outline"
+              style={[styles.iconDelete, {color: colors.text}]}
+              onPress={() => {
+                console.log('icon delete icon: ', item.content);
+                CoursesContext.deleteSearchHistory(
+                  authContext.state.token,
+                  item.id,
+                );
+              }}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    );
+  } else {
+    if (searching === true) {
+      switch (selectedIndex) {
+        case 0:
+          ViewResult = (
+            <All
+              courseIds={courseIds}
+              pathIds={pathIds}
+              authorIds={authorIds}
+              navigation={props.navigation}
+            />
+          );
+          break;
+        case 1:
+          ViewResult = (
+            <Courses courseIds={courseIds} navigation={props.navigation} />
+          );
+          break;
+        case 2:
+          ViewResult = (
+            <Paths pathIds={pathIds} navigation={props.navigation} />
+          );
+          break;
+        case 3:
+          ViewResult = (
+            <Authors authorIds={authorIds} navigation={props.navigation} />
+          );
+          break;
 
-      default:
-        break;
+        default:
+          break;
+      }
     }
   }
+
   const buttons = ['All', 'Courses', 'Path', 'Author'];
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
@@ -173,26 +174,49 @@ const Search = (props) => {
         onChangeText={(text) => {
           if (text === '' || text === null) {
             setSearching(false);
+            setTextSearch(text);
           } else {
             setSearching(true);
-            onTextChangeSearch(text, authContext.state.token);
+            setTextSearch(text);
           }
         }}
         value={textSearch}
       />
-      <ButtonGroup
-        onPress={updateIndex}
-        selectedIndex={selectedIndex}
-        buttons={buttons}
-        containerStyle={{height: 30}}
-        buttonStyle={{color: colors.text}}
-        buttonContainerStyle={{backgroundColor: colors.background}}
-        selectedButtonStyle={styles.selectedButtonStyle}
-      />
-      {CoursesContext.state.isLoadingSearch ? (
-        <ActivityIndicator size="large" color="#8e44ad" />
-      ) : (
+      <View style={styles.groupButtonSearchHistory}>
+        <Button
+          title="Search"
+          onPress={() => {
+            setIsHistory(false);
+            onTextChangeSearch(textSearch, authContext.state.token);
+          }}
+        />
+        <Button
+          title="History"
+          onPress={() => {
+            setIsHistory(true);
+            getSearchHistory(authContext.state.token);
+          }}
+        />
+      </View>
+      {isHistory ? (
         ViewResult
+      ) : (
+        <>
+          <ButtonGroup
+            onPress={updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons}
+            containerStyle={{height: 30}}
+            buttonStyle={{color: colors.text}}
+            buttonContainerStyle={{backgroundColor: colors.background}}
+            selectedButtonStyle={styles.selectedButtonStyle}
+          />
+          {CoursesContext.state.isLoadingSearch ? (
+            <ActivityIndicator size="large" color="#8e44ad" />
+          ) : (
+            ViewResult
+          )}
+        </>
       )}
     </>
   );
@@ -218,5 +242,17 @@ const styles = StyleSheet.create({
   },
   selectedButtonStyle: {
     borderBottomWidth: 3,
+  },
+  groupButtonSearchHistory: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  itemHistory: {
+    margin: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  iconDelete: {
+    fontSize: 20,
   },
 });

@@ -1,25 +1,24 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import Video from 'react-native-video';
+import YouTube from 'react-native-youtube';
 
 const VideoPlayer = (props) => {
+  console.log('VideoPlayer: ', props.videoURL);
+  /* const video = props.videoURL.toString().slice(32); */
   return (
     <View style={styles.video}>
-      <Video
-        /* source={require('../../../../assets/video/BigBuckBunny.mp4')} */
-        source={{
-          uri:
-            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        }} // Can be a URL or a local file. // Store reference
-        style={styles.backgroundVideo}
-        rate={1.0}
-        volume={1.0}
-        shouldCorrectPitch={true}
-        muted={false}
-        resizeMode="cover"
-        /* shouldPlay
-        isLooping
-        useNativeControls */
+      <YouTube
+        videoId="KVZ-P-ZI6W4" // The YouTube video ID
+        play // control playback of video with true/false
+        inline // control whether the video should play in fullscreen or inline
+        loop // control whether the video should loop when ended
+        apiKey="AIzaSyBy0J_swCBmhGGxPg6Iukmm2nUz793x5MU"
+        /* onReady={(e) => this.setState({isReady: true})}
+        onChangeState={(e) => this.setState({status: e.state})}
+        onChangeQuality={(e) => this.setState({quality: e.quality})}
+        onError={(e) => this.setState({error: e.error})} */
+        style={{alignSelf: 'stretch', height: 300}}
       />
     </View>
   );
@@ -29,7 +28,7 @@ export default VideoPlayer;
 
 const styles = StyleSheet.create({
   video: {
-    height: 200,
+    height: 300,
     width: '100%',
     backgroundColor: 'gray',
   },
