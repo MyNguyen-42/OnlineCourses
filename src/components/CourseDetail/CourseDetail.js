@@ -83,19 +83,21 @@ const CourseDetail = (props) => {
           <>
             <VideoPlayer videoURL={videoURL} />
             <Text style={[styles.title, {color: colors.text}]}>
-              {item.title}
+              {courseContext.state.dataCourseDetail.title}
             </Text>
             <Tag
-              title={item['instructor.user.name']}
+              title={courseContext.state.dataCourseDetail.instructor.name}
               style={styles.author}
               onPress={() => {}}
             />
             <View style={styles.containerLevelRelease}>
               <MyRating
                 /* ratingNumber={item.ratedNumber} */
-                rating={item.ratedNumber}
+                rating={courseContext.state.dataCourseDetail.formalityPoint}
               />
-              <Text style={{color: colors.text}}> {item.createdAt}</Text>
+              <Text style={{color: colors.text}}>
+                {courseContext.state.dataCourseDetail.createdAt}
+              </Text>
             </View>
             <View style={styles.containerButton}>
               <CircleButton
@@ -140,7 +142,7 @@ const CourseDetail = (props) => {
               />
             </View>
             <Text style={[styles.description, {color: colors.text}]}>
-              {item.description}
+              {courseContext.state.dataCourseDetail.description}
             </Text>
             {/* {item.learnWhat.map((item) => (
               <Text style={[styles.description, {color: colors.text}]}>
@@ -175,28 +177,32 @@ const CourseDetail = (props) => {
             ) : (
               <ListLesson data={courseContext.state.dataCourseDetail.section} />
             )}
-            <Text>Your Review</Text>
-            <Input
-              style={styles.input}
-              placeholder={'Comment'}
-              onChangeText={(text) => setYourComment(text)}
-            />
-            <Rating
-              imageSize={20}
-              tintColor={colors.background}
-              ratingCount={5}
-              startingValue={props.rating}
-              style={styles.rating}
-              fractions={1}
-              onFinishRating={ratingCompleted}
-            />
-            <FilledButton
-              title={'REVIEW'}
-              onPress={() => {
-                onPressReview(yourComment, yourRating);
-              }}
-              style={styles.loginButton}
-            />
+
+            <Text style={styles.title}>Your Review</Text>
+            <View style={styles.containerButtonSmall}>
+              <Input
+                style={styles.input}
+                placeholder={'Comment'}
+                onChangeText={(text) => setYourComment(text)}
+              />
+              <Rating
+                imageSize={20}
+                tintColor={colors.background}
+                ratingCount={5}
+                startingValue={props.rating}
+                style={styles.rating}
+                fractions={1}
+                onFinishRating={ratingCompleted}
+              />
+              <FilledButton
+                title={'REVIEW'}
+                onPress={() => {
+                  onPressReview(yourComment, yourRating);
+                }}
+                style={styles.loginButton}
+              />
+            </View>
+
             <ListComment data={courseContext.state.dataCourseDetail.ratings} />
           </>
         )}

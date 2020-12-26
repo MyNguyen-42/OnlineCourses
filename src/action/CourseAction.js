@@ -318,8 +318,12 @@ export const ratingCourse = (dispatch) => (
         console.log('fail');
       }
     })
-    .catch((error) => {})
-    .finally(() => {});
+    .catch((error) => {
+      console.log('fail');
+    })
+    .finally(() => {
+      console.log('fail');
+    });
 };
 
 export const deleteSearchHistory = (dispatch) => (token, searchId) => {

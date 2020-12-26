@@ -5,12 +5,13 @@ import YouTube from 'react-native-youtube';
 
 const VideoPlayer = (props) => {
   console.log('VideoPlayer: ', props.videoURL);
+  /* const video = props.videoURL.toString().slice(32); */
   return (
     <View style={styles.video}>
       <YouTube
         videoId="KVZ-P-ZI6W4" // The YouTube video ID
         play // control playback of video with true/false
-        fullscreen // control whether the video should play in fullscreen or inline
+        inline // control whether the video should play in fullscreen or inline
         loop // control whether the video should loop when ended
         apiKey="AIzaSyBy0J_swCBmhGGxPg6Iukmm2nUz793x5MU"
         /* onReady={(e) => this.setState({isReady: true})}
