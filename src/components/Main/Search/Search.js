@@ -1,17 +1,14 @@
 import React, {useState, useContext, useReducer} from 'react';
-import {StyleSheet, View, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput, Text, Button} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {ButtonGroup, SearchBar} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
 import {Header} from 'react-native-elements';
-/* import {CoursesContext} from '../../../Provider/CoursesProvider'; */
 import Courses from './Courses/Courses';
 import Authors from './Authors/Authors';
 import Paths from './Paths/Paths';
 import All from './All/All';
-import {authors, paths} from '../../../models/CourseModel';
-import {SEARCH_COURSE_SUCCESSED} from '../../../action/CourseAction';
 import {CourseContext} from '../../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import {ActivityIndicator} from 'react-native';
@@ -47,36 +44,6 @@ const Search = (props) => {
       /* setPathIds(CoursesContext.state.searchResult.courses.data); */
       setAuthorIds(CoursesContext.state.searchResult.instructors.data);
     }
-
-    /* setCourseIds([]);
-    setPathIds([]);
-    setAuthorIds([]);
-
-    const lKeyword = Keyword.toLowerCase().trim();
-
-    const resultCourseIds = [];
-
-    const resultPathIds = [];
-
-    const resultAuthorIds = [];
-
-
-    paths.forEach((value, key) => {
-      if (value.title.toLowerCase().search(lKeyword) >= 0) {
-        console.log('key', key);
-        resultPathIds.push(paths[key]);
-      }
-    });
-
-    authors.forEach((value, key) => {
-      if (value.name.toLowerCase().search(lKeyword) >= 0) {
-        console.log('key', key);
-        resultAuthorIds.push(authors[key]);
-      }
-    });
-
-    setCourseIds(resultCourseIds);
-    setAuthorIds(resultAuthorIds); */
   };
 
   const updateIndex = (SelectedIndex) => {
@@ -113,12 +80,21 @@ const Search = (props) => {
           <Authors authorIds={authorIds} navigation={props.navigation} />
         );
         break;
+      case 4:
+        /* CoursesContext.getSearchHistory(authContext.state.token);
+        console.log(CoursesContext.searchHistories);
+        ViewResult = <Text>{CoursesContext.searchHistories}</Text>; */
+        break;
 
       default:
         break;
     }
+  } else {
+    /* CoursesContext.getSearchHistory(authContext.state.token);
+    console.log(CoursesContext.searchHistories);
+    ViewResult = <Text>{CoursesContext.searchHistories}</Text>; */
   }
-  const buttons = ['All', 'Courses', 'Path', 'Author'];
+  const buttons = ['All', 'Courses', 'Path', 'Author', 'History'];
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -180,6 +156,7 @@ const Search = (props) => {
         }}
         value={textSearch}
       />
+      <Button title="H" />
       <ButtonGroup
         onPress={updateIndex}
         selectedIndex={selectedIndex}

@@ -14,6 +14,11 @@ export const LOAD_USER_FAVORITE_COURSE_SUCCESSED =
   'LOAD_USER_FAVORITE_COURSE_SUCCESSED';
 export const LOAD_USER_FAVORITE_COURSE_FAIL = 'LOAD_USER_FAVORITE_COURSE_FAIL';
 export const SEARCH_COURSE_SUCCESSED = 'SEARCH_COURSE_sUCCESSED';
+export const GET_RATING_COURSE_SUCCESSED = 'GET_RATING_COURSE_SUCCESSED';
+export const GET_RATING_COURSE_FAIL = 'GET_RATING_COURSE_FAIL';
+export const GET_SEARCH_HISTORY_SUCCESSED = 'GET_SEARCH_HISTORY_SUCCESSED';
+export const GET_SEARCH_HISTORY_FAIL = 'GET_SEARCH_HISTORY_FAIL';
+export const SEARCH_BY_CATEGORY_SUCCESSED = 'SEARCH_BY_CATEGORY_SUCCESSED';
 //nhận vào 1 dispatch, return ra function
 
 const body = {
@@ -87,7 +92,7 @@ export const loadListCourseNew = (dispatch) => () => {
     .finally(() => {});
 }; */
 
-export const loadCourseDetail = (dispatch) => (token, id) => {
+/* export const loadCourseDetail = (dispatch) => (token, id) => {
   console.log('loadCourseDetail');
   axios
     .get(Server + '/course/get-course-info?id=' + id, {
@@ -106,7 +111,7 @@ export const loadCourseDetail = (dispatch) => (token, id) => {
     })
     .catch((error) => {})
     .finally(() => {});
-};
+}; */
 
 export const likeCourse = (dispatch) => (token, courseId) => {
   console.log('UpdateProfile');
@@ -170,4 +175,110 @@ export const search = (dispatch) => (keyword, token) => {
         console.log('fail');
       }
     });
+};
+
+export const getRatingCourse = (dispatch) => (token, courseId) => {
+  console.log('getRatingCourse');
+  axios
+    .get(`${Server}/course/get-rating/${courseId}`, {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: GET_RATING_COURSE_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const getSearchHistory = (dispatch) => (token) => {
+  console.log('getCourseHistory');
+  axios
+    .get(`${Server}/course/search-history`, {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: GET_SEARCH_HISTORY_SUCCESSED,
+          data: Response.data.payload.data,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const getCourseDetailWithLesson = (dispatch) => (token) => {
+  console.log('getCourseHistory');
+  axios
+    .get(`${Server}/course/search-history`, {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: GET_SEARCH_HISTORY_SUCCESSED,
+          data: Response.data.payload.data,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const getCourseDetail = (dispatch) => (id) => {
+  console.log('loadCourseDetail');
+  axios
+    .get(`${Server}/course/get-course-detail/${id}/null`)
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: REQUEST_COURSE_DETAIL_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const searchByCategory = (dispatch) => (categoryId) => {
+  console.log('searchByCategory');
+  axios
+    .post(`${Server}/search`, {
+      keyword: '',
+      opt: {
+        category: [categoryId],
+      },
+    })
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: SEARCH_BY_CATEGORY_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
 };

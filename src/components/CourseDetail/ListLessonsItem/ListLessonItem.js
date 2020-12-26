@@ -23,10 +23,10 @@ const ListCoursesItem = (props) => {
           style={[styles.icon, {color: colors.text}]}
         />
         <Text style={{color: colors.text, width: WidthTitle}}>
-          {props.item.title}
+          {props.item.name}
         </Text>
       </View>
-      <Text style={{color: colors.text}}>{props.item.time}</Text>
+      <Text style={{color: colors.text}}>{props.item.hours}</Text>
     </TouchableOpacity>
   );
 };

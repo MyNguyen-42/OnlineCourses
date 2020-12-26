@@ -16,6 +16,7 @@ import ListLesson from './ListLessons/ListLesson';
 import {CourseContext} from '../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../Provider/AuthenticationProvider';
 import MyRating from '../../components/common/MyRating';
+import ListComment from './ListComment/ListComment';
 
 const Description =
   'Everything is working, but whenever I put the focus on the TextFile to type something, the TabBar is changed from tab C to tab A.Very annoying. This should not happen. The TabBarView remains unchanged';
@@ -33,7 +34,8 @@ const CourseDetail = (props) => {
 
   useEffect(() => {
     console.log(props);
-    courseContext.loadCourseDetail(
+    courseContext.getCourseDetail(props.route.params.item.id);
+    courseContext.getRatingCourse(
       authContext.state.token,
       props.route.params.item.id,
     );
@@ -58,7 +60,11 @@ const CourseDetail = (props) => {
         <>
           <VideoPlayer />
           <Text style={[styles.title, {color: colors.text}]}>{item.title}</Text>
-          <Tag title={item.author} style={styles.author} onPress={() => {}} />
+          <Tag
+            title={item['instructor.user.name']}
+            style={styles.author}
+            onPress={() => {}}
+          />
           <View style={styles.containerLevelRelease}>
             {/* <Text style={{color: colors.text}}>{item.level}</Text> */}
             <MyRating
@@ -91,7 +97,7 @@ const CourseDetail = (props) => {
             />
             <CircleButton title="Add to channel" name="text-box-plus-outline" />
             <CircleButton
-              title="DL" /* {
+              title="Download" /* {
             favoriteContext.downloadCourses.has(item)
               ? 'Downloaded'
               : 'Download'
@@ -111,6 +117,11 @@ const CourseDetail = (props) => {
           <Text style={[styles.description, {color: colors.text}]}>
             {item.description}
           </Text>
+          {item.learnWhat.map((item) => (
+            <Text style={[styles.description, {color: colors.text}]}>
+              {item}
+            </Text>
+          ))}
           <View style={styles.containerButtonSmall}>
             <FilledButton
               name="file-multiple-outline"
@@ -137,8 +148,9 @@ const CourseDetail = (props) => {
           {selectedIndex ? (
             <Text style={{color: colors.text}}>{item.subtitle}</Text>
           ) : (
-            <ListLesson data={item.content} />
+            <ListLesson data={courseContext.state.dataCourseDetail.section} />
           )}
+          <ListComment data={courseContext.state.dataCourseDetail.ratings} />
         </>
       )}
     </ScrollView>

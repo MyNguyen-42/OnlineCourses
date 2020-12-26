@@ -1,8 +1,11 @@
 import {
+  GET_RATING_COURSE_SUCCESSED,
+  GET_SEARCH_HISTORY_SUCCESSED,
   LOAD_USER_FAVORITE_COURSE_SUCCESSED,
   REQUEST_COURSE_DETAIL_SUCCESSED,
   REQUEST_LIST_COURSES_NEW_SUCCESSED,
   REQUEST_LIST_COURSES_SUCCESSED,
+  SEARCH_BY_CATEGORY_SUCCESSED,
   SEARCH_COURSE_SUCCESSED,
   UPDATE_LIKE_COURSE_SUCCESSED,
 } from '../action/CourseAction';
@@ -37,7 +40,20 @@ export const reducer = (state, action) => {
       };
     case SEARCH_COURSE_SUCCESSED:
       return {...state, searchResult: action.data, isLoadingSearch: false};
-
+    case GET_RATING_COURSE_SUCCESSED:
+      return {...state, ratingCourse: action.data, isGetRatingCourse: false};
+    case GET_SEARCH_HISTORY_SUCCESSED:
+      return {
+        ...state,
+        searchHistories: action.data,
+        isLoadingSearchHistories: false,
+      };
+    case SEARCH_BY_CATEGORY_SUCCESSED:
+      return {
+        ...state,
+        searchByCategoryResult: action.data,
+        isLoadingSearchByCategory: false,
+      };
     default:
       throw new Error();
   }

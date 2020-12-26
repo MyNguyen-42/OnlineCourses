@@ -7,6 +7,10 @@ import {
   likeCourse,
   loadFavoriteCourse,
   search,
+  getRatingCourse,
+  getSearchHistory,
+  getCourseDetail,
+  searchByCategory,
 } from '../action/CourseAction';
 
 const CourseContext = React.createContext();
@@ -30,6 +34,13 @@ const initialState = {
   currentSearchText: '',
   recentSearches: [],
   searchResult: null,
+  ratingCourse: null,
+  isGetRatingCourse: true,
+  isGetRatingCourseError: false,
+  searchHistories: null,
+  isLoadingSearchHistories: true,
+  searchByCategoryResult: null,
+  isLoadingSearchByCategory: true,
 };
 
 const CourseProvider = (props) => {
@@ -40,10 +51,14 @@ const CourseProvider = (props) => {
         state,
         loadListCourseSell: loadListCourseSell(dispatch),
         loadListCourseNew: loadListCourseNew(dispatch),
-        loadCourseDetail: loadCourseDetail(dispatch),
+        /* loadCourseDetail: loadCourseDetail(dispatch), */
         likeCourse: likeCourse(dispatch),
         loadFavoriteCourse: loadFavoriteCourse(dispatch),
         search: search(dispatch),
+        getRatingCourse: getRatingCourse(dispatch),
+        getSearchHistory: getSearchHistory(dispatch),
+        getCourseDetail: getCourseDetail(dispatch),
+        searchByCategory: searchByCategory(dispatch),
       }}>
       {props.children}
     </CourseContext.Provider>
