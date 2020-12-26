@@ -1,7 +1,9 @@
 import {
+  DELETE_SEARCH_HISTORY_SUCCESSED,
   GET_RATING_COURSE_SUCCESSED,
   GET_SEARCH_HISTORY_SUCCESSED,
   LOAD_USER_FAVORITE_COURSE_SUCCESSED,
+  RATING_COURSE_SUCCESSED,
   REQUEST_COURSE_DETAIL_SUCCESSED,
   REQUEST_LIST_COURSES_NEW_SUCCESSED,
   REQUEST_LIST_COURSES_SUCCESSED,
@@ -54,6 +56,14 @@ export const reducer = (state, action) => {
         searchByCategoryResult: action.data,
         isLoadingSearchByCategory: false,
       };
+    case RATING_COURSE_SUCCESSED:
+      return {
+        ...state,
+        isLoadingRatingCourse: false,
+      };
+    case DELETE_SEARCH_HISTORY_SUCCESSED: {
+      return {...state};
+    }
     default:
       throw new Error();
   }

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTheme} from '@react-navigation/native';
+import {videoURLContext} from '../CourseDetail';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -15,8 +16,15 @@ const WidthTitle = screenWidth - 100;
 
 const ListCoursesItem = (props) => {
   const {colors} = useTheme();
+  const {videoURL, setVideoURL} = React.useContext(videoURLContext);
+  console.log('video: ', videoURL);
+
   return (
-    <TouchableOpacity style={styles.item} onPress={() => {}}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        setVideoURL(props.item.videoUrl);
+      }}>
       <View style={styles.containerIconText}>
         <MaterialCommunityIcons
           name="checkbox-blank-circle"
