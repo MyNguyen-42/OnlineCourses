@@ -13,6 +13,9 @@ import {
   searchByCategory,
   ratingCourse,
   deleteSearchHistory,
+  getCategoryAll,
+  loadListTopRate,
+  buyFreeCourse,
 } from '../action/CourseAction';
 
 const CourseContext = React.createContext();
@@ -24,6 +27,9 @@ const initialState = {
   dataCoursesNew: null,
   isLoadingCoursesNew: true,
   isErrorCoursesNew: false,
+  dataTopRate: null,
+  isLoadingTopRate: true,
+  isErrorTopRate: false,
   dataCourseDetail: null,
   isLoadingCourseDetail: true,
   isErrorCoursesDetail: false,
@@ -44,6 +50,11 @@ const initialState = {
   searchByCategoryResult: null,
   isLoadingSearchByCategory: true,
   isLoadingRatingCourse: true,
+  dataCategoryAll: null,
+  isLoadingCategoryAll: true,
+  isErrorCategoryAll: false,
+  isLoadingBuyCourseFree: true,
+  isErrorBuyCourseFree: false,
 };
 
 const CourseProvider = (props) => {
@@ -54,6 +65,7 @@ const CourseProvider = (props) => {
         state,
         loadListCourseSell: loadListCourseSell(dispatch),
         loadListCourseNew: loadListCourseNew(dispatch),
+        loadListTopRate: loadListTopRate(dispatch),
         /* loadCourseDetail: loadCourseDetail(dispatch), */
         likeCourse: likeCourse(dispatch),
         loadFavoriteCourse: loadFavoriteCourse(dispatch),
@@ -64,6 +76,8 @@ const CourseProvider = (props) => {
         searchByCategory: searchByCategory(dispatch),
         ratingCourse: ratingCourse(dispatch),
         deleteSearchHistory: deleteSearchHistory(dispatch),
+        getCategoryAll: getCategoryAll(dispatch),
+        buyFreeCourse: buyFreeCourse(dispatch),
       }}>
       {props.children}
     </CourseContext.Provider>
