@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  Share,
 } from 'react-native';
 import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
@@ -71,6 +72,25 @@ const CourseDetail = (props) => {
 
   const onPressBuyCourse = (token, courseId) => {
     courseContext.buyFreeCourse(token, courseId);
+  };
+
+  const onShare = async (nameCourse) => {
+    try {
+      const result = await Share.share({
+        message: nameCourse,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const onPressSectionItem = (item) => {
@@ -172,10 +192,14 @@ const CourseDetail = (props) => {
             ))} */}
             <View style={styles.containerButtonSmall}>
               <FilledButton
-                name="file-multiple-outline"
-                title={'Related paths & courses'}
+                /* name="file-multiple-outline" */
+                name="share"
+                /* title={'Related paths & courses'} */
+                title={'Share'}
                 style={styles.buttonSmall}
-                onPress={() => {}}
+                onPress={() => {
+                  onShare(courseContext.state.dataCourseDetail.title);
+                }}
               />
               <FilledButton
                 name="checkbox-multiple-marked-circle-outline"
