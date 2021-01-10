@@ -4,6 +4,7 @@ import {Server} from '../global/Constants';
 export const REQUEST_LIST_COURSES_SUCCESSED = 'REQUEST_LIST_COURSES_SUCCESSED';
 export const REQUEST_LIST_COURSES_NEW_SUCCESSED =
   'REQUEST_LIST_COURSES_NEW_SUCCESSED';
+export const REQUEST_TOP_RATE_SUCCESSED = 'REQUEST_TOP_RATE_SUCCESSED';
 export const REQUEST_LIST_COURSES_USER_FAVORITE_SUCCESSED =
   'REQUEST_LIST_COURSES_USER_FAVORITE_SUCCESSED';
 export const REQUEST_COURSE_DETAIL_SUCCESSED =
@@ -24,6 +25,10 @@ export const RATING_COURSE_FAIL = 'RATING_COURSE_FAIL';
 export const DELETE_SEARCH_HISTORY_SUCCESSED =
   'DELETE_SEARCH_HISTORY_SUCCESSED';
 export const DELETE_SEARCH_HISTORY_FAIL = 'DELETE_SEARCH_HISTORY_FAIL';
+export const GET_CATEGORY_ALL_SUCCESSED = 'GET_CATEGORY_ALL_SUCCESSED';
+export const GET_CATEGORY_ALL_FAIL = 'GET_CATEGORY_ALL_FAIL';
+export const BUY_FREE_COURSE_SUCCESSED = 'BUY_FREE_COURSE_SUCCESSED';
+export const BUY_FREE_COURSE_FAIL = 'BUY_FREE_COURSE_FAIL';
 //nhận vào 1 dispatch, return ra function
 
 const body = {
@@ -68,6 +73,25 @@ export const loadListCourseNew = (dispatch) => () => {
         console.log('Action: ', Response.data.message);
         dispatch({
           type: REQUEST_LIST_COURSES_NEW_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const loadListTopRate = (dispatch) => () => {
+  console.log('loadTopRate');
+  axios
+    .post(`${Server}/course/top-rate`, body, options)
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: REQUEST_TOP_RATE_SUCCESSED,
           data: Response.data.payload,
         });
       } else {
@@ -305,7 +329,12 @@ export const ratingCourse = (dispatch) => (
         presentationPoint: ratingNumber,
         content: content,
       },
-      {headers: {Authorization: `Bearer ${token}`}},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
     )
     .then((Response) => {
       if (Response.status === 200) {
@@ -319,7 +348,11 @@ export const ratingCourse = (dispatch) => (
       }
     })
     .catch((error) => {
-      console.log('fail');
+      console.log('fail: ', error.response.request._response);
+      /*  dispatch({
+        type: RATING_COURSE_FAIL,
+        data: error.response.request._response,
+      }); */
     })
     .finally(() => {
       console.log('fail');
@@ -338,6 +371,50 @@ export const deleteSearchHistory = (dispatch) => (token, searchId) => {
         dispatch({
           type: DELETE_SEARCH_HISTORY_SUCCESSED,
           data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const getCategoryAll = (dispatch) => () => {
+  console.log('loadCategoryAll');
+  axios
+    .get(`${Server}/category/all`)
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: GET_CATEGORY_ALL_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {})
+    .finally(() => {});
+};
+
+export const buyFreeCourse = (dispatch) => (token, courseId) => {
+  console.log('paymentGetFreeCourse');
+  axios
+    .post(
+      `${Server}/payment/get-free-courses`,
+      {
+        courseId: courseId,
+      },
+      {headers: {Authorization: `Bearer ${token}`}},
+    )
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: BUY_FREE_COURSE_SUCCESSED,
+          data: Response.data.freeCourseLink,
         });
       } else {
         console.log('fail');

@@ -14,6 +14,7 @@ import axios from 'axios';
 import {ActivityIndicator} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 export const LOAD_INSTRUCTORS_SUCCESSED = 'LOAD_INSTRUCTORS_SUCCESSED';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const initialState = {
   instructors: null,
@@ -32,11 +33,10 @@ const reducer = (state, action) => {
 
 const Browse = (props) => {
   const {colors} = useTheme();
-  const onPress = () => {
-    props.navigation.navigate(ScreenKey.SettingStackScreens);
-  };
-
+  const authContext = useContext(AuthenticationContext);
+  const CoursesContext = useContext(CourseContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const {lang} = useContext(LanguageContext);
 
   useEffect(() => {
     console.log('load Instructors');
@@ -57,12 +57,27 @@ const Browse = (props) => {
       .finally(() => {});
   }, []);
 
+  useEffect(() => {
+    CoursesContext.getCategoryAll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const renderListCategoryItem = (Categories) => {
+    return Categories.map((item) => (
+      <Tag title={item.name} onPress={() => {}} />
+    ));
+  };
+  const onPress = () => {
+    props.navigation.navigate(ScreenKey.SettingStackScreens);
+  };
+
+  console.log(CoursesContext.state.dataCategoryAll);
   return (
     <>
       <Header
         placement="left"
         centerComponent={{
-          text: 'Browse',
+          text: lang.browse,
           style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
         }}
         rightComponent={{
@@ -75,27 +90,32 @@ const Browse = (props) => {
       <ScrollView>
         <ImageButton
           uri="https://wallpapertag.com/wallpaper/full/2/c/7/463317-cool-techno-backgrounds-1920x1200-for-lockscreen.jpg"
-          title="NEW RELEASE"
+          title={lang.newRelease}
           onPress={() => {
-            const Courses = newCourses;
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
-              params: {Courses},
+              params: {
+                key: props.title,
+                data: CoursesContext.state.dataCoursesNew,
+              },
             });
           }}
         />
         <ImageButton
           uri="https://cdn.guidingtech.com/imager/assets/2020/04/787146/Cool-Backgrounds-for-Zoom-Meetings-1_4d470f76dc99e18ad75087b1b8410ea9.jpg?1585326792"
-          title="RECOMMENDED FOR YOU"
+          title={lang.recommendedForYou}
           onPress={() => {
-            const Courses = recommendedCourses;
+            CoursesContext.loadListTopRate();
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
-              params: {Courses},
+              params: {
+                key: props.title,
+                data: CoursesContext.state.dataTopRate,
+              },
             });
           }}
         />
-        <ScrollView horizontal={true}>
+        {/* <ScrollView horizontal={true}>
           <View style={styles.grid}>
             <ImageButton
               uri="http://wonderfulengineering.com/wp-content/uploads/2014/03/Engineering-backgrounds-14.jpg"
@@ -174,25 +194,34 @@ const Browse = (props) => {
               }}
             />
           </View>
-        </ScrollView>
+        </ScrollView> */}
         <Text style={[styles.label, {color: colors.text}]}>
           {' '}
-          Popular Skills
+          {lang.popularSkills}
         </Text>
-        <ScrollView horizontal={true}>
+
+        {CoursesContext.state.isLoadingCategoryAll ? (
+          <ActivityIndicator size="large" color="#8e44ad" />
+        ) : (
+          <ScrollView horizontal={true}>
+            {renderListCategoryItem(CoursesContext.state.dataCategoryAll)}
+          </ScrollView>
+        )}
+
+        {/* <ScrollView horizontal={true}>
           <Tag title="JavaScripts" onPress={() => {}} />
           <Tag title="Angular" onPress={() => {}} />
           <Tag title="C#" onPress={() => {}} />
           <Tag title="Java" onPress={() => {}} />
           <Tag title="Data Analysis" onPress={() => {}} />
-        </ScrollView>
-        <SectionPaths title="Paths" navigation={props.navigation} />
+        </ScrollView> */}
+        <SectionPaths title={lang.paths} navigation={props.navigation} />
 
         {state.isLoadingInstructor ? (
           <ActivityIndicator size="large" color="#8e44ad" />
         ) : (
           <SectionAuthors
-            title="Top authors"
+            title={lang.topAuthors}
             navigation={props.navigation}
             data={state.instructors}
           />

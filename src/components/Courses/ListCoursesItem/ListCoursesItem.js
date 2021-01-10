@@ -29,18 +29,18 @@ const ListCoursesItem = (props) => {
         <Image
           style={styles.image}
           source={{
-            uri: props.item.imageUrl,
+            uri: props.item.imageUrl || props.item.courseImage,
           }}
         />
         <View style={styles.title}>
-          <Text>{props.item.title}</Text>
+          <Text>{props.item.title || props.item.courseTitle}</Text>
           <Text style={styles.darkText}>
-            {props.item['instructor.user.name']}
+            {props.item['instructor.user.name'] || props.item.instructorName}
           </Text>
           <Text
             style={
               styles.darkText
-            }>{`${props.item.level} . ${props.item.createdAt}. ${props.item.totalHours}`}</Text>
+            }>{`${props.item.createdAt}. ${props.item.totalHours}`}</Text>
         </View>
       </View>
       <MaterialCommunityIcons

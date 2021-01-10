@@ -5,6 +5,7 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  Share,
 } from 'react-native';
 import CircleButton from '../common/CircleButton';
 import {FilledButton} from '../common/FilledButton';
@@ -18,6 +19,9 @@ import {AuthenticationContext} from '../../Provider/AuthenticationProvider';
 import MyRating from '../../components/common/MyRating';
 import ListComment from './ListComment/ListComment';
 import Input from '../common/Inputs';
+import SectionCoursesItem from '../Main/Home/SectionCoursesItem/SectionCoursesItem';
+import {ScreenKey} from '../../global/Constants';
+import {LanguageContext} from '../../Provider/LanguageProvider';
 
 export const videoURLContext = React.createContext();
 
@@ -34,7 +38,8 @@ const CourseDetail = (props) => {
   const [yourComment, setYourComment] = useState('');
   const [yourRating, setYourRating] = useState(5);
   const [videoURL, setVideoURL] = React.useState('');
-  const buttons = ['Contents', 'Transcript'];
+  const {lang} = useContext(LanguageContext);
+  const buttons = [lang.contents, lang.transcript];
   console.log('CoursesDetail: ', props.route.params.item.id);
   console.log('courseContext: ', courseContext);
   console.log('videoURL: ', videoURL);
@@ -47,21 +52,16 @@ const CourseDetail = (props) => {
       props.route.params.item.id,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.route.params.item.id]);
 
   const ratingCompleted = (rating) => {
     console.log('Rating is: ' + rating);
     setYourRating(rating);
   };
 
-  const onPressReview = (yourComment, yourRating) => {
+  const onPressReview = (token, courseId, yourComment, yourRating) => {
     console.log('Review btn: ');
-    courseContext.ratingCourse(
-      authContext.state.token,
-      props.route.params.item.id,
-      yourRating,
-      yourComment,
-    );
+    courseContext.ratingCourse(token, courseId, yourRating, yourComment);
   };
 
   const updateIndex = (SelectedIndex) => {
@@ -70,6 +70,43 @@ const CourseDetail = (props) => {
 
   const onPressBookmark = (token, courseId) => {
     courseContext.likeCourse(token, courseId);
+  };
+
+  const onPressBuyCourse = (token, courseId) => {
+    courseContext.buyFreeCourse(token, courseId);
+  };
+
+  const onShare = async (nameCourse) => {
+    try {
+      const result = await Share.share({
+        message: nameCourse,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const onPressSectionItem = (item) => {
+    props.navigation.navigate(ScreenKey.CourseDetail, {item});
+  };
+
+  const renderCoursesLikeCategory = (value) => {
+    return value.map((item) => (
+      <SectionCoursesItem
+        item={item}
+        navigation={props.navigation}
+        onPressSectionItem={onPressSectionItem}
+      />
+    ));
   };
 
   let item = props.route.params.item;
@@ -122,6 +159,12 @@ const CourseDetail = (props) => {
               <CircleButton
                 title="Add to channel"
                 name="text-box-plus-outline"
+                onPress={() => {
+                  onPressBuyCourse(
+                    authContext.state.token,
+                    props.route.params.item.id,
+                  );
+                }}
               />
               <CircleButton
                 title="Download" /* {
@@ -151,10 +194,14 @@ const CourseDetail = (props) => {
             ))} */}
             <View style={styles.containerButtonSmall}>
               <FilledButton
-                name="file-multiple-outline"
-                title={'Related paths & courses'}
+                /* name="file-multiple-outline" */
+                name="share"
+                /* title={'Related paths & courses'} */
+                title=/* {'Share'} */ {lang.share}
                 style={styles.buttonSmall}
-                onPress={() => {}}
+                onPress={() => {
+                  onShare(courseContext.state.dataCourseDetail.title);
+                }}
               />
               <FilledButton
                 name="checkbox-multiple-marked-circle-outline"
@@ -178,11 +225,18 @@ const CourseDetail = (props) => {
               <ListLesson data={courseContext.state.dataCourseDetail.section} />
             )}
 
-            <Text style={styles.title}>Your Review</Text>
+            <Text>Các khóa học cùng chủ đề</Text>
+            <ScrollView horizontal={true}>
+              {renderCoursesLikeCategory(
+                courseContext.state.dataCourseDetail.coursesLikeCategory,
+              )}
+            </ScrollView>
+
+            <Text style={styles.title}>{lang.yourReview}</Text>
             <View style={styles.containerButtonSmall}>
               <Input
                 style={styles.input}
-                placeholder={'Comment'}
+                placeholder={lang.comment}
                 onChangeText={(text) => setYourComment(text)}
               />
               <Rating
@@ -195,9 +249,14 @@ const CourseDetail = (props) => {
                 onFinishRating={ratingCompleted}
               />
               <FilledButton
-                title={'REVIEW'}
+                title={lang.review}
                 onPress={() => {
-                  onPressReview(yourComment, yourRating);
+                  onPressReview(
+                    authContext.state.token,
+                    props.route.params.item.id,
+                    yourComment,
+                    yourRating,
+                  );
                 }}
                 style={styles.loginButton}
               />

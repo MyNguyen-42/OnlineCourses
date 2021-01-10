@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
 import SmallRightButton from '../../../common/SmallRightButton';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../../global/Constants';
+import {LanguageContext} from '../../../../Provider/LanguageProvider';
 
 const SectionCourses = (props) => {
   const {colors} = useTheme();
   const Courses = props.data;
+  const {lang} = useContext(LanguageContext);
 
   const onPressSectionItem = (item) => {
     props.navigation.navigate(ScreenKey.CourseDetail, {item});
@@ -29,7 +31,7 @@ const SectionCourses = (props) => {
         <Text style={[styles.text, {color: colors.text}]}>{props.title}</Text>
         <SmallRightButton
           style={{color: colors.text}}
-          text="See all"
+          text={lang.seeAll}
           name="navigate-next"
           onPress={() => {
             /* props.navigation.navigate(ScreenKey.ListCoursesStack, {

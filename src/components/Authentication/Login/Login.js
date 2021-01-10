@@ -6,12 +6,14 @@ import Input from '../../common/Inputs';
 import {TextButton} from '../../common/TextButton';
 import {ScreenKey} from '../../../global/Constants';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 import Error from '../../common/Error';
 
 const Login = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const authContext = useContext(AuthenticationContext);
+  const {lang} = useContext(LanguageContext);
 
   useEffect(() => {
     console.log('Auth/Login: ', authContext);
@@ -29,7 +31,7 @@ const Login = (props) => {
 
   return (
     <View style={styles.container}>
-      <Heading style={styles.title}> LOGIN</Heading>
+      <Heading style={styles.title}>{lang.login}</Heading>
       <Error
         error={authContext.status === 200 ? '' : authContext.state.message}
       />
@@ -41,26 +43,26 @@ const Login = (props) => {
       />
       <Input
         style={styles.input}
-        placeholder={'password'}
+        placeholder={lang.password}
         leftIcon="lock"
         onChangeText={(text) => setPassword(text)}
         secureTextEntry
       />
       <FilledButton
-        title={'LOGIN'}
+        title={lang.login}
         onPress={() => {
           onPressLogin(username, password);
         }}
         style={styles.loginButton}
       />
       <TextButton
-        title={'Have U an account? CREAT ONE'}
+        title={lang.haveUAnAccount}
         onPress={() => {
           props.navigation.navigate(ScreenKey.RegisterScreen);
         }}
       />
       <TextButton
-        title={'Forget password'}
+        title={lang.forgetPassword}
         onPress={() => {
           props.navigation.navigate(ScreenKey.ForgetPasswordScreen);
         }}

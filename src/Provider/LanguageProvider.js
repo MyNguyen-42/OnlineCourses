@@ -1,0 +1,111 @@
+import React, {useState} from 'react';
+
+export const languages = {
+  en: {
+    all: 'All',
+    account: 'Account',
+    authors: 'Authors',
+    home: 'Home',
+    browse: 'Browse',
+    contents: 'Contents',
+    comments: 'Comments',
+    comment: 'Comment',
+    course: 'Course',
+    download: 'Download',
+    search: 'Search',
+    topSell: 'Top Sell',
+    topNew: 'Top New',
+    seeAll: 'See all',
+    setting: 'Setting',
+    theme: 'Theme',
+    appVersion: 'App Version',
+    login: 'LOGIN',
+    language: 'Language',
+    password: 'password',
+    haveUAnAccount: 'HAVE U AN ACCOUNT? CREAT ONE',
+    history: 'History',
+    forgetPassword: 'Forget Password',
+    invalidUserNameOrPassword: 'Invalid user name or password',
+    signOut: 'Sign Out',
+    profile: 'Profile',
+    editProfile: 'Edit Profile',
+    submit: 'SUBMIT',
+    newRelease: 'NEW RELEASE',
+    newPassword: 'New Password',
+    recommendedForYou: 'RECOMMEND FOR YOU',
+    popularSkills: 'Popular Skills',
+    paths: 'Paths',
+    topAuthors: 'Top Authors',
+    favorite: 'Bookmark',
+    addToChannel: 'Add to channel',
+    share: 'Share',
+    transcript: 'Transcript',
+    yourReview: 'Your Review',
+    review: 'REVIEW',
+    relatedPathsCourses: 'Related paths & courses',
+    sendVerificationCode: 'Send verification code',
+    verifyNewPassword: 'Verify New Password',
+  },
+  vi: {
+    all: 'Tất cả',
+    authors: 'Giáo viên',
+    home: 'Trang chủ',
+    download: 'Tải về',
+    browse: 'Browse',
+    search: 'Tìm kiếm',
+    course: 'Khóa học',
+    topSell: 'Các khóa học bán chạy',
+    topNew: 'Các khóa học mới',
+    seeAll: 'Xem thêm',
+    setting: 'Cài đặt',
+    account: 'Tài khoản',
+    theme: 'Giao diện',
+    appVersion: 'Phiên bản',
+    login: 'ĐĂNG NHẬP',
+    language: 'Ngôn ngữ',
+    password: 'Mật khẩu',
+    haveUAnAccount: 'Tạo tài khoản',
+    history: 'Lịch sử',
+    forgetPassword: 'Quên mật khẩu',
+    invalidUserNameOrPassword: 'Tên đăng nhập hoặc tài khoản không đúng',
+    signOut: 'Đăng xuất',
+    profile: 'Hồ sơ cá nhân',
+    editProfile: 'CHỉnh sửa thông tin cá nhân',
+    submit: 'XÁC NHẬN',
+    newRelease: 'KHÓA HỌC MỚI',
+    newPassword: 'Mật khẩu mới',
+    recommendedForYou: 'ĐỀ XUẤT CHO BẠN',
+    popularSkills: 'Popular Skills',
+    paths: 'Paths',
+    topAuthors: 'Giáo viên',
+    favorite: 'Yêu thích',
+    addToChannel: 'Add to channel',
+    share: 'Chia sẻ',
+    contents: 'Nội dung',
+    transcript: 'transcript',
+    yourReview: 'Bình luận',
+    comment: 'Bình luận',
+    review: 'BÌNH LUẬN',
+    comments: 'Bình luận',
+    relatedPathsCourses: 'Các khóa học liên quan',
+    sendVerificationCode: 'Send verification code',
+    verifyNewPassword: 'Nhập lại mật khẩu mới',
+  },
+};
+
+const LanguageContext = React.createContext(/* languages.en */);
+
+const LanguageProvider = (props) => {
+  const [lang, setLang] = React.useState(languages.vi);
+  return (
+    <LanguageContext.Provider
+      value={{
+        lang,
+        setLang,
+      }}>
+      {props.children}
+    </LanguageContext.Provider>
+  );
+};
+
+export {LanguageProvider, LanguageContext};

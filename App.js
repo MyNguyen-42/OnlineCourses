@@ -16,6 +16,7 @@ import {CourseProvider} from './src/Provider/CourseProvider';
 import SplashScreen from './src/components/SplashScreen/SplashScreen';
 import MainTabNavigation from './src/screens/MainTabNavigation';
 import AuthenticationStackScreens from './src/screens/AuthenticationStackScreens';
+import {LanguageProvider} from './src/Provider/LanguageProvider';
 
 const MainNavigationStack = createStackNavigator();
 
@@ -79,16 +80,16 @@ export default function App() {
     <AuthenticationProvider>
       <AccountProvider>
         <CourseProvider>
-          {/* <FavoriteProvider> */}
-          <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
-            <View style={styles.container}>
-              <NavigationContainer
-                theme={isDarkTheme ? DarkTheme : DefaultTheme}>
-                <MainNavigation />
-              </NavigationContainer>
-            </View>
-          </ThemeContext.Provider>
-          {/* </FavoriteProvider> */}
+          <LanguageProvider>
+            <ThemeContext.Provider value={{isDarkTheme, setIsDarkTheme}}>
+              <View style={styles.container}>
+                <NavigationContainer
+                  theme={isDarkTheme ? DarkTheme : DefaultTheme}>
+                  <MainNavigation />
+                </NavigationContainer>
+              </View>
+            </ThemeContext.Provider>
+          </LanguageProvider>
         </CourseProvider>
       </AccountProvider>
     </AuthenticationProvider>

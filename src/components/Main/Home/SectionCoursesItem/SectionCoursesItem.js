@@ -38,9 +38,15 @@ const SectionCoursesItem = (props) => {
 
         <MyRating
           ratingNumber={
-            props.item.ratingNumber || props.item.courseContentPoint
+            props.item.ratingNumber ||
+            props.item.courseContentPoint ||
+            props.item.courseFormalityPoint
           }
-          rating={props.item.rating || props.item.courseContentPoint}
+          rating={
+            props.item.rating ||
+            props.item.courseContentPoint ||
+            props.item.formalityPoint
+          }
         />
       </View>
     </TouchableOpacity>
