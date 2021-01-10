@@ -7,11 +7,11 @@ import SmallRightButton from '../../common/SmallRightButton';
 /* import {FavoriteContext} from '../../../Provider/FavoriteProvider'; */
 import ListCoursesItem from '../../Courses/ListCoursesItem/ListCoursesItem';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const Download = (props) => {
   const {colors} = useTheme();
-  /* const favoriteContext = useContext(FavoriteContext);
-  const course = Array.from(favoriteContext.downloadCourses); */
+  const {lang} = useContext(LanguageContext);
 
   /* console.log(course); */
   const onPress = () => {
@@ -27,7 +27,7 @@ const Download = (props) => {
       <Header
         placement="left"
         centerComponent={{
-          text: 'Downloads',
+          text: lang.download,
           style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
         }}
         rightComponent={{

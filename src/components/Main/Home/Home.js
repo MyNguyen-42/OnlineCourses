@@ -10,10 +10,9 @@ import SectionCourses from './SectionCourses/SectionCourses';
 import {Header} from 'react-native-elements';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../global/Constants';
-import {recommendedCourses} from '../../../models/CourseModel';
-import {newCourses} from '../../../models/CourseModel';
 import {CourseContext} from '../../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const image = {
   uri:
@@ -24,11 +23,11 @@ const introduce =
   'With Pluralsight, you can build and apply skills in top technologies.You have free access to Skill IQ, Role IQ, a limited library of courses and a weekly rotation of new courses.';
 
 const Home = (props) => {
-  const course = Array.from(newCourses);
   const {colors} = useTheme();
   const authContext = useContext(AuthenticationContext);
-
   const CoursesContext = useContext(CourseContext);
+  const {lang} = useContext(LanguageContext);
+
   useEffect(() => {
     CoursesContext.loadListCourseSell();
     CoursesContext.loadListCourseNew();
@@ -44,7 +43,7 @@ const Home = (props) => {
       <Header
         placement="left"
         centerComponent={{
-          text: 'Home',
+          text: lang.home,
           style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
         }}
         rightComponent={{
@@ -60,36 +59,29 @@ const Home = (props) => {
           <Text style={styles.text}>Welcome to Pluralsight!</Text>
           <Text style={styles.textIntroduce}>{introduce}</Text>
         </ImageBackground>
-        {/* <SectionCourses
-          title="Continue learning"
-          navigation={props.navigation}
-          data={recommendedCourses}
-        /> */}
         {CoursesContext.state.isLoading ? (
           <ActivityIndicator size="large" color="#8e44ad" />
         ) : (
           <SectionCourses
-            title="Top sell"
+            title={lang.topSell}
             navigation={props.navigation}
             data={CoursesContext.state.data}
-            /* data={recommendedCourses} */
           />
         )}
         {CoursesContext.state.isLoadingCoursesNew ? (
           <ActivityIndicator size="large" color="#8e44ad" />
         ) : (
           <SectionCourses
-            title="Top new"
+            title={lang.topNew}
             navigation={props.navigation}
             data={CoursesContext.state.dataCoursesNew}
-            /* data={recommendedCourses} */
           />
         )}
         {CoursesContext.state.isLoadingUserFavoriteCourse ? (
           <ActivityIndicator size="large" color="#8e44ad" />
         ) : (
           <SectionCourses
-            title="Favorites"
+            title={lang.favorite}
             navigation={props.navigation}
             data={CoursesContext.state.dataUserFavoriteCourse}
           />

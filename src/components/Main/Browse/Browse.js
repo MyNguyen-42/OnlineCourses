@@ -14,6 +14,7 @@ import axios from 'axios';
 import {ActivityIndicator} from 'react-native';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 export const LOAD_INSTRUCTORS_SUCCESSED = 'LOAD_INSTRUCTORS_SUCCESSED';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const initialState = {
   instructors: null,
@@ -35,6 +36,7 @@ const Browse = (props) => {
   const authContext = useContext(AuthenticationContext);
   const CoursesContext = useContext(CourseContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const {lang} = useContext(LanguageContext);
 
   useEffect(() => {
     console.log('load Instructors');
@@ -75,7 +77,7 @@ const Browse = (props) => {
       <Header
         placement="left"
         centerComponent={{
-          text: 'Browse',
+          text: lang.browse,
           style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
         }}
         rightComponent={{
@@ -88,7 +90,7 @@ const Browse = (props) => {
       <ScrollView>
         <ImageButton
           uri="https://wallpapertag.com/wallpaper/full/2/c/7/463317-cool-techno-backgrounds-1920x1200-for-lockscreen.jpg"
-          title="NEW RELEASE"
+          title={lang.newRelease}
           onPress={() => {
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
               screen: ScreenKey.ListCourses,
@@ -101,7 +103,7 @@ const Browse = (props) => {
         />
         <ImageButton
           uri="https://cdn.guidingtech.com/imager/assets/2020/04/787146/Cool-Backgrounds-for-Zoom-Meetings-1_4d470f76dc99e18ad75087b1b8410ea9.jpg?1585326792"
-          title="RECOMMENDED FOR YOU"
+          title={lang.recommendedForYou}
           onPress={() => {
             CoursesContext.loadListTopRate();
             props.navigation.navigate(ScreenKey.ListCoursesStack, {
@@ -195,7 +197,7 @@ const Browse = (props) => {
         </ScrollView> */}
         <Text style={[styles.label, {color: colors.text}]}>
           {' '}
-          Popular Skills
+          {lang.popularSkills}
         </Text>
 
         {CoursesContext.state.isLoadingCategoryAll ? (
@@ -213,13 +215,13 @@ const Browse = (props) => {
           <Tag title="Java" onPress={() => {}} />
           <Tag title="Data Analysis" onPress={() => {}} />
         </ScrollView> */}
-        <SectionPaths title="Paths" navigation={props.navigation} />
+        <SectionPaths title={lang.paths} navigation={props.navigation} />
 
         {state.isLoadingInstructor ? (
           <ActivityIndicator size="large" color="#8e44ad" />
         ) : (
           <SectionAuthors
-            title="Top authors"
+            title={lang.topAuthors}
             navigation={props.navigation}
             data={state.instructors}
           />

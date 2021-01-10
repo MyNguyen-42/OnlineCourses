@@ -13,6 +13,7 @@ import {CourseContext} from '../../../Provider/CourseProvider';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import {ActivityIndicator} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const Search = (props) => {
   const {colors} = useTheme();
@@ -20,6 +21,7 @@ const Search = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const CoursesContext = useContext(CourseContext);
   const authContext = useContext(AuthenticationContext);
+  const {lang} = useContext(LanguageContext);
 
   const [courseIds, setCourseIds] = useState([]);
   const [pathIds, setPathIds] = useState([]);
@@ -102,12 +104,12 @@ const Search = (props) => {
             <Courses courseIds={courseIds} navigation={props.navigation} />
           );
           break;
-        case 2:
+        /* case 2:
           ViewResult = (
             <Paths pathIds={pathIds} navigation={props.navigation} />
           );
-          break;
-        case 3:
+          break; */
+        case 2:
           ViewResult = (
             <Authors authorIds={authorIds} navigation={props.navigation} />
           );
@@ -119,7 +121,7 @@ const Search = (props) => {
     }
   }
 
-  const buttons = ['All', 'Courses', 'Path', 'Author'];
+  const buttons = [lang.all, lang.course, /* lang.paths, */ lang.authors];
   const onPress = () => {
     props.navigation.navigate(ScreenKey.SettingStackScreens);
   };
@@ -128,7 +130,7 @@ const Search = (props) => {
       <Header
         placement="left"
         centerComponent={{
-          text: 'Search',
+          text: lang.search,
           style: {color: colors.text, fontSize: 20, fontWeight: 'bold'},
         }}
         rightComponent={{
@@ -184,14 +186,14 @@ const Search = (props) => {
       />
       <View style={styles.groupButtonSearchHistory}>
         <Button
-          title="Search"
+          title={lang.search}
           onPress={() => {
             setIsHistory(false);
             onTextChangeSearch(textSearch, authContext.state.token);
           }}
         />
         <Button
-          title="History"
+          title={lang.history}
           onPress={() => {
             setIsHistory(true);
             getSearchHistory(authContext.state.token);

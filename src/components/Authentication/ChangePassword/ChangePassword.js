@@ -2,13 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Input from '../../common/Inputs';
 import {FilledButton} from '../../common/FilledButton';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const ChangePassword = () => {
+  const {lang} = React.useContext(LanguageContext);
+
+  const [password, setPassword] = React.useState('');
+  const [confirmPassword, setConfirmPassword] = React.useState('');
   return (
     <View style={styles.container}>
-      <Input placeholder="New Password" style={styles.input} />
-      <Input placeholder="Verify New Password" style={styles.input} />
-      <FilledButton title="Send verification code" style={styles.button} />
+      <Input placeholder={lang.newPassword} style={styles.input} />
+      <Input placeholder={lang.verifyNewPassword} style={styles.input} />
+      <FilledButton title={lang.sendVerificationCode} style={styles.button} />
     </View>
   );
 };

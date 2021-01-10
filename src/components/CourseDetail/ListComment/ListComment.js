@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import ListCommentItem from '../ListCommentItem/ListCommentItem';
+import {LanguageContext} from '../../../Provider/LanguageProvider';
 
 const ListComment = (props) => {
   const {colors} = useTheme();
-
+  const {lang} = useContext(LanguageContext);
   const Comments = props.data;
   /* console.log('Comment Course Detail: ', props.data); */
 
@@ -25,7 +26,7 @@ const ListComment = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, {color: colors.text}]}>comments</Text>
+      <Text style={[styles.text, {color: colors.text}]}>{lang.comments}</Text>
       <ScrollView horizontal={false}>
         {renderListItem(Comments.ratingList)}
       </ScrollView>

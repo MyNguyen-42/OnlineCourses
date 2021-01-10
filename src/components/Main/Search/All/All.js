@@ -12,11 +12,11 @@ const All = (props) => {
         navigation={props.navigation}
         header="Courses"
       />
-      <Paths
+      {/* <Paths
         pathIds={props.pathIds.slice(0, 4)}
         navigation={props.navigation}
         header="Paths"
-      />
+      /> */}
       <Authors
         authorIds={props.authorIds.slice(0, 4)}
         navigation={props.navigation}

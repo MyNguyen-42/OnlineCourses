@@ -21,6 +21,7 @@ import ListComment from './ListComment/ListComment';
 import Input from '../common/Inputs';
 import SectionCoursesItem from '../Main/Home/SectionCoursesItem/SectionCoursesItem';
 import {ScreenKey} from '../../global/Constants';
+import {LanguageContext} from '../../Provider/LanguageProvider';
 
 export const videoURLContext = React.createContext();
 
@@ -37,7 +38,8 @@ const CourseDetail = (props) => {
   const [yourComment, setYourComment] = useState('');
   const [yourRating, setYourRating] = useState(5);
   const [videoURL, setVideoURL] = React.useState('');
-  const buttons = ['Contents', 'Transcript'];
+  const {lang} = useContext(LanguageContext);
+  const buttons = [lang.contents, lang.transcript];
   console.log('CoursesDetail: ', props.route.params.item.id);
   console.log('courseContext: ', courseContext);
   console.log('videoURL: ', videoURL);
@@ -195,7 +197,7 @@ const CourseDetail = (props) => {
                 /* name="file-multiple-outline" */
                 name="share"
                 /* title={'Related paths & courses'} */
-                title={'Share'}
+                title=/* {'Share'} */ {lang.share}
                 style={styles.buttonSmall}
                 onPress={() => {
                   onShare(courseContext.state.dataCourseDetail.title);
@@ -230,11 +232,11 @@ const CourseDetail = (props) => {
               )}
             </ScrollView>
 
-            <Text style={styles.title}>Your Review</Text>
+            <Text style={styles.title}>{lang.yourReview}</Text>
             <View style={styles.containerButtonSmall}>
               <Input
                 style={styles.input}
-                placeholder={'Comment'}
+                placeholder={lang.comment}
                 onChangeText={(text) => setYourComment(text)}
               />
               <Rating
@@ -247,7 +249,7 @@ const CourseDetail = (props) => {
                 onFinishRating={ratingCompleted}
               />
               <FilledButton
-                title={'REVIEW'}
+                title={lang.review}
                 onPress={() => {
                   onPressReview(
                     authContext.state.token,
