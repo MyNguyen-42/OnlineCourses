@@ -46,12 +46,10 @@ const ListLesson = (props) => {
     <View>
       <FlatList
         ItemSeparatorComponent={FlatListItemSeparator}
-        /* data={Lesson} */
         data={props.data}
         renderItem={({item}) => (
           <View>
             <Main item={item} />
-            {/* <ListLessonItem item={item} navigation={props.navigation} /> */}
           </View>
         )}
       />

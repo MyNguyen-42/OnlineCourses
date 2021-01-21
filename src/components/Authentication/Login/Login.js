@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import {FilledButton} from '../../common/FilledButton';
 import Heading from '../../common/Heading';
 import Input from '../../common/Inputs';

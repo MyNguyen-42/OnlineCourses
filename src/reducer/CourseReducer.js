@@ -2,6 +2,8 @@ import {
   BUY_FREE_COURSE_SUCCESSED,
   DELETE_SEARCH_HISTORY_SUCCESSED,
   GET_CATEGORY_ALL_SUCCESSED,
+  GET_LESSON_VIDEO_FAIL,
+  GET_LESSON_VIDEO_SUCCESSED,
   GET_RATING_COURSE_SUCCESSED,
   GET_SEARCH_HISTORY_SUCCESSED,
   LOAD_USER_FAVORITE_COURSE_SUCCESSED,
@@ -89,6 +91,19 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isLoadingBuyCourseFree: false,
+        isErrorLessonVideo: false,
+      };
+    case GET_LESSON_VIDEO_SUCCESSED:
+      return {
+        ...state,
+        dataLessonVideo: action.data,
+        isLoadingLessonVideo: false,
+      };
+    case GET_LESSON_VIDEO_FAIL:
+      return {
+        ...state,
+        isLoadingLessonVideo: false,
+        isErrorLessonVideo: true,
       };
     default:
       throw new Error();

@@ -4,7 +4,6 @@ import SmallRightButton from '../../../../common/SmallRightButton';
 import SectionPathsItem from '../SectionPathsItem/SectionPathsItem';
 import {useTheme} from '@react-navigation/native';
 import {ScreenKey} from '../../../../../global/Constants';
-import {paths} from '../../../../../models/CourseModel';
 import {LanguageContext} from '../../../../../Provider/LanguageProvider';
 
 const SectionPaths = (props) => {
@@ -17,11 +16,11 @@ const SectionPaths = (props) => {
     props.navigation.navigate(ScreenKey.PathDetail, {item});
   };
 
-  const renderListItem = (Paths) => {
+  /*  const renderListItem = (Paths) => {
     return Paths.map((id) => (
       <SectionPathsItem item={id} onPressSectionItem={onPressSectionItem} />
     ));
-  };
+  }; */
 
   return (
     <View style={styles.container}>
@@ -36,7 +35,8 @@ const SectionPaths = (props) => {
           }}
         />
       </View>
-      <ScrollView horizontal={true}>{renderListItem(paths)}</ScrollView>
+      <Text> No data</Text>
+      {/* <ScrollView horizontal={true}>{renderListItem(paths)}</ScrollView> */}
     </View>
   );
 };

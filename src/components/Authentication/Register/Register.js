@@ -7,6 +7,7 @@ import {TextButton} from '../../common/TextButton';
 import {ScreenKey} from '../../../global/Constants';
 import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
 import Error from '../../common/Error';
+import {ScrollView} from 'react-native';
 
 const Register = (props) => {
   const [name, setName] = useState('');

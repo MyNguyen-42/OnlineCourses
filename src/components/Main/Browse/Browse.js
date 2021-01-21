@@ -8,7 +8,6 @@ import SectionAuthors from './Authors/SectionAuthors/SectionAuthors';
 import {ScreenKey, Server} from '../../../global/Constants';
 import {useTheme} from '@react-navigation/native';
 import {Header} from 'react-native-elements';
-import {recommendedCourses, newCourses} from '../../../models/CourseModel';
 import {CourseContext} from '../../../Provider/CourseProvider';
 import axios from 'axios';
 import {ActivityIndicator} from 'react-native';

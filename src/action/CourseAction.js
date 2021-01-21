@@ -29,6 +29,8 @@ export const GET_CATEGORY_ALL_SUCCESSED = 'GET_CATEGORY_ALL_SUCCESSED';
 export const GET_CATEGORY_ALL_FAIL = 'GET_CATEGORY_ALL_FAIL';
 export const BUY_FREE_COURSE_SUCCESSED = 'BUY_FREE_COURSE_SUCCESSED';
 export const BUY_FREE_COURSE_FAIL = 'BUY_FREE_COURSE_FAIL';
+export const GET_LESSON_VIDEO_SUCCESSED = 'GET_LESSON_VIDEO_SUCCESSED';
+export const GET_LESSON_VIDEO_FAIL = 'GET_LESSON_VIDEO_FAIL';
 //nhận vào 1 dispatch, return ra function
 
 const body = {
@@ -58,7 +60,9 @@ export const loadListCourseSell = (dispatch) => () => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {
       /* setIsLoading(false); */
     });
@@ -79,7 +83,9 @@ export const loadListCourseNew = (dispatch) => () => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -98,7 +104,9 @@ export const loadListTopRate = (dispatch) => () => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -186,7 +194,9 @@ export const loadFavoriteCourse = (dispatch) => (token) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -223,7 +233,9 @@ export const getRatingCourse = (dispatch) => (token, courseId) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -244,7 +256,9 @@ export const getSearchHistory = (dispatch) => (token) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -265,7 +279,9 @@ export const getCourseDetailWithLesson = (dispatch) => (token) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -284,7 +300,9 @@ export const getCourseDetail = (dispatch) => (id) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -308,7 +326,9 @@ export const searchByCategory = (dispatch) => (categoryId) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -376,7 +396,9 @@ export const deleteSearchHistory = (dispatch) => (token, searchId) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -395,7 +417,9 @@ export const getCategoryAll = (dispatch) => () => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
 
@@ -420,6 +444,35 @@ export const buyFreeCourse = (dispatch) => (token, courseId) => {
         console.log('fail');
       }
     })
-    .catch((error) => {})
+    .catch((error) => {
+      console.log('fail: ', error.response.request._response);
+    })
+    .finally(() => {});
+};
+
+export const getLessonVideo = (dispatch) => (token, courseId, lessonId) => {
+  console.log('getLessonVideos');
+  axios
+    .get(`${Server}/lesson/video/${courseId}/${lessonId}`, {
+      headers: {Authorization: `Bearer ${token}`},
+    })
+    .then((Response) => {
+      if (Response.status === 200) {
+        console.log('Action: ', Response.data.message);
+        dispatch({
+          type: GET_LESSON_VIDEO_SUCCESSED,
+          data: Response.data.payload,
+        });
+      } else {
+        console.log('fail');
+      }
+    })
+    .catch((error) => {
+      dispatch({
+        type: GET_LESSON_VIDEO_FAIL,
+        status: error.response.status,
+      });
+      console.log('fail: ', error.response.request._response);
+    })
     .finally(() => {});
 };
