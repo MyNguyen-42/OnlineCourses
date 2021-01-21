@@ -8,7 +8,11 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useTheme} from '@react-navigation/native';
-import {videoURLContext} from '../CourseDetail';
+/* import {videoURLContext} from '../CourseDetail'; */
+import {CourseContext} from '../../../Provider/CourseProvider';
+import {AuthenticationContext} from '../../../Provider/AuthenticationProvider';
+import {idLessonContext} from '../CourseDetail';
+import {Alert} from 'react-native';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -16,14 +20,20 @@ const WidthTitle = screenWidth - 100;
 
 const ListCoursesItem = (props) => {
   const {colors} = useTheme();
-  const {videoURL, setVideoURL} = React.useContext(videoURLContext);
-  console.log('video: ', videoURL);
+  /* const {videoURL, setVideoURL} = React.useContext(videoURLContext); */
+  const {idLesson, setIdLesson} = React.useContext(idLessonContext);
+  const courseContext = React.useContext(CourseContext);
+  const authContext = React.useContext(AuthenticationContext);
 
   return (
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
-        setVideoURL(props.item.videoUrl);
+        courseContext.getLessonVideo(
+          authContext.state.token,
+          courseContext.state.dataCourseDetail.id,
+          props.item.id,
+        );
       }}>
       <View style={styles.containerIconText}>
         <MaterialCommunityIcons

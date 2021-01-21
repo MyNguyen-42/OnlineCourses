@@ -16,6 +16,7 @@ import {
   getCategoryAll,
   loadListTopRate,
   buyFreeCourse,
+  getLessonVideo,
 } from '../action/CourseAction';
 
 const CourseContext = React.createContext();
@@ -55,6 +56,9 @@ const initialState = {
   isErrorCategoryAll: false,
   isLoadingBuyCourseFree: true,
   isErrorBuyCourseFree: false,
+  dataLessonVideo: null,
+  isLoadingLessonVideo: true,
+  isErrorLessonVideo: false,
 };
 
 const CourseProvider = (props) => {
@@ -78,6 +82,7 @@ const CourseProvider = (props) => {
         deleteSearchHistory: deleteSearchHistory(dispatch),
         getCategoryAll: getCategoryAll(dispatch),
         buyFreeCourse: buyFreeCourse(dispatch),
+        getLessonVideo: getLessonVideo(dispatch),
       }}>
       {props.children}
     </CourseContext.Provider>

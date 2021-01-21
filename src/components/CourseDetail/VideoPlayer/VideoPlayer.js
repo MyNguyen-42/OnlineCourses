@@ -1,11 +1,11 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import Video from 'react-native-video';
 import YouTube from 'react-native-youtube';
+import {CourseContext} from '../../../Provider/CourseProvider';
 
 const VideoPlayer = (props) => {
-  console.log('VideoPlayer: ', props.videoURL);
-  /* const video = props.videoURL.toString().slice(32); */
+  const courseContext = React.useContext(CourseContext);
   const isYouTubeUri = (uri) => {
     console.log('uri is: ', uri);
     if (uri !== null) {
@@ -24,16 +24,20 @@ const VideoPlayer = (props) => {
     }
   };
 
-  /* const rederVideo()=>{
-
-  } */
-
-  const videouri = props.videoURL;
   return (
     <View style={styles.video}>
-      {isYouTubeUri(props.videoURL) ? (
+      {courseContext.state.isLoadingLessonVideo ? (
+        <View style={styles.backgroundVideo}>
+          <Text> Loading...</Text>
+        </View>
+      ) : // Kiểm tra ở chỗ này xem tải video có lỗi hay không
+      isYouTubeUri(
+          /* props.videoURL */ courseContext.state.dataLessonVideo.videoUrl,
+        ) ? (
         <YouTube
-          videoId={getYouTubeId(props.videoURL)} // The YouTube video ID
+          videoId={getYouTubeId(
+            /* props.videoURL */ courseContext.state.dataLessonVideo.videoUrl,
+          )} // The YouTube video ID
           play // control playback of video with true/false
           inline // control whether the video should play in fullscreen or inline
           loop // control whether the video should loop when ended
@@ -46,9 +50,8 @@ const VideoPlayer = (props) => {
         />
       ) : (
         <Video
-          /* source={require('../../../../assets/video/BigBuckBunny.mp4')} */
           source={{
-            uri: props.videoURL,
+            uri: courseContext.state.dataLessonVideo.videoUrl,
             /* 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', */
           }}
           style={styles.backgroundVideo}
